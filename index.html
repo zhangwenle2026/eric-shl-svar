@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260331-0150">
+<meta name="app-version" content="20260331-0250">
 <meta name="theme-color" content="#2e6fba">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
@@ -121,9 +121,29 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 .section-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .section-info h2{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary)}
 .section-info p{font-size:11px;color:var(--muted);margin-top:2px}
+body{font-size:15px}
+.card{padding:20px}
+.sentence-text{font-size:15px}
+.mcq-opt{font-size:14px;padding:13px 16px}
+.btn-primary{font-size:14px;padding:11px 22px}
+.tab-btn{font-size:12px;padding:10px 8px}
+.card-title{font-size:14px}
+.instruction-box,.info-box,.tip-box{font-size:13px}
 </style>
 </head>
 <body>
+
+<div id="invite-overlay" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1a4a8a,#2e6fba);display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#fff;border-radius:20px;padding:32px 24px;width:100%;max-width:360px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.25)">
+    <div style="font-size:40px;margin-bottom:12px">🔐</div>
+    <div style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:#1a4a8a;margin-bottom:6px">ERIC SHL SVAR</div>
+    <div style="font-size:13px;color:#6b7c93;margin-bottom:24px">Enter your invite code to access</div>
+    <input id="invite-input" type="text" placeholder="Invite Code" style="width:100%;padding:14px 16px;border:2px solid #d0dff0;border-radius:12px;font-size:16px;text-align:center;letter-spacing:2px;outline:none;margin-bottom:12px;font-family:inherit;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
+    <div id="invite-error" style="color:#e74c3c;font-size:12px;margin-bottom:10px;display:none">Invalid code. Please try again.</div>
+    <button onclick="checkInvite()" style="width:100%;padding:14px;background:linear-gradient(135deg,#1a4a8a,#2e6fba);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">Enter →</button>
+    <div style="font-size:11px;color:#aab;margin-top:16px">Powered by ERIC · Meituan Keeta Brazil</div>
+  </div>
+</div>
 
 <header class="app-header">
   <div class="header-top">
@@ -285,6 +305,10 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 </div>
 
 <script>
+var INVITE_CODE='SMB VAMOS';
+(function(){if(localStorage.getItem('ERIC_INVITE_OK')==='1')document.getElementById('invite-overlay').style.display='none';})();
+function checkInvite(){var v=(document.getElementById('invite-input').value||'').trim().toUpperCase();if(v===INVITE_CODE.toUpperCase()){localStorage.setItem('ERIC_INVITE_OK','1');document.getElementById('invite-overlay').style.display='none';}else{document.getElementById('invite-error').style.display='block';document.getElementById('invite-input').style.borderColor='#e74c3c';setTimeout(function(){document.getElementById('invite-input').style.borderColor='#d0dff0';},1500);}}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('invite-overlay').style.display!=='none')checkInvite();});
 var SKEY='ERIC_SHL_SVAR';
 var stars=JSON.parse(localStorage.getItem(SKEY+'_stars')||'{}');
 
