@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="app-version" content="20260331-0150">
+<meta name="theme-color" content="#2e6fba">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
+<title>ERIC SHL SVAR</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#2e6fba;--primary-dark:#1a4a8a;--primary-light:#4a90d9;
+  --accent:#e8935a;--pink:#f2a7b3;--bg:#eef5fc;--card:#ffffff;
+  --text:#1a2a3a;--muted:#6b7c93;--border:#d0dff0;
+  --green:#27ae60;--red:#e74c3c;--orange:#f39c12;--teal:#16a085;
+  --radius:16px;--shadow:0 2px 12px rgba(46,111,186,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+.app-header{background:linear-gradient(135deg,#16345a,#1d5799,#3a82cc);color:#fff;padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(22,52,90,0.3)}
+.app-header::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),#f2c47a,var(--pink))}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-top:4px}
+.app-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;letter-spacing:1px}
+.app-subtitle{font-size:10px;opacity:0.75;letter-spacing:0.5px}
+.progress-badge{background:rgba(255,255,255,0.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600}
+
+.tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid rgba(255,255,255,0.15)}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:1;min-width:70px;padding:9px 6px;background:none;border:none;color:rgba(255,255,255,0.65);font-size:11px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;white-space:nowrap;text-align:center}
+.tab-btn.active{color:#fff;border-bottom-color:#fff;font-weight:700}
+.tab-btn .tab-icon{display:block;font-size:14px;margin-bottom:2px}
+
+.panel{display:none;padding:16px;padding-bottom:80px}
+.panel.active{display:block}
+
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--primary);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.8px;display:flex;align-items:center;gap:6px}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+
+.tip-box{background:linear-gradient(135deg,#fff8f3,#fff2eb);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#7a3a10;line-height:1.7}
+.tip-box strong{color:var(--accent)}
+
+.info-box{background:linear-gradient(135deg,#eef5fc,#e0ecfb);border-left:3px solid var(--primary);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--primary-dark);line-height:1.7}
+
+/* SENTENCE ITEMS */
+.sentence-item{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);transition:all 0.2s}
+.sentence-item:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 4px 16px rgba(46,111,186,0.12)}
+.sentence-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.5px;margin-bottom:4px}
+.sentence-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:10px}
+.sentence-phonetic{font-size:11px;color:var(--teal);font-style:italic;margin-bottom:8px}
+.sentence-tip{font-size:11px;color:var(--muted);background:var(--bg);padding:6px 10px;border-radius:6px;border:1px solid var(--border)}
+
+.btn{border:none;border-radius:20px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.btn-primary{background:var(--primary);color:#fff;padding:9px 18px;font-size:13px}
+.btn-tts{background:rgba(46,111,186,0.1);color:var(--primary);padding:6px 14px;font-size:12px;border-radius:20px;border:1px solid var(--border)}
+.btn-tts:hover{background:var(--primary);color:#fff}
+.btn-accent{background:var(--accent);color:#fff;padding:7px 14px;font-size:12px}
+.btn-outline{background:transparent;color:var(--primary);padding:7px 14px;font-size:12px;border:1.5px solid var(--primary);border-radius:20px}
+.btn-small{padding:5px 12px;font-size:11px}
+.btn-tag{background:var(--bg);color:var(--muted);padding:5px 12px;font-size:11px;border:1.5px solid var(--border);border-radius:20px}
+.btn-tag.starred{background:#fff8e1;color:var(--orange);border-color:var(--orange)}
+
+/* FLASHCARD */
+.flashcard-wrap{perspective:800px;cursor:pointer;margin-bottom:14px}
+.flashcard{width:100%;border-radius:var(--radius);position:relative;transform-style:preserve-3d;transition:transform 0.5s ease;min-height:180px}
+.flashcard.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.fc-front{background:var(--card);border:2px solid var(--border);box-shadow:var(--shadow)}
+.fc-back{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;transform:rotateY(180deg)}
+.fc-word{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;color:var(--primary);margin-bottom:6px;text-align:center}
+.fc-hint{font-size:11px;color:var(--muted);letter-spacing:0.5px}
+.fc-answer{font-size:18px;font-weight:700;text-align:center;margin-bottom:8px}
+.fc-example{font-size:12px;opacity:0.85;text-align:center;line-height:1.6;font-style:italic}
+.fc-category{font-size:10px;background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:10px;margin-top:8px;letter-spacing:0.5px}
+
+/* VOCAB CONTROLS */
+.flashcard-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.card-counter{font-size:12px;color:var(--muted);font-weight:600;text-align:center;flex:1}
+
+/* PASSAGE */
+.passage-box{background:#f8fbff;border:1.5px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;font-size:13px;line-height:1.9;color:var(--text)}
+.passage-box mark{background:#fff3cd;padding:0 2px;border-radius:2px}
+
+/* Q&A answer card */
+.answer-card{background:linear-gradient(135deg,#eafaf1,#d5f5e3);border:1.5px solid var(--green);border-radius:12px;padding:14px;margin-bottom:10px}
+.answer-label{font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.8px;margin-bottom:4px}
+.answer-text{font-size:14px;font-weight:600;color:#1a5c2a;line-height:1.6}
+
+/* VOCAB CATEGORY FILTER */
+.cat-filter{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;margin-bottom:12px}
+.cat-filter::-webkit-scrollbar{display:none}
+.cat-btn{flex-shrink:0;padding:5px 14px;border-radius:16px;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.cat-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* FREE TALK topic card */
+.topic-study-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow);border:1.5px solid var(--border)}
+.topic-study-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.5px;margin-bottom:6px}
+.topic-study-q{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px;line-height:1.5}
+.topic-outline{margin-bottom:12px}
+.topic-outline-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
+.outline-step{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
+.step-dot{width:20px;height:20px;border-radius:50%;background:var(--primary);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-text{font-size:12px;color:var(--text);line-height:1.6}
+.phrase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.phrase-chip{background:rgba(46,111,186,0.08);color:var(--primary);padding:4px 12px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(46,111,186,0.2);transition:all 0.2s}
+.phrase-chip:hover{background:var(--primary);color:#fff}
+
+/* STAR TOGGLE */
+.star-toggle{cursor:pointer;font-size:18px;color:#ddd;transition:color 0.2s;margin-left:auto}
+.star-toggle.on{color:var(--orange)}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.section-info h2{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary)}
+.section-info p{font-size:11px;color:var(--muted);margin-top:2px}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-top">
+    <div>
+      <div class="app-title">ERIC SHL SVAR</div>
+      <div class="app-subtitle">CEFR B1 · Study & Practice</div>
+    </div>
+    <div class="progress-badge" id="starCount">⭐ 0 starred</div>
+  </div>
+  <nav class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('a')"><span class="tab-icon">🗣️</span>A · Read</button>
+    <button class="tab-btn" onclick="switchTab('b')"><span class="tab-icon">🔁</span>B · Repeat</button>
+    <button class="tab-btn" onclick="switchTab('c')"><span class="tab-icon">💬</span>C · Q&A</button>
+    <button class="tab-btn" onclick="switchTab('d')"><span class="tab-icon">📝</span>D · Vocab</button>
+    <button class="tab-btn" onclick="switchTab('e')"><span class="tab-icon">🎧</span>E · Listen</button>
+    <button class="tab-btn" onclick="switchTab('f')"><span class="tab-icon">🎤</span>F · Talk</button>
+  </nav>
+</header>
+
+<!-- ===== PANEL A ===== -->
+<div class="panel active" id="panel-a">
+  <div class="section-header">
+    <div class="section-icon">🗣️</div>
+    <div class="section-info"><h2>Read Aloud</h2><p>朗读练习 · 10 sentences</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Key Tips:</strong><br>
+    • Read at a <strong>natural pace</strong> — not too fast, not too slow<br>
+    • Avoid fillers: <em>um, uh, like, you know</em><br>
+    • Focus on <strong>word stress</strong>: e.g. reSCHEDuled, apPROVing, EXCEEDed<br>
+    • Listen first, then read — imitate the rhythm
+  </div>
+  <div id="a-list"></div>
+</div>
+
+<!-- ===== PANEL B ===== -->
+<div class="panel" id="panel-b">
+  <div class="section-header">
+    <div class="section-icon">🔁</div>
+    <div class="section-info"><h2>Repeat Sentence</h2><p>句子复述 · 8 sentences</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Strategy:</strong><br>
+    • Listen for <strong>chunks</strong>, not individual words<br>
+    • Even if you miss a word, keep going — confidence matters<br>
+    • Practice: Listen → cover → repeat → reveal → compare<br>
+    • Common mistake: pausing too long before starting
+  </div>
+  <div id="b-list"></div>
+</div>
+
+<!-- ===== PANEL C ===== -->
+<div class="panel" id="panel-c">
+  <div class="section-header">
+    <div class="section-icon">💬</div>
+    <div class="section-info"><h2>Q&A Practice</h2><p>问答练习 · 4 scenarios</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Tips:</strong><br>
+    • Answer in <strong>complete sentences</strong> when possible<br>
+    • "Joe is happy" beats just saying "happy"<br>
+    • Speed and confidence count — don't hesitate too long<br>
+    • For yes/no questions, always add a reason
+  </div>
+  <div id="c-list"></div>
+</div>
+
+<!-- ===== PANEL D ===== -->
+<div class="panel" id="panel-d">
+  <div class="section-header">
+    <div class="section-icon">📝</div>
+    <div class="section-info"><h2>Vocabulary</h2><p>词汇闪卡 · 10 words</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Study Method:</strong><br>
+    • Tap card to flip and see the synonym<br>
+    • Say the word and synonym out loud for better retention<br>
+    • Star words you find difficult for focused review<br>
+    • Group: <em>postpone/delay, confirm/verify, clarify/explain</em> — learn together
+  </div>
+  <div class="cat-filter">
+    <button class="cat-btn active" onclick="filterVocab('all')">All</button>
+    <button class="cat-btn" onclick="filterVocab('action')">Action Words</button>
+    <button class="cat-btn" onclick="filterVocab('size')">Size / Degree</button>
+    <button class="cat-btn" onclick="filterVocab('quality')">Quality</button>
+  </div>
+  <div id="d-flashcard-area"></div>
+  <div class="flashcard-nav">
+    <button class="btn btn-outline btn-small" onclick="prevD()">← Prev</button>
+    <div class="card-counter" id="d-counter">1 / 10</div>
+    <button class="btn btn-primary btn-small" onclick="nextD()">Next →</button>
+  </div>
+</div>
+
+<!-- ===== PANEL E ===== -->
+<div class="panel" id="panel-e">
+  <div class="section-header">
+    <div class="section-icon">🎧</div>
+    <div class="section-info"><h2>Listening</h2><p>听力理解 · 2 passages</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Strategy:</strong><br>
+    • First listen: get the <strong>main idea</strong><br>
+    • Second listen: focus on <strong>numbers, names, and key decisions</strong><br>
+    • Highlighted words are important — notice them when listening<br>
+    • Don't get stuck on unknown words; guess from context
+  </div>
+
+  <div class="card">
+    <div class="card-title">📄 Passage 1 · Work Meeting</div>
+    <div class="passage-box" id="e-p1"></div>
+    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-tts" onclick="tts(E_P[0])">▶ Play Full Passage</button>
+      <button class="btn btn-outline btn-small" onclick="tts('Our delivery success rate was 94 percent, which is up 3 percent from the previous week.')">▶ Key sentence</button>
+    </div>
+    <div id="e-notes1" class="info-box" style="margin-bottom:14px">
+      <strong>📌 Key Info to Listen For:</strong><br>
+      • Delivery rate: <strong>94%</strong> (up 3% from last week)<br>
+      • Customer complaint: <strong>response time</strong><br>
+      • New policy starts: <strong>next Monday</strong><br>
+      • Required response time: <strong>within 2 hours</strong>
+    </div>
+    <div id="e-qa1"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">📄 Passage 2 · Client Call</div>
+    <div class="passage-box" id="e-p2"></div>
+    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-tts" onclick="tts(E_P[1])">▶ Play Full Passage</button>
+      <button class="btn btn-outline btn-small" onclick="tts('We expect them to be available within five to seven business days.')">▶ Key sentence</button>
+    </div>
+    <div id="e-notes2" class="info-box" style="margin-bottom:14px">
+      <strong>📌 Key Info to Listen For:</strong><br>
+      • Caller: <strong>David, operations team</strong><br>
+      • Problem: <strong>2 items out of stock</strong><br>
+      • Wait time: <strong>5–7 business days</strong><br>
+      • Action needed: <strong>reply by end of day</strong>
+    </div>
+    <div id="e-qa2"></div>
+  </div>
+</div>
+
+<!-- ===== PANEL F ===== -->
+<div class="panel" id="panel-f">
+  <div class="section-header">
+    <div class="section-icon">🎤</div>
+    <div class="section-info"><h2>Free Talk</h2><p>自由演讲 · 6 topics</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Structure your answer (PEEL):</strong><br>
+    • <strong>P</strong>oint — state your main idea first<br>
+    • <strong>E</strong>vidence — give an example or reason<br>
+    • <strong>E</strong>xplain — elaborate briefly<br>
+    • <strong>L</strong>ink — conclude and connect back<br>
+    <br>Tap a phrase chip to hear it pronounced 🔊
+  </div>
+  <div id="f-topics-list"></div>
+</div>
+
+<script>
+var SKEY='ERIC_SHL_SVAR';
+var stars=JSON.parse(localStorage.getItem(SKEY+'_stars')||'{}');
+
+// ============ DATA ============
+var A_SENTENCES=[
+  {text:"The meeting has been rescheduled to Thursday at two o'clock.",tip:"Stress: re-SCHED-uled. Pause after 'rescheduled'."},
+  {text:"Could you please send me the report by end of day?",tip:"Rising intonation on 'end of day?' — it's a request, sounds polite."},
+  {text:"We need to review the budget before approving the project.",tip:"Stress: RE-view, ap-PROV-ing. Both action words carry weight."},
+  {text:"The delivery was delayed due to bad weather conditions.",tip:"'Due to' = because of. Stress: de-LAYED, con-DI-tions."},
+  {text:"Our team exceeded the sales target by fifteen percent this quarter.",tip:"Stress: ex-CEED-ed. 'Fifteen percent' — clear and confident."},
+  {text:"Please make sure to confirm your attendance before Friday.",tip:"'Make sure to' is a soft command. Stress: con-FIRM, at-TEN-dance."},
+  {text:"The new policy will take effect from the first of next month.",tip:"'Take effect' is a phrase — don't stress 'take' alone."},
+  {text:"I would like to follow up on the email I sent last week.",tip:"'Follow up' = check in on something. Natural linking: 'follow-up-on'."},
+  {text:"Can you clarify what you mean by the third point?",tip:"Rising intonation. Stress: CLAR-i-fy, THIRD point."},
+  {text:"We appreciate your patience and understanding in this matter.",tip:"Formal closing phrase. Stress: ap-PRE-ci-ate, PA-tience, un-DER-stand-ing."}
+];
+
+var B_SENTENCES=[
+  {text:"The client confirmed the order will arrive on Monday.",phonetic:"'Confirmed' = kən-FERMD. Keep 'will arrive on Monday' as one chunk."},
+  {text:"Please submit your expense report before the deadline.",phonetic:"'Submit' = suh-MIT. Stress: EX-pense, DEAD-line."},
+  {text:"We have decided to postpone the product launch until further notice.",phonetic:"'Postpone' = post-PONE. 'Until further notice' = common business phrase."},
+  {text:"Could you forward the presentation to all team members?",phonetic:"'Forward' here means send/share. Stress: for-WARD, pre-zen-TAY-shun."},
+  {text:"The quarterly review meeting is scheduled for next Wednesday.",phonetic:"'Quarterly' = KWOR-ter-lee. 'Scheduled for' = happening on."},
+  {text:"I need you to double-check the figures in the third column.",phonetic:"'Double-check' = verify twice. 'Figures' = numbers. Stress: FIG-ures, COL-umn."},
+  {text:"The supplier has agreed to extend the contract for six months.",phonetic:"'Extend' = make longer. Stress: sup-PLI-er, ex-TEND, con-TRACT."},
+  {text:"Make sure the warehouse team is informed about the change.",phonetic:"'Warehouse' = WARE-house. 'Informed about' = told about."}
+];
+
+var C_QA=[
+  {text:"Joe is smiling and laughing. He looks very happy.",q:"Is Joe happy or sad?",ans:"Joe is happy.",extra:"'He is happy' or 'Happy' both work. A full sentence scores better.",vocab:["smiling","laughing"]},
+  {text:"The office temperature is 28 degrees and everyone is sweating.",q:"Is it hot or cold in the office?",ans:"It is hot in the office.",extra:"Add a reason: 'It is hot because everyone is sweating.'",vocab:["temperature","sweating"]},
+  {text:"Sarah called to say the delivery truck broke down on the highway.",q:"Will the delivery arrive on time?",ans:"No, the delivery will be delayed.",extra:"Explain: 'No, because the truck broke down.'",vocab:["broke down","on time","delivery"]},
+  {text:"The manager said: Great job on the presentation! I was really impressed.",q:"How does the manager feel about the presentation?",ans:"The manager is impressed / feels positive.",extra:"You can say: 'The manager thinks the presentation was great.'",vocab:["impressed","presentation","great job"]}
+];
+
+var D_WORDS=[
+  {word:"HUGE",syn:"large",wrong:["heavy","tiny","little"],cat:"size",ex:"That was a huge improvement — sales went up 40%."},
+  {word:"POSTPONE",syn:"delay",wrong:["cancel","start","finish"],cat:"action",ex:"We had to postpone the launch due to technical issues."},
+  {word:"CONFIRM",syn:"verify",wrong:["deny","question","forget"],cat:"action",ex:"Please confirm your attendance by Friday."},
+  {word:"URGENT",syn:"immediate",wrong:["slow","optional","relaxed"],cat:"quality",ex:"This is urgent — we need a response today."},
+  {word:"CLARIFY",syn:"explain",wrong:["confuse","hide","rush"],cat:"action",ex:"Could you clarify what you mean by that?"},
+  {word:"EXCEED",syn:"surpass",wrong:["fail","reach","miss"],cat:"action",ex:"Our team exceeded the target by 15%."},
+  {word:"SUBMIT",syn:"hand in",wrong:["receive","reject","review"],cat:"action",ex:"Please submit the report by end of day."},
+  {word:"NEGOTIATE",syn:"discuss terms",wrong:["agree instantly","refuse","ignore"],cat:"action",ex:"We need to negotiate the contract before signing."},
+  {word:"EFFICIENT",syn:"productive",wrong:["lazy","slow","wasteful"],cat:"quality",ex:"She is very efficient — always finishes early."},
+  {word:"APPROXIMATELY",syn:"roughly",wrong:["exactly","never","always"],cat:"size",ex:"It will take approximately two hours."}
+];
+
+var E_P=[
+  "Good morning everyone. I'd like to start today's meeting by reviewing last week's performance. Our delivery success rate was 94%, which is up 3% from the previous week. However, we had some complaints about customer service response time. Going forward, we need to ensure all customer inquiries are answered within two hours. Additionally, the new pricing structure will be implemented starting next Monday. Please make sure your teams are informed.",
+  "Hello, this is David from the operations team. I am calling regarding the order you placed on March 15th. Unfortunately, two of the items you ordered are currently out of stock. We expect them to be available within five to seven business days. We can either send the available items now and ship the rest later, or wait and send everything together. Please let us know your preference by end of day so we can proceed."
+];
+
+var E_QA=[
+  [
+    {q:"What was the delivery success rate last week?",opts:["91%","94%","97%","90%"],correct:1},
+    {q:"What was the main complaint from customers?",opts:["Delivery speed","Product quality","Response time","Price"],correct:2},
+    {q:"When will the new pricing structure start?",opts:["This Friday","Next Monday","Next Wednesday","Immediately"],correct:1}
+  ],
+  [
+    {q:"Why is David calling?",opts:["To confirm delivery","To report a delay","To cancel the order","To request payment"],correct:1},
+    {q:"How long before items are available?",opts:["2–3 days","3–5 days","5–7 days","10 days"],correct:2},
+    {q:"What does David ask the customer to do?",opts:["Call back tomorrow","Visit the store","Reply by end of day","Place a new order"],correct:2}
+  ]
+];
+
+var F_TOPICS=[
+  {
+    q:"Describe a challenging situation at work and how you handled it.",
+    outline:["State the situation briefly (what, when, where)","Explain the challenge — why was it difficult?","Describe what YOU did to handle it","Share the result and what you learned"],
+    phrases:["I faced a difficult situation when...","The main challenge was...","To solve this, I decided to...","As a result, we managed to...","Looking back, I learned that..."]
+  },
+  {
+    q:"What are the most important qualities of a good team member?",
+    outline:["Give your main opinion (2-3 qualities)","Explain WHY each quality matters","Give a brief example from work","Conclude with a summary statement"],
+    phrases:["In my opinion, the most important quality is...","For example, in my team...","Without this quality, it would be hard to...","To sum up, a good team member should..."]
+  },
+  {
+    q:"How has technology changed the way you work?",
+    outline:["Give a general statement about technology and work","Describe 1-2 specific tools you use","Explain how they help (efficiency, communication, etc.)","Mention any challenge or limitation"],
+    phrases:["Technology has significantly changed...","For instance, we now use... to...","This has made it much easier to...","However, one challenge is...","Overall, I think technology has..."]
+  },
+  {
+    q:"Describe your typical workday and your main responsibilities.",
+    outline:["Start with your morning routine","Describe your core responsibilities","Mention how you collaborate with others","Close with what you enjoy most"],
+    phrases:["My day usually starts with...","My main responsibilities include...","I work closely with... to...","The part I enjoy most is..."]
+  },
+  {
+    q:"What do you think is the biggest challenge for international businesses?",
+    outline:["State your main point (e.g. cultural differences, language)","Explain with a reason or example","Offer a possible solution or approach","Conclude with your overall view"],
+    phrases:["I believe the biggest challenge is...","For example, when working across cultures...","One way to overcome this is...","In my experience,...","To conclude, international businesses need to..."]
+  },
+  {
+    q:"How do you stay motivated when facing difficult targets?",
+    outline:["Acknowledge the difficulty honestly","Describe your personal strategy","Give a concrete example if possible","End with a positive, forward-looking statement"],
+    phrases:["When targets are tough, I try to...","I break the goal into smaller steps...","For example, last month when...","I also find it helpful to...","In the end, I believe that..."]
+  }
+];
+
+// ============ UTILS ============
+function tts(text){
+  if(!window.speechSynthesis) return alert('TTS not supported in this browser.');
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.9; u.pitch=1.0;
+  var voices=speechSynthesis.getVoices();
+  var en=voices.find(function(v){return v.lang==='en-US'&&v.name.includes('Google');})||voices.find(function(v){return v.lang==='en-US';})||voices.find(function(v){return v.lang.startsWith('en');});
+  if(en) u.voice=en;
+  speechSynthesis.speak(u);
+}
+
+function switchTab(id){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('panel-'+id).classList.add('active');
+  var idx={'a':0,'b':1,'c':2,'d':3,'e':4,'f':5}[id];
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+function toggleStar(key){
+  stars[key]=!stars[key];
+  localStorage.setItem(SKEY+'_stars',JSON.stringify(stars));
+  updateStarCount();
+  return stars[key];
+}
+
+function updateStarCount(){
+  var n=Object.values(stars).filter(Boolean).length;
+  document.getElementById('starCount').textContent='⭐ '+n+' starred';
+}
+
+// ============ INIT A ============
+function initA(){
+  var html='';
+  A_SENTENCES.forEach(function(s,i){
+    var sk='a_'+i;
+    html+='<div class="sentence-item">';
+    html+='<div class="sentence-num" style="display:flex;justify-content:space-between"><span>Sentence '+(i+1)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
+    html+='<div class="sentence-text">'+s.text+'</div>';
+    html+='<div class="sentence-tip" style="margin-bottom:10px">💡 '+s.tip+'</div>';
+    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="margin-right:8px">🔊 Listen</button>';
+    html+='</div>';
+  });
+  document.getElementById('a-list').innerHTML=html;
+}
+
+// ============ INIT B ============
+function initB(){
+  var html='';
+  B_SENTENCES.forEach(function(s,i){
+    var sk='b_'+i;
+    html+='<div class="sentence-item">';
+    html+='<div class="sentence-num" style="display:flex;justify-content:space-between"><span>Sentence '+(i+1)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
+    html+='<div class="sentence-text">'+s.text+'</div>';
+    html+='<div class="sentence-phonetic">🎯 '+s.phonetic+'</div>';
+    html+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
+    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')">🔊 Listen</button>';
+    html+='<button class="btn btn-accent btn-small" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="font-size:11px">🔁 Repeat mode</button>';
+    html+='</div></div>';
+  });
+  document.getElementById('b-list').innerHTML=html;
+}
+
+// ============ INIT C ============
+function initC(){
+  var html='';
+  C_QA.forEach(function(s,i){
+    html+='<div class="card">';
+    html+='<div class="card-title">Scenario '+(i+1)+'</div>';
+    html+='<div class="passage-box" style="margin-bottom:10px">'+s.text+'</div>';
+    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')">🔊 Play Scenario</button>';
+    html+='<div style="font-size:14px;font-weight:600;color:var(--text);margin:12px 0 8px">❓ '+s.q+'</div>';
+    html+='<div class="answer-card"><div class="answer-label">✅ MODEL ANSWER</div><div class="answer-text">'+s.ans+'</div></div>';
+    html+='<div class="tip-box" style="margin-bottom:8px">💡 '+s.extra+'</div>';
+    html+='<div style="margin-top:8px"><span style="font-size:11px;color:var(--muted);font-weight:600">KEY VOCABULARY: </span>';
+    s.vocab.forEach(function(v){
+      html+='<span class="phrase-chip" onclick="tts(\''+v+'\')">'+v+'</span> ';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('c-list').innerHTML=html;
+}
+
+// ============ INIT D (FLASHCARDS) ============
+var dIdx=0;
+var dFilter='all';
+var dFiltered=[];
+
+function filterVocab(cat){
+  dFilter=cat;
+  dFiltered=D_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
+  if(dFiltered.length===0) dFiltered=D_WORDS.slice();
+  dIdx=0;
+  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
+  event.target.classList.add('active');
+  renderD();
+}
+
+function initD(){
+  dFiltered=D_WORDS.slice();
+  renderD();
+}
+
+function renderD(){
+  var w=dFiltered[dIdx];
+  if(!w) return;
+  var sk='d_'+w.word;
+  var html='<div class="flashcard-wrap" onclick="flipCard(this)">';
+  html+='<div class="flashcard" id="fc-current" style="min-height:200px;position:relative">';
+  html+='<div class="fc-front"><div class="fc-word">'+w.word+'</div>';
+  html+='<div class="fc-hint">Tap to see synonym →</div>';
+  html+='<div style="margin-top:12px"><button class="btn btn-tts" onclick="event.stopPropagation();tts(\''+w.word.toLowerCase()+'\')">🔊 Pronounce</button></div>';
+  html+='</div>';
+  html+='<div class="fc-back">';
+  html+='<div class="fc-answer">= '+w.syn+'</div>';
+  html+='<div class="fc-example">"'+w.ex+'"</div>';
+  html+='<div class="fc-category">'+w.cat.toUpperCase()+'</div>';
+  html+='<div style="margin-top:10px"><button class="btn btn-tts" style="background:rgba(255,255,255,0.2);color:#fff;border:none" onclick="event.stopPropagation();tts(\''+w.syn+'\')">🔊 '+w.syn+'</button></div>';
+  html+='</div></div></div>';
+  document.getElementById('d-flashcard-area').innerHTML=html;
+  document.getElementById('d-counter').textContent=(dIdx+1)+' / '+dFiltered.length+(dFilter!=='all'?' ('+dFilter+')':'');
+}
+
+function flipCard(wrap){
+  var fc=wrap.querySelector('.flashcard');
+  if(fc) fc.classList.toggle('flipped');
+}
+
+function nextD(){if(dIdx<dFiltered.length-1){dIdx++;renderD();}}
+function prevD(){if(dIdx>0){dIdx--;renderD();}}
+
+// ============ INIT E ============
+function initE(){
+  document.getElementById('e-p1').textContent=E_P[0];
+  document.getElementById('e-p2').textContent=E_P[1];
+  var keys=['A','B','C','D'];
+  [0,1].forEach(function(pi){
+    var html='';
+    E_QA[pi].forEach(function(q,qi){
+      html+='<div style="margin-bottom:16px">';
+      html+='<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">Q'+(qi+1)+'. '+q.q+'</div>';
+      html+='<div class="mcq-options" style="display:flex;flex-direction:column;gap:7px">';
+      q.opts.forEach(function(opt,oi){
+        var isCorrect=(oi===q.correct);
+        var cls='mcq-opt'+(isCorrect?' correct':'');
+        html+='<div class="'+cls+'" style="background:var(--bg);border-radius:10px;padding:10px 14px;border:1.5px solid var(--border);display:flex;align-items:center;gap:10px;'+(isCorrect?'border-color:var(--green);background:#eafaf1;':'')+'"><span style="width:24px;height:24px;border-radius:50%;background:'+(isCorrect?'var(--green)':'var(--border)')+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:'+(isCorrect?'#fff':'var(--muted)')+';flex-shrink:0">'+keys[oi]+'</span><span style="font-size:13px'+(isCorrect?';font-weight:700;color:var(--green)':'')+'">'+opt+(isCorrect?' ✅':'')+'</span></div>';
+      });
+      html+='</div></div>';
+    });
+    document.getElementById('e-qa'+(pi+1)).innerHTML=html;
+  });
+}
+
+// ============ INIT F ============
+function initF(){
+  var html='';
+  F_TOPICS.forEach(function(t,i){
+    html+='<div class="topic-study-card">';
+    html+='<div class="topic-study-num">TOPIC '+(i+1)+' / 6</div>';
+    html+='<div class="topic-study-q">'+t.q+'</div>';
+    html+='<div class="topic-outline">';
+    html+='<div class="topic-outline-title">📋 Suggested Structure</div>';
+    t.outline.forEach(function(step,si){
+      html+='<div class="outline-step"><span class="step-dot">'+(si+1)+'</span><span class="step-text">'+step+'</span></div>';
+    });
+    html+='</div>';
+    html+='<div class="topic-outline-title" style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px">💬 Useful Phrases (tap to hear)</div>';
+    html+='<div class="phrase-chips">';
+    t.phrases.forEach(function(p){
+      html+='<span class="phrase-chip" onclick="tts(\''+p.replace(/'/g,"\\'")+'\')">'+p+'</span>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('f-topics-list').innerHTML=html;
+}
+
+// Add MCQ opt style
+var mcqStyle=document.createElement('style');
+mcqStyle.textContent='.mcq-opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:13px;cursor:default}.mcq-opt.correct{border-color:var(--green);background:#eafaf1}';
+document.head.appendChild(mcqStyle);
+
+// ============ LOAD ============
+window.addEventListener('load',function(){
+  initA(); initB(); initC(); initD(); initE(); initF();
+  updateStarCount();
+  speechSynthesis.getVoices();
+});
+</script>
+</body>
+</html>
