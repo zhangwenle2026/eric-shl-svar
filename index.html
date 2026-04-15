@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260331-0250">
+<meta name="app-version" content="20260415-2358">
 <meta name="theme-color" content="#2e6fba">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
@@ -66,6 +66,37 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 .btn-small{padding:5px 12px;font-size:11px}
 .btn-tag{background:var(--bg);color:var(--muted);padding:5px 12px;font-size:11px;border:1.5px solid var(--border);border-radius:20px}
 .btn-tag.starred{background:#fff8e1;color:var(--orange);border-color:var(--orange)}
+
+/* AUDIO BAR (SHL TEST style) */
+.audio-bar{display:flex;align-items:center;gap:10px;background:#f0f7ff;border:1.5px solid #c5daf5;border-radius:12px;padding:10px 14px;margin-bottom:10px;cursor:pointer}
+.audio-bar:hover{background:#daeeff}
+.audio-bar.playing{background:#daeeff;border-color:var(--primary)}
+.audio-bar .play-icon{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.audio-bar.playing .play-icon{background:var(--primary-dark)}
+.audio-bar .wave{display:flex;align-items:center;gap:3px;height:28px;flex:1}
+.audio-bar .wave span{width:3px;border-radius:3px;background:var(--primary);opacity:0.5;height:4px}
+.audio-bar.playing .wave span{animation:wb 0.6s ease-in-out infinite alternate}
+.audio-bar.playing .wave span:nth-child(2){animation-delay:0.1s}
+.audio-bar.playing .wave span:nth-child(3){animation-delay:0.2s}
+.audio-bar.playing .wave span:nth-child(4){animation-delay:0.3s}
+.audio-bar.playing .wave span:nth-child(5){animation-delay:0.1s}
+.audio-bar.playing .wave span:nth-child(6){animation-delay:0.25s}
+.audio-bar.playing .wave span:nth-child(7){animation-delay:0.15s}
+.audio-bar.playing .wave span:nth-child(8){animation-delay:0.35s}
+@keyframes wb{to{height:22px;opacity:1}}
+.audio-bar .bar-label{font-size:13px;font-weight:600;color:var(--primary-dark);white-space:nowrap}
+
+/* SPEECH CARDS */
+.speech-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.speech-title{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.speech-scene{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:12px}
+.speech-line{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bg)}
+.speech-line:last-child{border-bottom:none}
+.speech-en{font-size:14px;line-height:1.7;color:var(--text);flex:1}
+.speech-cn{font-size:12px;color:var(--muted);line-height:1.6;margin-top:2px}
+.speech-line-btn{flex-shrink:0;margin-top:2px}
+.speech-toggle{background:var(--bg);color:var(--primary);border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.2s}
+.speech-toggle:hover{background:var(--primary);color:#fff}
 
 /* FLASHCARD */
 .flashcard-wrap{perspective:800px;cursor:pointer;margin-bottom:14px}
@@ -279,7 +310,7 @@ body{font-size:15px}
 <div class="panel" id="panel-f">
   <div class="section-header">
     <div class="section-icon">🎤</div>
-    <div class="section-info"><h2>Free Talk</h2><p>自由演讲 · 6 topics</p></div>
+    <div class="section-info"><h2>Free Talk</h2><p>自由演讲 · 6 topics + 3 speeches</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Structure your answer (PEEL):</strong><br>
@@ -290,6 +321,18 @@ body{font-size:15px}
     <br>Tap a phrase chip to hear it pronounced 🔊
   </div>
   <div id="f-topics-list"></div>
+
+  <!-- SPEECH SECTION -->
+  <div class="section-header" style="margin-top:20px">
+    <div class="section-icon">📝</div>
+    <div class="section-info"><h2>Speech Practice</h2><p>场景演讲练习 · 3 speeches · 听 → 读 → 背</p></div>
+  </div>
+  <div class="info-box">
+    <strong>🎯 练习方法：</strong><br>
+    ① 先点播放器<strong>听一遍</strong>整段 → ② 逐句跟读（点每句的 🔊）→ ③ 看中文<strong>回忆英文</strong> → ④ 自己完整背一遍<br>
+    句子都很短，用词简单，节奏感强，适合反复朗读 💪
+  </div>
+  <div id="f-speech-list"></div>
 </div>
 
 <script>
@@ -389,6 +432,64 @@ var F_TOPICS=[
     q:"How do you stay motivated when facing difficult targets?",
     outline:["Acknowledge the difficulty honestly","Describe your personal strategy","Give a concrete example if possible","End with a positive, forward-looking statement"],
     phrases:["When targets are tough, I try to...","I break the goal into smaller steps...","For example, last month when...","I also find it helpful to...","In the end, I believe that..."]
+  }
+];
+
+// ============ SPEECH DATA ============
+var F_SPEECHES=[
+  {
+    title:"At the Airport 在机场",
+    scene:"✈️ You are at the airport, describing the experience to a friend.",
+    lines:[
+      {en:"I am standing in the airport right now.",cn:"我现在正站在机场里。"},
+      {en:"It is very big and very busy.",cn:"这里非常大，非常繁忙。"},
+      {en:"People are walking fast with their bags.",cn:"人们拎着行李快步走着。"},
+      {en:"I can see a coffee shop on my left.",cn:"我左边能看到一家咖啡店。"},
+      {en:"The smell of fresh coffee is so nice.",cn:"新鲜咖啡的味道真好闻。"},
+      {en:"I checked in online, so I go straight to security.",cn:"我在网上值机了，所以直接去安检。"},
+      {en:"The security line is long, but it moves quickly.",cn:"安检队伍很长，但走得挺快。"},
+      {en:"After security, I find my gate — Gate 12.",cn:"过了安检，我找到了登机口——12号。"},
+      {en:"I sit down and put on my headphones.",cn:"我坐下来，戴上耳机。"},
+      {en:"A voice says: Flight 302 is now boarding.",cn:"广播说：302航班现在开始登机。"},
+      {en:"I pick up my bag and join the line.",cn:"我拿起包，加入队伍。"},
+      {en:"I feel excited. A new journey is about to begin.",cn:"我很兴奋。一段新的旅程即将开始。"}
+    ]
+  },
+  {
+    title:"At the School Playground 在学校操场",
+    scene:"🏫 You are at your old school playground, sharing a memory.",
+    lines:[
+      {en:"I am back at my old school playground.",cn:"我回到了以前学校的操场。"},
+      {en:"It looks smaller than I remember.",cn:"它看起来比我记忆中小了。"},
+      {en:"But the feeling is still the same — warm and happy.",cn:"但那种感觉还是一样——温暖而快乐。"},
+      {en:"I used to run here every morning before class.",cn:"以前每天早上上课前我都在这里跑步。"},
+      {en:"My best friend and I would race to the big tree.",cn:"我和最好的朋友会比赛跑到那棵大树前。"},
+      {en:"He always won. I never gave up trying.",cn:"他总是赢。但我从没放弃过。"},
+      {en:"Over there is the basketball court.",cn:"那边是篮球场。"},
+      {en:"We played basketball every afternoon after school.",cn:"每天放学后我们都打篮球。"},
+      {en:"We were not very good, but we had so much fun.",cn:"我们打得不好，但玩得特别开心。"},
+      {en:"The playground taught me something important.",cn:"这个操场教会了我一件重要的事。"},
+      {en:"It is not about winning. It is about showing up.",cn:"重要的不是赢，而是坚持出现。"},
+      {en:"I smile, take a deep breath, and walk away slowly.",cn:"我微笑着，深吸一口气，慢慢走开。"}
+    ]
+  },
+  {
+    title:"At the Shopping Mall 在商场",
+    scene:"🛍️ You are at a shopping mall, describing what you see and do.",
+    lines:[
+      {en:"I walk into the shopping mall on a Saturday afternoon.",cn:"周六下午，我走进了商场。"},
+      {en:"The air conditioning feels amazing after the hot sun.",cn:"在大太阳下走了一路，空调的感觉真棒。"},
+      {en:"There are so many stores — I do not know where to start.",cn:"商店太多了——我都不知道从哪里开始逛。"},
+      {en:"First, I go to a clothing store to look for a new shirt.",cn:"首先，我去了一家服装店找一件新衬衫。"},
+      {en:"I find a blue one that fits perfectly.",cn:"我找到了一件蓝色的，非常合身。"},
+      {en:"The price is good, so I buy it right away.",cn:"价格不错，我马上就买了。"},
+      {en:"Then I walk to the food court on the third floor.",cn:"然后我走到三楼的美食广场。"},
+      {en:"I order a burger and a glass of orange juice.",cn:"我点了一个汉堡和一杯橙汁。"},
+      {en:"I sit by the window and watch people walk by.",cn:"我坐在窗边，看着来来往往的人们。"},
+      {en:"Some carry big bags. Some hold their children's hands.",cn:"有些人拎着大包，有些牵着孩子的手。"},
+      {en:"Everyone looks relaxed and happy.",cn:"每个人看起来都很放松、很开心。"},
+      {en:"I finish my juice, pick up my bag, and head home with a smile.",cn:"我喝完果汁，拿起包，带着微笑回家。"}
+    ]
   }
 ];
 
@@ -546,6 +647,62 @@ function initE(){
   });
 }
 
+// ============ PLAY BAR TTS (SHL TEST style) ============
+function playBarTts(barEl,text){
+  document.querySelectorAll('.audio-bar.playing').forEach(function(b){b.classList.remove('playing');b.querySelector('.play-icon').textContent='▶';});
+  if(window._curBar===barEl&&window.speechSynthesis.speaking){window.speechSynthesis.cancel();window._curBar=null;return;}
+  window._curBar=barEl;
+  barEl.classList.add('playing');barEl.querySelector('.play-icon').textContent='⏹';
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';u.rate=0.85;
+  u.onend=function(){barEl.classList.remove('playing');barEl.querySelector('.play-icon').textContent='▶';window._curBar=null;};
+  u.onerror=function(){barEl.classList.remove('playing');barEl.querySelector('.play-icon').textContent='▶';window._curBar=null;};
+  var voices=window.speechSynthesis.getVoices();
+  var en=voices.find(function(v){return v.lang==='en-US'&&v.name.includes('Google');})||voices.find(function(v){return v.lang==='en-US';})||voices.find(function(v){return v.lang.startsWith('en');});
+  if(en)u.voice=en;
+  window.speechSynthesis.speak(u);
+}
+
+// ============ INIT F SPEECH ============
+function initFSpeech(){
+  var html='';
+  F_SPEECHES.forEach(function(s,si){
+    var fullText=s.lines.map(function(l){return l.en;}).join(' ');
+    html+='<div class="speech-card">';
+    html+='<div class="speech-title">📝 Speech '+(si+1)+' — '+s.title+'</div>';
+    html+='<div class="speech-scene">'+s.scene+'</div>';
+    // Full play bar
+    html+='<div class="audio-bar" onclick="playBarTts(this,F_SPEECHES['+si+'].lines.map(function(l){return l.en}).join(\'. \'))">';
+    html+='<div class="play-icon">▶</div>';
+    html+='<div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>';
+    html+='<div class="bar-label">🔊 Play Full Speech / 播放完整演讲</div>';
+    html+='</div>';
+    // Lines
+    html+='<div id="speech-lines-'+si+'">';
+    s.lines.forEach(function(l,li){
+      html+='<div class="speech-line">';
+      html+='<div class="speech-line-btn"><button class="btn btn-tts btn-small" onclick="tts(\''+l.en.replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\')">🔊</button></div>';
+      html+='<div><div class="speech-en">'+(li+1)+'. '+l.en+'</div>';
+      html+='<div class="speech-cn">'+l.cn+'</div></div>';
+      html+='</div>';
+    });
+    html+='</div>';
+    // Toggle Chinese button
+    html+='<button class="speech-toggle" onclick="toggleCn(this,'+si+')">🙈 Hide Chinese / 隐藏中文</button>';
+    html+='</div>';
+  });
+  document.getElementById('f-speech-list').innerHTML=html;
+}
+
+function toggleCn(btn,si){
+  var container=document.getElementById('speech-lines-'+si);
+  var cns=container.querySelectorAll('.speech-cn');
+  var hidden=cns[0]&&cns[0].style.display==='none';
+  cns.forEach(function(el){el.style.display=hidden?'':'none';});
+  btn.textContent=hidden?'🙈 Hide Chinese / 隐藏中文':'👀 Show Chinese / 显示中文';
+}
+
 // ============ INIT F ============
 function initF(){
   var html='';
@@ -576,7 +733,7 @@ document.head.appendChild(mcqStyle);
 
 // ============ LOAD ============
 window.addEventListener('load',function(){
-  initA(); initB(); initC(); initD(); initE(); initF();
+  initA(); initB(); initC(); initD(); initE(); initF(); initFSpeech();
   updateStarCount();
   speechSynthesis.getVoices();
 });
