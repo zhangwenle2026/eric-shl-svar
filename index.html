@@ -326,7 +326,7 @@ body{font-size:15px}
 <div class="panel" id="panel-e">
   <div class="section-header">
     <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>16 words (synonyms + antonyms) · 16 个单词（同义词 + 反义词）</p></div>
+    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>17 words (synonyms + antonyms + usage) · 17 个单词（同义词 + 反义词 + 用法）</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Study Method 学习方法：</strong><br>
@@ -341,6 +341,7 @@ body{font-size:15px}
     <button class="cat-btn" onclick="filterVocab('size')">Size 程度词</button>
     <button class="cat-btn" onclick="filterVocab('quality')">Quality 品质词</button>
     <button class="cat-btn" onclick="filterVocab('antonym')">🔄 Antonym 反义词</button>
+    <button class="cat-btn" onclick="filterVocab('usage')">📝 Usage 用法</button>
   </div>
   <div id="e-flashcard-area"></div>
   <div class="flashcard-nav">
@@ -429,7 +430,9 @@ var E_WORDS=[
   {word:"INCREASE",syn:"decrease",wrong:["grow","multiply","raise"],cat:"action",ex:"We saw an increase in orders last month.",type:"antonym"},
   {word:"TEMPORARY",syn:"permanent",wrong:["short","brief","instant"],cat:"quality",ex:"This is only a temporary arrangement.",type:"antonym"},
   {word:"COMPLICATED",syn:"simple",wrong:["complex","difficult","intricate"],cat:"quality",ex:"The process is too complicated for new employees.",type:"antonym"},
-  {word:"FLEXIBLE",syn:"rigid",wrong:["adaptable","versatile","open"],cat:"quality",ex:"We need a more flexible work schedule.",type:"antonym"}
+  {word:"FLEXIBLE",syn:"rigid",wrong:["adaptable","versatile","open"],cat:"quality",ex:"We need a more flexible work schedule.",type:"antonym"},
+  // Usage flashcards (choose correct sentence) ⭐真题
+  {word:"⭐ COMPRISE",syn:"The company comprises 30% women.",wrong:["The company comprise 30% women.","The company is comprised 30% women.","The company comprises of 30% women."],cat:"action",ex:"comprise = 包含/由…构成，不与 of 连用；主语单数用 comprises。",type:"usage"}
 ];
 
 var D_P=[
@@ -734,6 +737,7 @@ var eFiltered=[];
 function filterVocab(cat){
   eFilter=cat;
   if(cat==='antonym') eFiltered=E_WORDS.filter(function(w){return w.type==='antonym';});
+  else if(cat==='usage') eFiltered=E_WORDS.filter(function(w){return w.type==='usage';});
   else eFiltered=E_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
   if(eFiltered.length===0) eFiltered=E_WORDS.slice();
   eIdx=0;
@@ -753,15 +757,19 @@ function renderE(){
   var html='<div class="flashcard-wrap" onclick="flipCard(this)">';
   html+='<div class="flashcard" id="fc-current" style="min-height:200px;position:relative">';
   var isAnt=w.type==='antonym';
-  html+='<div class="fc-front"><div class="fc-word"'+(isAnt?' style="color:#8e44ad"':'')+'>'+w.word+'</div>';
-  html+='<div class="fc-hint">'+(isAnt?'Tap to see <strong>antonym</strong> 点击查看<strong>反义词</strong> →':'Tap to see synonym 点击查看同义词 →')+'</div>';
-  html+='<div style="margin-top:12px"><button class="btn btn-tts" onclick="event.stopPropagation();tts(\''+w.word.toLowerCase()+'\')">🔊 Pronounce 发音</button></div>';
+  var isUsage=w.type==='usage';
+  var wordColor=isUsage?'color:#2980b9':(isAnt?'color:#8e44ad':'');
+  var hint=isUsage?'Tap to see <strong>correct sentence</strong> 点击查看<strong>正确句子</strong> →':(isAnt?'Tap to see <strong>antonym</strong> 点击查看<strong>反义词</strong> →':'Tap to see synonym 点击查看同义词 →');
+  var ansPrefix=isUsage?'✅ ':(isAnt?'≠ ':'= ');
+  html+='<div class="fc-front"><div class="fc-word"'+(wordColor?' style="'+wordColor+'"':'')+'>'+w.word+'</div>';
+  html+='<div class="fc-hint">'+hint+'</div>';
+  html+='<div style="margin-top:12px"><button class="btn btn-tts" onclick="event.stopPropagation();tts(\''+w.word.replace(/⭐\s*/,'').toLowerCase()+'\')">🔊 Pronounce 发音</button></div>';
   html+='</div>';
   html+='<div class="fc-back">';
-  html+='<div class="fc-answer">'+(isAnt?'≠ ':'= ')+w.syn+'</div>';
+  html+='<div class="fc-answer" style="font-size:'+(isUsage?'14':'')+'px">'+ansPrefix+w.syn+'</div>';
   html+='<div class="fc-example">"'+w.ex+'"</div>';
-  html+='<div class="fc-category">'+w.cat.toUpperCase()+'</div>';
-  html+='<div style="margin-top:10px"><button class="btn btn-tts" style="background:rgba(255,255,255,0.2);color:#fff;border:none" onclick="event.stopPropagation();tts(\''+w.syn+'\')">🔊 '+w.syn+'</button></div>';
+  html+='<div class="fc-category">'+w.cat.toUpperCase()+(isUsage?' · USAGE 用法':'')+'</div>';
+  html+='<div style="margin-top:10px"><button class="btn btn-tts" style="background:rgba(255,255,255,0.2);color:#fff;border:none" onclick="event.stopPropagation();tts(\''+w.syn.replace(/'/g,"\\'")+'\')">🔊 '+w.syn+'</button></div>';
   html+='</div></div></div>';
   document.getElementById('e-flashcard-area').innerHTML=html;
   document.getElementById('e-counter').textContent=(eIdx+1)+' / '+eFiltered.length+(eFilter!=='all'?' ('+eFilter+')':'');
