@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260418-0412-realtopics">
-<meta name="theme-color" content="#2e6fba">
+<meta name="app-version" content="20260418-0522-wext-ui">
+<meta name="theme-color" content="#4f46e5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
 <title>ERIC SHL SVAR</title>
@@ -14,67 +14,78 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#2e6fba;--primary-dark:#1a4a8a;--primary-light:#4a90d9;
-  --accent:#e8935a;--pink:#f2a7b3;--bg:#eef5fc;--card:#ffffff;
-  --text:#1a2a3a;--muted:#6b7c93;--border:#d0dff0;
-  --green:#27ae60;--red:#e74c3c;--orange:#f39c12;--teal:#16a085;
-  --radius:16px;--shadow:0 2px 12px rgba(46,111,186,0.12);
+  --primary:#4f46e5;--primary-dark:#1e1b4b;--primary-light:#818cf8;
+  --accent:#a78bfa;--pink:#c084fc;--bg:#f5f3ff;--card:rgba(255,255,255,0.85);
+  --text:#1e1b4b;--muted:#6b7280;--border:rgba(139,92,246,0.15);
+  --green:#10b981;--red:#ef4444;--orange:#f59e0b;--teal:#06b6d4;
+  --radius:20px;--shadow:0 4px 24px rgba(79,70,229,0.08);
+  --glass:rgba(255,255,255,0.6);--glass-border:rgba(255,255,255,0.3);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;
+  background:linear-gradient(135deg,#ede9fe 0%,#f5f3ff 30%,#eef2ff 60%,#f0f9ff 100%);
+  background-attachment:fixed}
 
-.app-header{background:linear-gradient(135deg,#16345a,#1d5799,#3a82cc);color:#fff;padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(22,52,90,0.3)}
-.app-header::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),#f2c47a,var(--pink))}
+.app-header{background:linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);color:#fff;padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(30,27,75,0.3);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.app-header::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#a78bfa,#f472b6,#fb923c,#a78bfa)}
 .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-top:4px}
 .app-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;letter-spacing:1px}
 .app-subtitle{font-size:10px;opacity:0.75;letter-spacing:0.5px}
-.progress-badge{background:rgba(255,255,255,0.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600}
+.progress-badge{background:rgba(167,139,250,0.3);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;border:1px solid rgba(167,139,250,0.3)}
 
-.tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid rgba(255,255,255,0.15)}
+.tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .tab-bar::-webkit-scrollbar{display:none}
-.tab-btn{flex:1;min-width:70px;padding:9px 6px;background:none;border:none;color:rgba(255,255,255,0.65);font-size:11px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;white-space:nowrap;text-align:center}
-.tab-btn.active{color:#fff;border-bottom-color:#fff;font-weight:700}
+.tab-btn{flex:1;min-width:70px;padding:10px 6px;background:none;border:none;color:rgba(255,255,255,0.55);font-size:11px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.25s;white-space:nowrap;text-align:center}
+.tab-btn.active{color:#fff;border-bottom-color:#a78bfa;font-weight:700;background:rgba(167,139,250,0.15)}
+.tab-btn:hover{color:rgba(255,255,255,0.8)}
 .tab-btn .tab-icon{display:block;font-size:14px;margin-bottom:2px}
 
 .panel{display:none;padding:16px;padding-bottom:80px}
 .panel.active{display:block}
 
-.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--glass-border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform 0.2s,box-shadow 0.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,70,229,0.12)}
 .card-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--primary);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.8px;display:flex;align-items:center;gap:6px}
 .card-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
 
-.tip-box{background:linear-gradient(135deg,#fff8f3,#fff2eb);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#7a3a10;line-height:1.7}
-.tip-box strong{color:var(--accent)}
+.tip-box{background:linear-gradient(135deg,rgba(167,139,250,0.08),rgba(196,181,253,0.12));border-left:3px solid var(--accent);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:#4c1d95;line-height:1.7;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tip-box strong{color:#7c3aed}
 
-.info-box{background:linear-gradient(135deg,#eef5fc,#e0ecfb);border-left:3px solid var(--primary);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--primary-dark);line-height:1.7}
+.info-box{background:linear-gradient(135deg,rgba(79,70,229,0.06),rgba(99,102,241,0.1));border-left:3px solid var(--primary);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--primary-dark);line-height:1.7;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 
 /* SENTENCE ITEMS */
-.sentence-item{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:10px;border:1.5px solid var(--border);transition:all 0.2s}
-.sentence-item:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 4px 16px rgba(46,111,186,0.12)}
+.sentence-item{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid var(--glass-border);transition:all 0.25s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(79,70,229,0.06)}
+.sentence-item:hover{border-color:var(--primary-light);transform:translateY(-3px);box-shadow:0 8px 24px rgba(79,70,229,0.12)}
 .sentence-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.5px;margin-bottom:4px}
 .sentence-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:10px}
 .sentence-phonetic{font-size:11px;color:var(--teal);font-style:italic;margin-bottom:8px}
-.sentence-tip{font-size:11px;color:var(--muted);background:var(--bg);padding:6px 10px;border-radius:6px;border:1px solid var(--border)}
+.sentence-tip{font-size:11px;color:var(--muted);background:rgba(245,243,255,0.8);padding:6px 10px;border-radius:8px;border:1px solid var(--border)}
 
-.btn{border:none;border-radius:20px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
-.btn-primary{background:var(--primary);color:#fff;padding:9px 18px;font-size:13px}
-.btn-tts{background:rgba(46,111,186,0.1);color:var(--primary);padding:6px 14px;font-size:12px;border-radius:20px;border:1px solid var(--border)}
-.btn-tts:hover{background:var(--primary);color:#fff}
-.btn-accent{background:var(--accent);color:#fff;padding:7px 14px;font-size:12px}
-.btn-outline{background:transparent;color:var(--primary);padding:7px 14px;font-size:12px;border:1.5px solid var(--primary);border-radius:20px}
-.btn-small{padding:5px 12px;font-size:11px}
-.btn-tag{background:var(--bg);color:var(--muted);padding:5px 12px;font-size:11px;border:1.5px solid var(--border);border-radius:20px}
-.btn-tag.starred{background:#fff8e1;color:var(--orange);border-color:var(--orange)}
+.btn{border:none;border-radius:12px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:600;transition:all 0.25s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,0.2)}
+.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:10px 20px;font-size:13px}
+.btn-tts{background:rgba(79,70,229,0.08);color:var(--primary);padding:7px 16px;font-size:12px;border-radius:12px;border:1px solid rgba(79,70,229,0.2)}
+.btn-tts:hover{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-color:transparent}
+.btn-accent{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff;padding:8px 16px;font-size:12px}
+.btn-outline{background:transparent;color:var(--primary);padding:8px 16px;font-size:12px;border:1.5px solid var(--primary);border-radius:12px}
+.btn-small{padding:6px 14px;font-size:11px}
+.btn-tag{background:var(--glass);color:var(--muted);padding:5px 12px;font-size:11px;border:1.5px solid var(--border);border-radius:12px}
+.btn-tag.starred{background:#fef3c7;color:var(--orange);border-color:var(--orange)}
 
-/* AUDIO BAR (SHL TEST style) */
-.audio-bar{display:flex;align-items:center;gap:10px;background:#f0f7ff;border:1.5px solid #c5daf5;border-radius:12px;padding:10px 14px;margin-bottom:10px;cursor:pointer}
-.audio-bar:hover{background:#daeeff}
-.audio-bar.playing{background:#daeeff;border-color:var(--primary)}
-.audio-bar .play-icon{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.audio-bar.playing .play-icon{background:var(--primary-dark)}
+/* AUDIO BAR */
+.audio-bar{display:flex;align-items:center;gap:10px;background:rgba(79,70,229,0.06);border:1.5px solid rgba(79,70,229,0.15);border-radius:14px;padding:10px 14px;margin-bottom:10px;cursor:pointer;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all 0.2s}
+.audio-bar:hover{background:rgba(79,70,229,0.1);border-color:var(--primary-light)}
+.audio-bar.playing{background:rgba(79,70,229,0.12);border-color:var(--primary)}
+.audio-bar .play-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.audio-bar.playing .play-icon{background:linear-gradient(135deg,#1e1b4b,#4f46e5)}
 .audio-bar .wave{display:flex;align-items:center;gap:3px;height:28px;flex:1}
-.audio-bar .wave span{width:3px;border-radius:3px;background:var(--primary);opacity:0.5;height:4px}
+.audio-bar .wave span{width:3px;border-radius:3px;background:linear-gradient(180deg,#4f46e5,#a78bfa);opacity:0.5;height:4px}
 .audio-bar.playing .wave span{animation:wb 0.6s ease-in-out infinite alternate}
 .audio-bar.playing .wave span:nth-child(2){animation-delay:0.1s}
 .audio-bar.playing .wave span:nth-child(3){animation-delay:0.2s}
@@ -84,27 +95,29 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 .audio-bar.playing .wave span:nth-child(7){animation-delay:0.15s}
 .audio-bar.playing .wave span:nth-child(8){animation-delay:0.35s}
 @keyframes wb{to{height:22px;opacity:1}}
-.audio-bar .bar-label{font-size:13px;font-weight:600;color:var(--primary-dark);white-space:nowrap}
+.audio-bar .bar-label{font-size:13px;font-weight:600;color:var(--primary);white-space:nowrap}
 
 /* SPEECH CARDS */
-.speech-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border)}
-.speech-title{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.speech-scene{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:12px}
+.speech-card{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--glass-border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.25s}
+.speech-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,70,229,0.12)}
+.speech-title{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary-dark);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.speech-scene{font-size:12px;color:#7c3aed;font-weight:600;margin-bottom:12px}
 .speech-line{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bg)}
 .speech-line:last-child{border-bottom:none}
 .speech-en{font-size:14px;line-height:1.7;color:var(--text);flex:1}
 .speech-cn{font-size:12px;color:var(--muted);line-height:1.6;margin-top:2px}
 .speech-line-btn{flex-shrink:0;margin-top:2px}
-.speech-toggle{background:var(--bg);color:var(--primary);border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.2s}
-.speech-toggle:hover{background:var(--primary);color:#fff}
+.speech-toggle{background:rgba(79,70,229,0.06);color:var(--primary);border:1.5px solid rgba(79,70,229,0.15);border-radius:12px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.25s}
+.speech-toggle:hover{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-color:transparent}
 
 /* FLASHCARD */
 .flashcard-wrap{perspective:800px;cursor:pointer;margin-bottom:14px}
 .flashcard{width:100%;border-radius:var(--radius);position:relative;transform-style:preserve-3d;transition:transform 0.5s ease;min-height:180px}
 .flashcard.flipped{transform:rotateY(180deg)}
 .fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-.fc-front{background:var(--card);border:2px solid var(--border);box-shadow:var(--shadow)}
-.fc-back{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;transform:rotateY(180deg)}
+.fc-front{background:var(--card);border:2px solid var(--glass-border);box-shadow:var(--shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.fc-back{background:linear-gradient(135deg,#1e1b4b,#4f46e5,#7c3aed);color:#fff;transform:rotateY(180deg)}
 .fc-word{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;color:var(--primary);margin-bottom:6px;text-align:center}
 .fc-hint{font-size:11px;color:var(--muted);letter-spacing:0.5px}
 .fc-answer{font-size:18px;font-weight:700;text-align:center;margin-bottom:8px}
@@ -116,32 +129,36 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 .card-counter{font-size:12px;color:var(--muted);font-weight:600;text-align:center;flex:1}
 
 /* PASSAGE */
-.passage-box{background:#f8fbff;border:1.5px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;font-size:13px;line-height:1.9;color:var(--text)}
-.passage-box mark{background:#fff3cd;padding:0 2px;border-radius:2px}
+.passage-box{background:rgba(245,243,255,0.8);border:1.5px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px;font-size:13px;line-height:1.9;color:var(--text);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.passage-box mark{background:rgba(251,191,36,0.2);padding:1px 4px;border-radius:3px}
 
 /* Q&A answer card */
-.answer-card{background:linear-gradient(135deg,#eafaf1,#d5f5e3);border:1.5px solid var(--green);border-radius:12px;padding:14px;margin-bottom:10px}
+.answer-card{background:linear-gradient(135deg,rgba(16,185,129,0.06),rgba(16,185,129,0.12));border:1.5px solid rgba(16,185,129,0.3);border-radius:14px;padding:14px;margin-bottom:10px}
 .answer-label{font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.8px;margin-bottom:4px}
-.answer-text{font-size:14px;font-weight:600;color:#1a5c2a;line-height:1.6}
+.answer-text{font-size:14px;font-weight:600;color:#065f46;line-height:1.6}
 
 /* VOCAB CATEGORY FILTER */
 .cat-filter{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;margin-bottom:12px}
 .cat-filter::-webkit-scrollbar{display:none}
-.cat-btn{flex-shrink:0;padding:5px 14px;border-radius:16px;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap}
-.cat-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.cat-btn{flex-shrink:0;padding:6px 16px;border-radius:12px;border:1.5px solid var(--border);background:var(--glass);color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.25s;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.cat-btn.active{background:linear-gradient(135deg,#4f46e5,#7c3aed);border-color:transparent;color:#fff;box-shadow:0 4px 12px rgba(79,70,229,0.25)}
+.cat-btn:hover:not(.active){border-color:var(--primary-light);color:var(--primary)}
 
 /* FREE TALK topic card */
-.topic-study-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow);border:1.5px solid var(--border)}
+.topic-study-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--glass-border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.25s}
+.topic-study-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,70,229,0.12)}
 .topic-study-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.5px;margin-bottom:6px}
-.topic-study-q{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px;line-height:1.5}
+.topic-study-q{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:12px;line-height:1.5}
 .topic-outline{margin-bottom:12px}
 .topic-outline-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
 .outline-step{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
-.step-dot{width:20px;height:20px;border-radius:50%;background:var(--primary);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-dot{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 8px rgba(79,70,229,0.25)}
 .step-text{font-size:12px;color:var(--text);line-height:1.6}
 .phrase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.phrase-chip{background:rgba(46,111,186,0.08);color:var(--primary);padding:4px 12px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(46,111,186,0.2);transition:all 0.2s}
-.phrase-chip:hover{background:var(--primary);color:#fff}
+.phrase-chip{background:rgba(79,70,229,0.06);color:var(--primary);padding:5px 14px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(79,70,229,0.15);transition:all 0.25s}
+.phrase-chip:hover{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-color:transparent;transform:translateY(-1px)}
 
 /* STAR TOGGLE */
 .star-toggle{cursor:pointer;font-size:18px;color:#ddd;transition:color 0.2s;margin-left:auto}
@@ -149,8 +166,8 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 
 /* SECTION HEADER */
 .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.section-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.section-info h2{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary)}
+.section-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 12px rgba(79,70,229,0.25)}
+.section-info h2{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--primary-dark)}
 .section-info p{font-size:11px;color:var(--muted);margin-top:2px}
 body{font-size:15px}
 .card{padding:20px}
@@ -202,14 +219,14 @@ body{font-size:15px}
 <div class="panel" id="panel-b">
   <div class="section-header">
     <div class="section-icon">🔁</div>
-    <div class="section-info"><h2>Repeat Sentence 句子复述</h2><p>12 sentences · 12 个句子</p></div>
+    <div class="section-info"><h2>Repeat Sentence 句子复述</h2><p>12 sentences · 先盲听，再复述</p></div>
   </div>
   <div class="tip-box">
-    <strong>💡 Strategy 学习策略：</strong><br>
-    • Listen for <strong>chunks</strong>, not individual words 听<strong>意群</strong>，不要逐词听<br>
-    • Even if you miss a word, keep going — confidence matters 即使漏了一个词也继续说——自信很重要<br>
-    • Practice: Listen → cover → repeat → reveal → compare 练习：听 → 遮住 → 复述 → 对照 → 比较<br>
-    • Common mistake: pausing too long before starting 常见错误：开口前犹豫太久
+    <strong>💡 Blind Listening Mode 盲听模式：</strong><br>
+    • Step 1️⃣ <strong>Listen</strong> — play the audio without seeing the text 播放音频，不看文字<br>
+    • Step 2️⃣ <strong>Repeat</strong> — try to say it from memory 凭记忆复述<br>
+    • Step 3️⃣ <strong>Reveal</strong> — check the original text 揭示原文对照<br>
+    • 🎚️ Adjust speed: 0.6x (slow) → 1.0x (normal) → 1.5x (fast) 调整速度
   </div>
   <div id="b-list"></div>
 </div>
@@ -634,21 +651,81 @@ function initA(){
   document.getElementById('a-list').innerHTML=html;
 }
 
-// ============ INIT B ============
+// ============ INIT B (Blind Listen → Repeat → Reveal) ============
+var bSpeed=1.0;
+var bRevealed={};
+
 function initB(){
   var html='';
   B_SENTENCES.forEach(function(s,i){
     var sk='b_'+i;
-    html+='<div class="sentence-item">';
+    var revealed=bRevealed[i];
+    html+='<div class="sentence-item" id="b-item-'+i+'">';
     html+='<div class="sentence-num" style="display:flex;justify-content:space-between"><span>Sentence 句子 '+(i+1)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
-    html+='<div class="sentence-text">'+s.text+'</div>';
-    html+='<div class="sentence-phonetic">🎯 '+s.phonetic+'</div>';
+    // Audio player with controls
+    html+='<div class="b-player" style="background:linear-gradient(135deg,#f0f4ff,#e8eeff);border:1.5px solid #c5d0f5;border-radius:14px;padding:12px 16px;margin-bottom:10px">';
+    html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+    html+='<button class="btn btn-primary" style="width:42px;height:42px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0" onclick="playB('+i+')" id="b-play-'+i+'">▶</button>';
+    html+='<div style="flex:1">';
+    html+='<div style="font-size:12px;font-weight:700;color:var(--primary-dark);margin-bottom:4px">🎧 Step 1: Listen 盲听</div>';
+    html+='<div style="display:flex;align-items:center;gap:6px">';
+    html+='<span style="font-size:10px;color:var(--muted)">Speed 语速:</span>';
+    html+='<button class="b-speed-btn" onclick="setBSpeed('+i+',0.6)" style="font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:'+(bSpeed===0.6?'var(--primary)':'#fff')+';color:'+(bSpeed===0.6?'#fff':'var(--muted)')+';cursor:pointer">0.6x</button>';
+    html+='<button class="b-speed-btn" onclick="setBSpeed('+i+',0.8)" style="font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:'+(bSpeed===0.8?'var(--primary)':'#fff')+';color:'+(bSpeed===0.8?'#fff':'var(--muted)')+';cursor:pointer">0.8x</button>';
+    html+='<button class="b-speed-btn" onclick="setBSpeed('+i+',1.0)" style="font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:'+(bSpeed===1.0?'var(--primary)':'#fff')+';color:'+(bSpeed===1.0?'#fff':'var(--muted)')+';cursor:pointer">1.0x</button>';
+    html+='<button class="b-speed-btn" onclick="setBSpeed('+i+',1.2)" style="font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:'+(bSpeed===1.2?'var(--primary)':'#fff')+';color:'+(bSpeed===1.2?'#fff':'var(--muted)')+';cursor:pointer">1.2x</button>';
+    html+='<button class="b-speed-btn" onclick="setBSpeed('+i+',1.5)" style="font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:'+(bSpeed===1.5?'var(--primary)':'#fff')+';color:'+(bSpeed===1.5?'#fff':'var(--muted)')+';cursor:pointer">1.5x</button>';
+    html+='</div></div></div>';
+    // Pause button
     html+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
-    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')">🔊 Listen 听一遍</button>';
-    html+='<button class="btn btn-accent btn-small" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="font-size:11px">🔁 Repeat 复述模式</button>';
+    html+='<button class="btn btn-outline btn-small" onclick="pauseB()" style="font-size:11px">⏸ Pause 暂停</button>';
+    html+='<button class="btn btn-accent btn-small" onclick="playB('+i+')" style="font-size:11px">🔁 Replay 重播</button>';
     html+='</div></div>';
+    // Step 2: Repeat prompt (always visible)
+    html+='<div style="background:#fff8f3;border:1.5px solid #f0d0b0;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:12px;color:#7a4a20">';
+    html+='<strong>🎤 Step 2: Repeat 复述</strong> — 听完后，凭记忆复述这个句子';
+    html+='</div>';
+    // Step 3: Reveal (hidden text until clicked)
+    if(revealed){
+      html+='<div class="sentence-text" style="margin-bottom:8px">'+s.text+'</div>';
+      html+='<div class="sentence-phonetic">🎯 '+s.phonetic+'</div>';
+    }else{
+      html+='<button class="btn btn-primary" onclick="revealB('+i+')" style="width:100%;justify-content:center;padding:12px;font-size:13px;border-radius:12px">👀 Step 3: Reveal 揭示原文</button>';
+    }
+    html+='</div>';
   });
   document.getElementById('b-list').innerHTML=html;
+}
+
+function playB(idx){
+  speechSynthesis.cancel();
+  var s=B_SENTENCES[idx];
+  var u=new SpeechSynthesisUtterance(s.text);
+  u.lang='en-US'; u.rate=bSpeed;
+  var voices=speechSynthesis.getVoices();
+  var en=voices.find(function(v){return v.lang==='en-US'&&v.name.includes('Google');})||voices.find(function(v){return v.lang==='en-US';})||voices.find(function(v){return v.lang.startsWith('en');});
+  if(en) u.voice=en;
+  var btn=document.getElementById('b-play-'+idx);
+  if(btn) btn.textContent='⏹';
+  u.onend=function(){if(btn) btn.textContent='▶';};
+  u.onerror=function(){if(btn) btn.textContent='▶';};
+  speechSynthesis.speak(u);
+}
+
+function pauseB(){
+  if(speechSynthesis.speaking&&!speechSynthesis.paused) speechSynthesis.pause();
+  else if(speechSynthesis.paused) speechSynthesis.resume();
+}
+
+function setBSpeed(idx,speed){
+  bSpeed=speed;
+  // Re-render just the speed buttons highlight
+  initB();
+}
+
+function revealB(idx){
+  bRevealed[idx]=true;
+  initB();
 }
 
 // ============ INIT C (Talk — topics + speeches) ============
