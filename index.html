@@ -247,7 +247,7 @@ body{font-size:15px}
 <div class="panel" id="panel-d">
   <div class="section-header">
     <div class="section-icon">🎧</div>
-    <div class="section-info"><h2>Listening 听力理解</h2><p>2 dialogues × 5 questions · 2 段对话 × 5 道推理题</p></div>
+    <div class="section-info"><h2>Listening 听力理解</h2><p>3 dialogues × 5 questions · 3 段对话 × 5 道推理题（含⭐真题）</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Strategy 听力策略（对话版）：</strong><br>
@@ -287,6 +287,22 @@ body{font-size:15px}
       • Resource needed 所需资源: <strong>extra developer for 2 weeks 额外1名开发2周</strong>
     </div>
     <div id="d-qa2"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">🎧 Dialogue 对话 3 · ⭐真题 Vending Machine Supplier 自动售货机供应商</div>
+    <div class="passage-box" id="d-p3" style="font-size:13px;line-height:1.7"></div>
+    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-tts" onclick="tts(D_P[2])">▶ Play Dialogue 播放对话</button>
+    </div>
+    <div id="d-notes3" class="info-box" style="margin-bottom:14px">
+      <strong>📌 Key Points to Listen For 听力要点：</strong><br>
+      • Boss can't attend 老板无法参加: <strong>asks Sarah to go instead 让Sarah代替参加</strong><br>
+      • Task 任务: <strong>take notes + negotiate better price 记笔记+谈更好价格</strong><br>
+      • Requirements 要求: <strong>≥5 beverage options, ≤$10,000, no compromise on quality 至少5种饮料选项，不超过1万美元，不牺牲质量</strong><br>
+      • Cannot close deal 不能当场签约: <strong>wants to consider other suppliers 要考虑其他供应商</strong>
+    </div>
+    <div id="d-qa3"></div>
   </div>
 </div>
 
@@ -402,7 +418,8 @@ var E_WORDS=[
 
 var D_P=[
   "Woman: Have you heard? The company is planning to move to a new office next month. Man: Yes, I read the email. It says the new building is closer to the train station, which would make my commute shorter. But I'm a bit worried about the open-plan layout. Woman: Me too. I find it hard to concentrate when there's a lot of noise. I wonder if they'll have quiet rooms. Man: The email mentioned some meeting pods and focus rooms, but I'm not sure how many. If there aren't enough, people might end up booking them all day. Woman: That's a good point. I think we should bring this up at the next team meeting. Maybe management hasn't considered how many people actually need quiet space. Man: Agreed. Also, I noticed the new office doesn't have a cafeteria — just a small kitchen. Woman: Really? That could be a problem for people who don't bring lunch. There are probably restaurants nearby though. Man: I hope so. Overall I think the move could be positive, but there are definitely some things they need to sort out first.",
-  "Manager: I need to talk to you about the Henderson project. The client wants to move the deadline forward by two weeks. Developer: Two weeks? That's going to be very tight. We're already behind on the testing phase because of the bugs we found last week. Manager: I understand. But the client is under pressure from their board to show progress. Is there any way we can deliver a basic version first and add the remaining features later? Developer: We could do a phased delivery. The core functionality is about eighty percent done. If we skip some of the nice-to-have features, we could probably have something ready. Manager: What about quality? I don't want us to deliver something buggy. Developer: If we focus on the core features only, I'm fairly confident we can maintain quality. But we'd need an extra developer for the next two weeks. Manager: I'll see what I can do. Let me talk to the resource team. In the meantime, can you prepare a revised timeline showing what we can deliver and when? Developer: Sure, I'll have that ready by tomorrow morning."
+  "Manager: I need to talk to you about the Henderson project. The client wants to move the deadline forward by two weeks. Developer: Two weeks? That's going to be very tight. We're already behind on the testing phase because of the bugs we found last week. Manager: I understand. But the client is under pressure from their board to show progress. Is there any way we can deliver a basic version first and add the remaining features later? Developer: We could do a phased delivery. The core functionality is about eighty percent done. If we skip some of the nice-to-have features, we could probably have something ready. Manager: What about quality? I don't want us to deliver something buggy. Developer: If we focus on the core features only, I'm fairly confident we can maintain quality. But we'd need an extra developer for the next two weeks. Manager: I'll see what I can do. Let me talk to the resource team. In the meantime, can you prepare a revised timeline showing what we can deliver and when? Developer: Sure, I'll have that ready by tomorrow morning.",
+  "⭐ Man: I was about to come to your office. Good, I found you on the way. Woman: Good morning, sir. Has something happened? I was just going to the cafeteria. Man: I am afraid I won't be able to make it to the meeting with the vending machine supplier today. Woman: Oh, should I cancel the meeting for the day? Man: No, no. Why cancel it? You can attend and take notes of their presentation. Woman: Yes, sir. Anything else that you want me to do? Man: Yes, I want you to negotiate a better price on the machine. We want to find a less expensive machine to replace the existing one. Woman: Do you want a less expensive machine even if it has fewer beverage options? Man: No, we want to keep at least five options, but we don't want to spend more than ten thousand dollars. Woman: Okay, I'll make a note of it. I will leave the office in a while. Man: Great. And please remember that we do not want to compromise on quality. Woman: I understand that, sir. I will try to get the best deal for cost and quality. Is there anything else you want to ask me? Man: Do I have the liberty to close the deal if I find the right machine? Woman: No, because I would still like to consider other suppliers in the market, even if our present supplier offers us a good price. Man: Sounds good. I'll have my lunch and then leave for the meeting. Woman: All the best, Sarah. Call me when you reach the meeting venue."
 ];
 
 var D_QA=[
@@ -419,6 +436,13 @@ var D_QA=[
     {q:"What solution does the manager propose?",opts:["Cancel the project","Hire a new team","Deliver a basic version first","Ask the client to wait a month"],correct:2},
     {q:"What does the developer need to meet the deadline?",opts:["A bigger office","An extra developer for two weeks","Permission to skip all testing","A meeting with the client"],correct:1},
     {q:"What will the developer do by tomorrow morning?",opts:["Finish the project","Prepare a revised timeline","Meet with the client","Request a transfer"],correct:1}
+  ],
+  [
+    {q:"Why can't the man attend the meeting? 男士为什么不能参加会议？",opts:["He is sick","He has another appointment","He doesn't say the specific reason, but he won't be able to make it","He is on vacation"],correct:2},
+    {q:"What does the man ask Sarah to do at the meeting? 男士让Sarah在会上做什么？",opts:["Cancel the meeting","Just observe and leave","Take notes and negotiate a better price","Sign the contract immediately"],correct:2},
+    {q:"What is the budget limit for the new machine? 新机器的预算上限是多少？",opts:["Five thousand dollars","Ten thousand dollars","Fifteen thousand dollars","Twenty thousand dollars"],correct:1},
+    {q:"Why doesn't the man want Sarah to close the deal? 为什么男士不让Sarah当场签约？",opts:["He doesn't trust her judgment","He wants to consider other suppliers in the market","The budget hasn't been approved yet","He wants to attend the next meeting himself"],correct:1},
+    {q:"What can you infer about the man's priorities? 能推断出男士的优先考虑是什么？",opts:["He only cares about the lowest price","He wants good quality with at least five beverage options within budget","He doesn't care about the vending machine","He wants the most expensive machine"],correct:1}
   ]
 ];
 
@@ -655,8 +679,11 @@ function initCSpeech(){
 function initD(){
   document.getElementById('d-p1').textContent=D_P[0];
   document.getElementById('d-p2').textContent=D_P[1];
+  if(D_P[2] && document.getElementById('d-p3')) document.getElementById('d-p3').textContent=D_P[2];
   var keys=['A','B','C','D'];
-  [0,1].forEach(function(pi){
+  var dialogueCount=D_QA.length;
+  var indices=[];for(var _i=0;_i<dialogueCount;_i++) indices.push(_i);
+  indices.forEach(function(pi){
     var html='';
     D_QA[pi].forEach(function(q,qi){
       html+='<div style="margin-bottom:16px">';
