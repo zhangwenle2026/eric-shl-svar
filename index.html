@@ -395,37 +395,37 @@ var stars=JSON.parse(localStorage.getItem(SKEY+'_stars')||'{}');
 
 // ============ DATA ============
 var A_SENTENCES=[
-  {text:"The meeting has been rescheduled to Thursday at two o'clock.",tip:"Stress 重音: re-SCHED-uled. Pause after 'rescheduled'. 在rescheduled后停顿。"},
-  {text:"Could you please send me the report by end of day?",tip:"Rising intonation 升调 on 'end of day?' — it's a polite request 礼貌请求。"},
-  {text:"We need to review the budget before approving the project.",tip:"Stress 重音: RE-view, ap-PROV-ing. 两个动词都要重读。"},
-  {text:"The delivery was delayed due to bad weather conditions.",tip:"'Due to' = because of 由于。Stress 重音: de-LAYED, con-DI-tions."},
-  {text:"Our team exceeded the sales target by fifteen percent this quarter.",tip:"Stress 重音: ex-CEED-ed. 'Fifteen percent' 要读清楚、自信。"},
-  {text:"Please make sure to confirm your attendance before Friday.",tip:"'Make sure to' = 请务必（柔和的命令）。Stress 重音: con-FIRM, at-TEN-dance."},
-  {text:"The new policy will take effect from the first of next month.",tip:"'Take effect' 生效 是固定搭配——不要单独重读 take。"},
-  {text:"I would like to follow up on the email I sent last week.",tip:"'Follow up' = 跟进某事。自然连读: 'follow-up-on'."},
-  {text:"Can you clarify what you mean by the third point?",tip:"Rising intonation 升调。Stress 重音: CLAR-i-fy, THIRD point."},
-  {text:"We appreciate your patience and understanding in this matter.",tip:"Formal closing 正式结束语。Stress 重音: ap-PRE-ci-ate, PA-tience, un-DER-stand-ing."},
-  {text:"The quarterly report indicates a steady growth in market share.",tip:"'Quarterly' = KWOR-ter-lee 季度的。'Steady growth' 稳步增长——连读自然。"},
-  {text:"All team members should attend the orientation session on Monday morning.",tip:"'Orientation' = or-ee-en-TAY-shun 入职培训。注意5个音节。"},
-  {text:"We are planning to launch the new product line in the second quarter.",tip:"'Launch' = 发布/上线。Stress 重音: LAUNCH, PROD-uct line, SEC-ond QUAR-ter."},
-  {text:"The finance department will review the expense claims before month end.",tip:"'Expense claims' = 费用报销。'Before month end' 月底前——作为意群连读。"},
-  {text:"Customers who experience issues should contact our support team directly.",tip:"Stress 重音: ex-PER-i-ence, CON-tact, di-RECT-ly。注意 directly 三个音节。"},
-  {text:"The warehouse has been relocated to a larger facility near the airport.",tip:"'Relocated' = re-lo-CAT-ed 搬迁。'Facility' = fa-CIL-i-ty 设施。"}
+  {text:"The quarterly report will be submitted to the board of directors by the end of this week.",tip:"Stress 重音: QUAR-ter-ly, sub-MIT-ted, di-REC-tors. 'Board of directors' 董事会——作为意群连读。"},
+  {text:"Employees are encouraged to provide feedback on the new company policies.",tip:"'Encouraged to' = 被鼓励。Stress 重音: em-PLOY-ees, en-CUR-aged, POL-i-cies 政策。"},
+  {text:"The marketing department has launched a new campaign to increase brand awareness.",tip:"'Campaign' = kam-PAIN 活动。'Brand awareness' 品牌知名度——连读自然。"},
+  {text:"We need to finalize the budget before the next board meeting.",tip:"'Finalize' = FI-na-lize 最终确定。Stress 重音: FI-na-lize, BUD-get, BOARD meeting."},
+  {text:"The new software system will improve efficiency across all departments.",tip:"'Efficiency' = e-FISH-en-see 效率。'Across all departments' 所有部门——不要吞 across。"},
+  {text:"Customer satisfaction has increased by fifteen percent this quarter.",tip:"'Satisfaction' = sa-tis-FAC-tion 满意度。'Fifteen percent' 慢读数字。"},
+  {text:"Please ensure all safety protocols are followed during the inspection.",tip:"'Protocols' = PRO-to-cols 协议/规程。'Inspection' = in-SPEC-tion 检查。"},
+  {text:"The conference will feature keynote speakers from leading technology companies.",tip:"'Keynote' = KEY-note 主旨/主题。'Feature' = 以…为特色。连读 'leading technology'。"},
+  {text:"Our team successfully completed the project ahead of schedule and under budget.",tip:"'Ahead of schedule' 提前完成，'under budget' 低于预算——两个短语都要读清楚。"},
+  {text:"The training program is designed to enhance leadership skills among mid-level managers.",tip:"'Enhance' = en-HANCE 提升。'Mid-level managers' 中层管理者——作为一个意群。"},
+  {text:"All participants must register online before the deadline.",tip:"'Participants' = par-TIS-i-pants 参与者。Stress 重音: REG-is-ter, DEAD-line."},
+  {text:"The company plans to expand its operations to three new markets next year.",tip:"'Expand operations' = 扩展业务。Stress 重音: ex-PAND, op-er-A-tions."},
+  {text:"Effective communication is essential for maintaining strong client relationships.",tip:"'Essential' = e-SEN-tial 必要的。'Client relationships' 客户关系——自然连读。"},
+  {text:"The annual performance review process begins in the first week of January.",tip:"'Annual' = AN-nual 年度的。'Performance review' 绩效评估——作为意群读。"},
+  {text:"We are committed to reducing our carbon footprint by twenty percent over the next five years.",tip:"'Committed to' = 致力于。'Carbon footprint' 碳足迹——稍做停顿再读数字。"},
+  {text:"Management has approved the proposal to restructure the customer service department.",tip:"'Restructure' = re-STRUC-ture 重组。Stress 重音: ap-PROVED, pro-PO-sal."}
 ];
 
 var B_SENTENCES=[
-  {text:"The client confirmed the order will arrive on Monday.",phonetic:"'Confirmed' = kən-FERMD 确认。'will arrive on Monday' 作为一个意群读。"},
-  {text:"Please submit your expense report before the deadline.",phonetic:"'Submit' = suh-MIT 提交。Stress 重音: EX-pense 费用, DEAD-line 截止日期。"},
-  {text:"We have decided to postpone the product launch until further notice.",phonetic:"'Postpone' = post-PONE 推迟。'Until further notice' 另行通知（常用商务短语）。"},
-  {text:"Could you forward the presentation to all team members?",phonetic:"'Forward' = 转发/发送。Stress 重音: for-WARD, pre-zen-TAY-shun 演示文稿。"},
-  {text:"The quarterly review meeting is scheduled for next Wednesday.",phonetic:"'Quarterly' = KWOR-ter-lee 季度的。'Scheduled for' = 安排在。"},
-  {text:"I need you to double-check the figures in the third column.",phonetic:"'Double-check' = 仔细核对。'Figures' = 数字。Stress 重音: FIG-ures, COL-umn."},
-  {text:"The supplier has agreed to extend the contract for six months.",phonetic:"'Extend' = 延长。Stress 重音: sup-PLI-er 供应商, ex-TEND, con-TRACT 合同。"},
-  {text:"Make sure the warehouse team is informed about the change.",phonetic:"'Warehouse' = WARE-house 仓库。'Informed about' = 被告知。"},
-  {text:"Our logistics partners have confirmed that the shipment will arrive by Wednesday afternoon.",phonetic:"'Logistics' = lo-JIS-tiks 物流。'Shipment' = SHIP-ment 货件。注意长句保持节奏。"},
-  {text:"The training program was designed to help new employees understand company procedures.",phonetic:"'Procedures' = pro-SEE-jurs 流程。'Designed to' = 旨在。"},
-  {text:"We strongly recommend that all departments submit their proposals before the deadline.",phonetic:"'Strongly recommend' = 强烈建议。'Proposals' = pro-POZ-als 提案。"},
-  {text:"Management has decided to implement a flexible working arrangement starting next quarter.",phonetic:"'Implement' = IM-ple-ment 实施。'Flexible arrangement' = 灵活安排。"}
+  {text:"The deadline for the project has been moved forward to next Monday.",phonetic:"'Moved forward' = 提前。Stress 重音: DEAD-line, moved FOR-ward, MON-day."},
+  {text:"We need to hire additional staff to handle the increased workload.",phonetic:"'Additional' = a-DI-tion-al 额外的。'Workload' = 工作量。连读 'handle the increased'."},
+  {text:"The manager suggested holding weekly team meetings to improve communication.",phonetic:"'Suggested' = sug-JEST-ed 建议。'Weekly team meetings' 作为一个意群连读。"},
+  {text:"Our biggest client has requested a meeting to discuss contract renewal.",phonetic:"'Renewal' = re-NEW-al 续约。Stress 重音: re-QUEST-ed, con-TRACT, re-NEW-al."},
+  {text:"The IT department will upgrade all computers during the holiday weekend.",phonetic:"'Upgrade' = up-GRADE 升级。'During the holiday weekend' 假期周末——自然连读。"},
+  {text:"Sales figures for the third quarter exceeded expectations by a wide margin.",phonetic:"'Exceeded expectations' = 超出预期。'By a wide margin' 以大幅度——读出自信感。"},
+  {text:"The company is offering flexible working hours to improve employee well-being.",phonetic:"'Flexible' = FLEX-i-ble 灵活的。'Well-being' = 幸福/福祉。注意连字符词。"},
+  {text:"Please review the attached document and provide your comments by Thursday.",phonetic:"'Attached' = a-TACHED 附带的。'Provide comments' 提供意见——Stress 重音: re-VIEW, pro-VIDE."},
+  {text:"The new branch office will be located in the downtown business district.",phonetic:"'Branch office' = 分部。'Downtown business district' 市中心商业区——三个词作为意群。"},
+  {text:"We have received several complaints about the quality of our latest product.",phonetic:"'Complaints' = com-PLAINTS 投诉。Stress 重音: re-CEIVED, QUAL-i-ty, LAT-est."},
+  {text:"The board of directors will meet next week to discuss the merger proposal.",phonetic:"'Merger' = MER-jer 合并。'Board of directors' 董事会——作为意群连读。"},
+  {text:"All departments must submit their annual reports before the fifteenth of December.",phonetic:"'Fifteenth' = fif-TEENTH 第十五。'Annual reports' 年度报告。注意 'fifteenth' 的 th 发音。"}
 ];
 
 // C_QA removed — Q&A section deleted (not in real exam)
