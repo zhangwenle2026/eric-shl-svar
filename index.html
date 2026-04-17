@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260418-0349">
+<meta name="app-version" content="20260418-0401">
 <meta name="theme-color" content="#2e6fba">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
@@ -186,7 +186,7 @@ body{font-size:15px}
 <div class="panel active" id="panel-a">
   <div class="section-header">
     <div class="section-icon">🗣️</div>
-    <div class="section-info"><h2>Read Aloud 朗读练习</h2><p>10 sentences · 10 个句子</p></div>
+    <div class="section-info"><h2>Read Aloud 朗读练习</h2><p>16 sentences · 16 个句子</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Key Tips 关键技巧：</strong><br>
@@ -202,7 +202,7 @@ body{font-size:15px}
 <div class="panel" id="panel-b">
   <div class="section-header">
     <div class="section-icon">🔁</div>
-    <div class="section-info"><h2>Repeat Sentence 句子复述</h2><p>8 sentences · 8 个句子</p></div>
+    <div class="section-info"><h2>Repeat Sentence 句子复述</h2><p>12 sentences · 12 个句子</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Strategy 学习策略：</strong><br>
@@ -247,44 +247,44 @@ body{font-size:15px}
 <div class="panel" id="panel-d">
   <div class="section-header">
     <div class="section-icon">🎧</div>
-    <div class="section-info"><h2>Listening 听力理解</h2><p>2 passages · 2 篇听力</p></div>
+    <div class="section-info"><h2>Listening 听力理解</h2><p>2 dialogues × 5 questions · 2 段对话 × 5 道推理题</p></div>
   </div>
   <div class="tip-box">
-    <strong>💡 Strategy 听力策略：</strong><br>
-    • First listen: get the <strong>main idea</strong> 第一遍：抓<strong>大意</strong><br>
-    • Second listen: focus on <strong>numbers, names, and key decisions</strong> 第二遍：注意<strong>数字、名字和关键决定</strong><br>
-    • Highlighted words are important — notice them when listening 高亮词是重点——听的时候留意<br>
-    • Don't get stuck on unknown words; guess from context 遇到生词别卡住，根据上下文猜
+    <strong>💡 Strategy 听力策略（对话版）：</strong><br>
+    • Listen for <strong>opinions and attitudes</strong>, not just facts 注意<strong>观点和态度</strong>，不只是事实<br>
+    • Pay attention to <strong>tone and implication</strong> 注意<strong>语气和言外之意</strong><br>
+    • <strong>Inference questions</strong>: "What can you infer?" = 需要推理，答案不会直接说出来<br>
+    • Listen <strong>twice</strong> — first for main idea, second for details 听<strong>两遍</strong>——第一遍抓大意，第二遍抓细节
   </div>
 
   <div class="card">
-    <div class="card-title">📄 Passage 1 · Work Meeting 工作会议</div>
-    <div class="passage-box" id="d-p1"></div>
+    <div class="card-title">🎧 Dialogue 对话 1 · Office Relocation 办公室搬迁</div>
+    <div class="passage-box" id="d-p1" style="font-size:13px;line-height:1.7"></div>
     <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-tts" onclick="tts(D_P[0])">▶ Play Full Passage 播放全文</button>
+      <button class="btn btn-tts" onclick="tts(D_P[0])">▶ Play Dialogue 播放对话</button>
     </div>
     <div id="d-notes1" class="info-box" style="margin-bottom:14px">
-      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
-      • Delivery rate 配送成功率: <strong>94%</strong> (up 3% from last week 比上周提升3%)<br>
-      • Customer complaint 客户投诉: <strong>response time 响应时间</strong><br>
-      • New policy starts 新政策开始: <strong>next Monday 下周一</strong><br>
-      • Required response time 要求响应时间: <strong>within 2 hours 2小时内</strong>
+      <strong>📌 Key Points to Listen For 听力要点：</strong><br>
+      • Man's positive point 男方优点: <strong>closer to train station 离地铁更近</strong><br>
+      • Woman's concern 女方担忧: <strong>noise in open-plan 开放式办公噪音</strong><br>
+      • Unknown factor 不确定因素: <strong>number of quiet rooms 安静房间数量</strong><br>
+      • Missing facility 缺少设施: <strong>no cafeteria 没有食堂</strong>
     </div>
     <div id="d-qa1"></div>
   </div>
 
   <div class="card" style="margin-top:16px">
-    <div class="card-title">📄 Passage 2 · Client Call 客户电话</div>
-    <div class="passage-box" id="d-p2"></div>
+    <div class="card-title">🎧 Dialogue 对话 2 · Project Deadline 项目截止日期</div>
+    <div class="passage-box" id="d-p2" style="font-size:13px;line-height:1.7"></div>
     <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-tts" onclick="tts(D_P[1])">▶ Play Full Passage 播放全文</button>
+      <button class="btn btn-tts" onclick="tts(D_P[1])">▶ Play Dialogue 播放对话</button>
     </div>
     <div id="d-notes2" class="info-box" style="margin-bottom:14px">
-      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
-      • Caller 来电者: <strong>David, operations team 运营团队</strong><br>
-      • Problem 问题: <strong>2 items out of stock 2件商品缺货</strong><br>
-      • Wait time 等待时间: <strong>5–7 business days 5-7个工作日</strong><br>
-      • Action needed 需要做的: <strong>reply by end of day 当天回复</strong>
+      <strong>📌 Key Points to Listen For 听力要点：</strong><br>
+      • Client pressure 客户压力: <strong>board wants to see progress 董事会要看进展</strong><br>
+      • Current status 当前状态: <strong>core 80% done, behind on testing 核心80%完成，测试落后</strong><br>
+      • Proposed solution 方案: <strong>phased delivery 分阶段交付</strong><br>
+      • Resource needed 所需资源: <strong>extra developer for 2 weeks 额外1名开发2周</strong>
     </div>
     <div id="d-qa2"></div>
   </div>
@@ -294,7 +294,7 @@ body{font-size:15px}
 <div class="panel" id="panel-e">
   <div class="section-header">
     <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>10 words · 10 个单词</p></div>
+    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>16 words (synonyms + antonyms) · 16 个单词（同义词 + 反义词）</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Study Method 学习方法：</strong><br>
@@ -308,6 +308,7 @@ body{font-size:15px}
     <button class="cat-btn" onclick="filterVocab('action')">Action 动作词</button>
     <button class="cat-btn" onclick="filterVocab('size')">Size 程度词</button>
     <button class="cat-btn" onclick="filterVocab('quality')">Quality 品质词</button>
+    <button class="cat-btn" onclick="filterVocab('antonym')">🔄 Antonym 反义词</button>
   </div>
   <div id="e-flashcard-area"></div>
   <div class="flashcard-nav">
@@ -353,7 +354,13 @@ var A_SENTENCES=[
   {text:"The new policy will take effect from the first of next month.",tip:"'Take effect' 生效 是固定搭配——不要单独重读 take。"},
   {text:"I would like to follow up on the email I sent last week.",tip:"'Follow up' = 跟进某事。自然连读: 'follow-up-on'."},
   {text:"Can you clarify what you mean by the third point?",tip:"Rising intonation 升调。Stress 重音: CLAR-i-fy, THIRD point."},
-  {text:"We appreciate your patience and understanding in this matter.",tip:"Formal closing 正式结束语。Stress 重音: ap-PRE-ci-ate, PA-tience, un-DER-stand-ing."}
+  {text:"We appreciate your patience and understanding in this matter.",tip:"Formal closing 正式结束语。Stress 重音: ap-PRE-ci-ate, PA-tience, un-DER-stand-ing."},
+  {text:"The quarterly report indicates a steady growth in market share.",tip:"'Quarterly' = KWOR-ter-lee 季度的。'Steady growth' 稳步增长——连读自然。"},
+  {text:"All team members should attend the orientation session on Monday morning.",tip:"'Orientation' = or-ee-en-TAY-shun 入职培训。注意5个音节。"},
+  {text:"We are planning to launch the new product line in the second quarter.",tip:"'Launch' = 发布/上线。Stress 重音: LAUNCH, PROD-uct line, SEC-ond QUAR-ter."},
+  {text:"The finance department will review the expense claims before month end.",tip:"'Expense claims' = 费用报销。'Before month end' 月底前——作为意群连读。"},
+  {text:"Customers who experience issues should contact our support team directly.",tip:"Stress 重音: ex-PER-i-ence, CON-tact, di-RECT-ly。注意 directly 三个音节。"},
+  {text:"The warehouse has been relocated to a larger facility near the airport.",tip:"'Relocated' = re-lo-CAT-ed 搬迁。'Facility' = fa-CIL-i-ty 设施。"}
 ];
 
 var B_SENTENCES=[
@@ -364,7 +371,11 @@ var B_SENTENCES=[
   {text:"The quarterly review meeting is scheduled for next Wednesday.",phonetic:"'Quarterly' = KWOR-ter-lee 季度的。'Scheduled for' = 安排在。"},
   {text:"I need you to double-check the figures in the third column.",phonetic:"'Double-check' = 仔细核对。'Figures' = 数字。Stress 重音: FIG-ures, COL-umn."},
   {text:"The supplier has agreed to extend the contract for six months.",phonetic:"'Extend' = 延长。Stress 重音: sup-PLI-er 供应商, ex-TEND, con-TRACT 合同。"},
-  {text:"Make sure the warehouse team is informed about the change.",phonetic:"'Warehouse' = WARE-house 仓库。'Informed about' = 被告知。"}
+  {text:"Make sure the warehouse team is informed about the change.",phonetic:"'Warehouse' = WARE-house 仓库。'Informed about' = 被告知。"},
+  {text:"Our logistics partners have confirmed that the shipment will arrive by Wednesday afternoon.",phonetic:"'Logistics' = lo-JIS-tiks 物流。'Shipment' = SHIP-ment 货件。注意长句保持节奏。"},
+  {text:"The training program was designed to help new employees understand company procedures.",phonetic:"'Procedures' = pro-SEE-jurs 流程。'Designed to' = 旨在。"},
+  {text:"We strongly recommend that all departments submit their proposals before the deadline.",phonetic:"'Strongly recommend' = 强烈建议。'Proposals' = pro-POZ-als 提案。"},
+  {text:"Management has decided to implement a flexible working arrangement starting next quarter.",phonetic:"'Implement' = IM-ple-ment 实施。'Flexible arrangement' = 灵活安排。"}
 ];
 
 // C_QA removed — Q&A section deleted (not in real exam)
@@ -379,24 +390,35 @@ var E_WORDS=[
   {word:"SUBMIT",syn:"hand in",wrong:["receive","reject","review"],cat:"action",ex:"Please submit the report by end of day."},
   {word:"NEGOTIATE",syn:"discuss terms",wrong:["agree instantly","refuse","ignore"],cat:"action",ex:"We need to negotiate the contract before signing."},
   {word:"EFFICIENT",syn:"productive",wrong:["lazy","slow","wasteful"],cat:"quality",ex:"She is very efficient — always finishes early."},
-  {word:"APPROXIMATELY",syn:"roughly",wrong:["exactly","never","always"],cat:"size",ex:"It will take approximately two hours."}
+  {word:"APPROXIMATELY",syn:"roughly",wrong:["exactly","never","always"],cat:"size",ex:"It will take approximately two hours."},
+  // Antonym flashcards
+  {word:"EXPAND",syn:"shrink",wrong:["grow","maintain","develop"],cat:"action",ex:"The company decided to expand into new markets.",type:"antonym"},
+  {word:"ACCEPT",syn:"reject",wrong:["receive","allow","welcome"],cat:"action",ex:"We cannot accept these terms without changes.",type:"antonym"},
+  {word:"INCREASE",syn:"decrease",wrong:["grow","multiply","raise"],cat:"action",ex:"We saw an increase in orders last month.",type:"antonym"},
+  {word:"TEMPORARY",syn:"permanent",wrong:["short","brief","instant"],cat:"quality",ex:"This is only a temporary arrangement.",type:"antonym"},
+  {word:"COMPLICATED",syn:"simple",wrong:["complex","difficult","intricate"],cat:"quality",ex:"The process is too complicated for new employees.",type:"antonym"},
+  {word:"FLEXIBLE",syn:"rigid",wrong:["adaptable","versatile","open"],cat:"quality",ex:"We need a more flexible work schedule.",type:"antonym"}
 ];
 
 var D_P=[
-  "Good morning everyone. I'd like to start today's meeting by reviewing last week's performance. Our delivery success rate was 94%, which is up 3% from the previous week. However, we had some complaints about customer service response time. Going forward, we need to ensure all customer inquiries are answered within two hours. Additionally, the new pricing structure will be implemented starting next Monday. Please make sure your teams are informed.",
-  "Hello, this is David from the operations team. I am calling regarding the order you placed on March 15th. Unfortunately, two of the items you ordered are currently out of stock. We expect them to be available within five to seven business days. We can either send the available items now and ship the rest later, or wait and send everything together. Please let us know your preference by end of day so we can proceed."
+  "Woman: Have you heard? The company is planning to move to a new office next month. Man: Yes, I read the email. It says the new building is closer to the train station, which would make my commute shorter. But I'm a bit worried about the open-plan layout. Woman: Me too. I find it hard to concentrate when there's a lot of noise. I wonder if they'll have quiet rooms. Man: The email mentioned some meeting pods and focus rooms, but I'm not sure how many. If there aren't enough, people might end up booking them all day. Woman: That's a good point. I think we should bring this up at the next team meeting. Maybe management hasn't considered how many people actually need quiet space. Man: Agreed. Also, I noticed the new office doesn't have a cafeteria — just a small kitchen. Woman: Really? That could be a problem for people who don't bring lunch. There are probably restaurants nearby though. Man: I hope so. Overall I think the move could be positive, but there are definitely some things they need to sort out first.",
+  "Manager: I need to talk to you about the Henderson project. The client wants to move the deadline forward by two weeks. Developer: Two weeks? That's going to be very tight. We're already behind on the testing phase because of the bugs we found last week. Manager: I understand. But the client is under pressure from their board to show progress. Is there any way we can deliver a basic version first and add the remaining features later? Developer: We could do a phased delivery. The core functionality is about eighty percent done. If we skip some of the nice-to-have features, we could probably have something ready. Manager: What about quality? I don't want us to deliver something buggy. Developer: If we focus on the core features only, I'm fairly confident we can maintain quality. But we'd need an extra developer for the next two weeks. Manager: I'll see what I can do. Let me talk to the resource team. In the meantime, can you prepare a revised timeline showing what we can deliver and when? Developer: Sure, I'll have that ready by tomorrow morning."
 ];
 
 var D_QA=[
   [
-    {q:"What was the delivery success rate last week?",opts:["91%","94%","97%","90%"],correct:1},
-    {q:"What was the main complaint from customers?",opts:["Delivery speed","Product quality","Response time","Price"],correct:2},
-    {q:"When will the new pricing structure start?",opts:["This Friday","Next Monday","Next Wednesday","Immediately"],correct:1}
+    {q:"What does the man like about the new office?",opts:["It has a cafeteria","It's closer to the train station","It has an open-plan layout","It's in a quieter neighborhood"],correct:1},
+    {q:"Why is the woman concerned?",opts:["The office is too far away","She doesn't like her manager","She finds it hard to concentrate in noisy environments","She doesn't want to change desk"],correct:2},
+    {q:"What can you infer about the meeting pods?",opts:["There are more than enough","They might not be sufficient for all staff","They are only for managers","They haven't been built yet"],correct:1},
+    {q:"What will the man probably do next?",opts:["Look for a new job","Book a meeting pod","Raise concerns at the team meeting","Send an email to HR"],correct:2},
+    {q:"What is the overall tone of the conversation?",opts:["Angry and frustrated","Cautiously positive with concerns","Completely negative","Excited without reservation"],correct:1}
   ],
   [
-    {q:"Why is David calling?",opts:["To confirm delivery","To report a delay","To cancel the order","To request payment"],correct:1},
-    {q:"How long before items are available?",opts:["2–3 days","3–5 days","5–7 days","10 days"],correct:2},
-    {q:"What does David ask the customer to do?",opts:["Call back tomorrow","Visit the store","Reply by end of day","Place a new order"],correct:2}
+    {q:"Why does the client want to move the deadline forward?",opts:["To save money","They are under pressure from their board","The project is too simple","They found a cheaper provider"],correct:1},
+    {q:"What is the developer's main concern?",opts:["He wants a pay raise","He doesn't like the client","They are behind on testing due to bugs","He wants to quit"],correct:2},
+    {q:"What solution does the manager propose?",opts:["Cancel the project","Hire a new team","Deliver a basic version first","Ask the client to wait a month"],correct:2},
+    {q:"What does the developer need to meet the deadline?",opts:["A bigger office","An extra developer for two weeks","Permission to skip all testing","A meeting with the client"],correct:1},
+    {q:"What will the developer do by tomorrow morning?",opts:["Finish the project","Prepare a revised timeline","Meet with the client","Request a transfer"],correct:1}
   ]
 ];
 
@@ -650,7 +672,8 @@ var eFiltered=[];
 
 function filterVocab(cat){
   eFilter=cat;
-  eFiltered=E_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
+  if(cat==='antonym') eFiltered=E_WORDS.filter(function(w){return w.type==='antonym';});
+  else eFiltered=E_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
   if(eFiltered.length===0) eFiltered=E_WORDS.slice();
   eIdx=0;
   document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
@@ -668,12 +691,13 @@ function renderE(){
   if(!w) return;
   var html='<div class="flashcard-wrap" onclick="flipCard(this)">';
   html+='<div class="flashcard" id="fc-current" style="min-height:200px;position:relative">';
-  html+='<div class="fc-front"><div class="fc-word">'+w.word+'</div>';
-  html+='<div class="fc-hint">Tap to see synonym 点击查看同义词 →</div>';
+  var isAnt=w.type==='antonym';
+  html+='<div class="fc-front"><div class="fc-word"'+(isAnt?' style="color:#8e44ad"':'')+'>'+w.word+'</div>';
+  html+='<div class="fc-hint">'+(isAnt?'Tap to see <strong>antonym</strong> 点击查看<strong>反义词</strong> →':'Tap to see synonym 点击查看同义词 →')+'</div>';
   html+='<div style="margin-top:12px"><button class="btn btn-tts" onclick="event.stopPropagation();tts(\''+w.word.toLowerCase()+'\')">🔊 Pronounce 发音</button></div>';
   html+='</div>';
   html+='<div class="fc-back">';
-  html+='<div class="fc-answer">= '+w.syn+'</div>';
+  html+='<div class="fc-answer">'+(isAnt?'≠ ':'= ')+w.syn+'</div>';
   html+='<div class="fc-example">"'+w.ex+'"</div>';
   html+='<div class="fc-category">'+w.cat.toUpperCase()+'</div>';
   html+='<div style="margin-top:10px"><button class="btn btn-tts" style="background:rgba(255,255,255,0.2);color:#fff;border:none" onclick="event.stopPropagation();tts(\''+w.syn+'\')">🔊 '+w.syn+'</button></div>';
