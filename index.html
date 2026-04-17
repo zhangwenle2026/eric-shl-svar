@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260416-0016">
+<meta name="app-version" content="20260418-0349">
 <meta name="theme-color" content="#2e6fba">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
@@ -175,10 +175,10 @@ body{font-size:15px}
   <nav class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('a')"><span class="tab-icon">🗣️</span>A · Read 朗读</button>
     <button class="tab-btn" onclick="switchTab('b')"><span class="tab-icon">🔁</span>B · Repeat 复述</button>
-    <button class="tab-btn" onclick="switchTab('c')"><span class="tab-icon">💬</span>C · Q&A 问答</button>
-    <button class="tab-btn" onclick="switchTab('d')"><span class="tab-icon">📝</span>D · Vocab 词汇</button>
-    <button class="tab-btn" onclick="switchTab('e')"><span class="tab-icon">🎧</span>E · Listen 听力</button>
-    <button class="tab-btn" onclick="switchTab('f')"><span class="tab-icon">🎤</span>F · Talk 演讲</button>
+    <button class="tab-btn" onclick="switchTab('c')"><span class="tab-icon">🎤</span>C · Talk 演讲</button>
+    <button class="tab-btn" onclick="switchTab('d')"><span class="tab-icon">🎧</span>D · Listen 听力</button>
+    <button class="tab-btn" onclick="switchTab('e')"><span class="tab-icon">📝</span>E · Vocab 词汇</button>
+    <button class="tab-btn" onclick="switchTab('f')"><span class="tab-icon">✍️</span>F · Grammar 语法</button>
   </nav>
 </header>
 
@@ -214,24 +214,84 @@ body{font-size:15px}
   <div id="b-list"></div>
 </div>
 
-<!-- ===== PANEL C ===== -->
+<!-- ===== PANEL C (Talk 演讲) ===== -->
 <div class="panel" id="panel-c">
   <div class="section-header">
-    <div class="section-icon">💬</div>
-    <div class="section-info"><h2>Q&A Practice 问答练习</h2><p>4 scenarios · 4 个场景</p></div>
+    <div class="section-icon">🎤</div>
+    <div class="section-info"><h2>Free Talk 自由演讲</h2><p>6 topics + 3 speeches · 6 个话题 + 3 篇演讲</p></div>
   </div>
   <div class="tip-box">
-    <strong>💡 Tips 答题技巧：</strong><br>
-    • Answer in <strong>complete sentences</strong> when possible 尽量用<strong>完整的句子</strong>回答<br>
-    • "Joe is happy" beats just saying "happy" 说"Joe is happy"比只说"happy"好<br>
-    • Speed and confidence count — don't hesitate too long 语速和自信很重要——不要犹豫太久<br>
-    • For yes/no questions, always add a reason 回答是非题时，记得加上原因
+    <strong>💡 Structure your answer (PEEL) 组织回答的结构：</strong><br>
+    • <strong>P</strong>oint — state your main idea first 先说观点<br>
+    • <strong>E</strong>vidence — give an example or reason 举例或说明原因<br>
+    • <strong>E</strong>xplain — elaborate briefly 简要展开<br>
+    • <strong>L</strong>ink — conclude and connect back 总结并回扣主题<br>
+    <br>Tap a phrase chip to hear it pronounced 🔊 点击短语卡片可以听发音
   </div>
-  <div id="c-list"></div>
+  <div id="c-topics-list"></div>
+
+  <!-- SPEECH SECTION -->
+  <div class="section-header" style="margin-top:20px">
+    <div class="section-icon">📝</div>
+    <div class="section-info"><h2>Speech Practice 场景演讲</h2><p>3 speeches · 3 篇演讲 · 听 → 读 → 背</p></div>
+  </div>
+  <div class="info-box">
+    <strong>🎯 练习方法：</strong><br>
+    ① 先点播放器<strong>听一遍</strong>整段 → ② 逐句跟读（点每句的 🔊）→ ③ 看中文<strong>回忆英文</strong> → ④ 自己完整背一遍<br>
+    句子都很短，用词简单，节奏感强，适合反复朗读 💪
+  </div>
+  <div id="c-speech-list"></div>
 </div>
 
-<!-- ===== PANEL D ===== -->
+<!-- ===== PANEL D (Listen 听力) ===== -->
 <div class="panel" id="panel-d">
+  <div class="section-header">
+    <div class="section-icon">🎧</div>
+    <div class="section-info"><h2>Listening 听力理解</h2><p>2 passages · 2 篇听力</p></div>
+  </div>
+  <div class="tip-box">
+    <strong>💡 Strategy 听力策略：</strong><br>
+    • First listen: get the <strong>main idea</strong> 第一遍：抓<strong>大意</strong><br>
+    • Second listen: focus on <strong>numbers, names, and key decisions</strong> 第二遍：注意<strong>数字、名字和关键决定</strong><br>
+    • Highlighted words are important — notice them when listening 高亮词是重点——听的时候留意<br>
+    • Don't get stuck on unknown words; guess from context 遇到生词别卡住，根据上下文猜
+  </div>
+
+  <div class="card">
+    <div class="card-title">📄 Passage 1 · Work Meeting 工作会议</div>
+    <div class="passage-box" id="d-p1"></div>
+    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-tts" onclick="tts(D_P[0])">▶ Play Full Passage 播放全文</button>
+    </div>
+    <div id="d-notes1" class="info-box" style="margin-bottom:14px">
+      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
+      • Delivery rate 配送成功率: <strong>94%</strong> (up 3% from last week 比上周提升3%)<br>
+      • Customer complaint 客户投诉: <strong>response time 响应时间</strong><br>
+      • New policy starts 新政策开始: <strong>next Monday 下周一</strong><br>
+      • Required response time 要求响应时间: <strong>within 2 hours 2小时内</strong>
+    </div>
+    <div id="d-qa1"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">📄 Passage 2 · Client Call 客户电话</div>
+    <div class="passage-box" id="d-p2"></div>
+    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-tts" onclick="tts(D_P[1])">▶ Play Full Passage 播放全文</button>
+    </div>
+    <div id="d-notes2" class="info-box" style="margin-bottom:14px">
+      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
+      • Caller 来电者: <strong>David, operations team 运营团队</strong><br>
+      • Problem 问题: <strong>2 items out of stock 2件商品缺货</strong><br>
+      • Wait time 等待时间: <strong>5–7 business days 5-7个工作日</strong><br>
+      • Action needed 需要做的: <strong>reply by end of day 当天回复</strong>
+    </div>
+    <div id="d-qa2"></div>
+  </div>
+</div>
+
+<!-- ===== PANEL E (Vocab 词汇) ===== -->
+<div class="panel" id="panel-e">
   <div class="section-header">
     <div class="section-icon">📝</div>
     <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>10 words · 10 个单词</p></div>
@@ -249,90 +309,33 @@ body{font-size:15px}
     <button class="cat-btn" onclick="filterVocab('size')">Size 程度词</button>
     <button class="cat-btn" onclick="filterVocab('quality')">Quality 品质词</button>
   </div>
-  <div id="d-flashcard-area"></div>
+  <div id="e-flashcard-area"></div>
   <div class="flashcard-nav">
-    <button class="btn btn-outline btn-small" onclick="prevD()">← Prev 上一个</button>
-    <div class="card-counter" id="d-counter">1 / 10</div>
-    <button class="btn btn-primary btn-small" onclick="nextD()">Next 下一个 →</button>
+    <button class="btn btn-outline btn-small" onclick="prevE()">← Prev 上一个</button>
+    <div class="card-counter" id="e-counter">1 / 10</div>
+    <button class="btn btn-primary btn-small" onclick="nextE()">Next 下一个 →</button>
   </div>
 </div>
 
-<!-- ===== PANEL E ===== -->
-<div class="panel" id="panel-e">
-  <div class="section-header">
-    <div class="section-icon">🎧</div>
-    <div class="section-info"><h2>Listening 听力理解</h2><p>2 passages · 2 篇听力</p></div>
-  </div>
-  <div class="tip-box">
-    <strong>💡 Strategy 听力策略：</strong><br>
-    • First listen: get the <strong>main idea</strong> 第一遍：抓<strong>大意</strong><br>
-    • Second listen: focus on <strong>numbers, names, and key decisions</strong> 第二遍：注意<strong>数字、名字和关键决定</strong><br>
-    • Highlighted words are important — notice them when listening 高亮词是重点——听的时候留意<br>
-    • Don't get stuck on unknown words; guess from context 遇到生词别卡住，根据上下文猜
-  </div>
-
-  <div class="card">
-    <div class="card-title">📄 Passage 1 · Work Meeting 工作会议</div>
-    <div class="passage-box" id="e-p1"></div>
-    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-tts" onclick="tts(E_P[0])">▶ Play Full Passage 播放全文</button>
-      <button class="btn btn-outline btn-small" onclick="tts('Our delivery success rate was 94 percent, which is up 3 percent from the previous week.')">▶ Key sentence 关键句</button>
-    </div>
-    <div id="e-notes1" class="info-box" style="margin-bottom:14px">
-      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
-      • Delivery rate 配送成功率: <strong>94%</strong> (up 3% from last week 比上周提升3%)<br>
-      • Customer complaint 客户投诉: <strong>response time 响应时间</strong><br>
-      • New policy starts 新政策开始: <strong>next Monday 下周一</strong><br>
-      • Required response time 要求响应时间: <strong>within 2 hours 2小时内</strong>
-    </div>
-    <div id="e-qa1"></div>
-  </div>
-
-  <div class="card" style="margin-top:16px">
-    <div class="card-title">📄 Passage 2 · Client Call 客户电话</div>
-    <div class="passage-box" id="e-p2"></div>
-    <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-tts" onclick="tts(E_P[1])">▶ Play Full Passage 播放全文</button>
-      <button class="btn btn-outline btn-small" onclick="tts('We expect them to be available within five to seven business days.')">▶ Key sentence 关键句</button>
-    </div>
-    <div id="e-notes2" class="info-box" style="margin-bottom:14px">
-      <strong>📌 Key Info to Listen For 听力要点：</strong><br>
-      • Caller 来电者: <strong>David, operations team 运营团队</strong><br>
-      • Problem 问题: <strong>2 items out of stock 2件商品缺货</strong><br>
-      • Wait time 等待时间: <strong>5–7 business days 5-7个工作日</strong><br>
-      • Action needed 需要做的: <strong>reply by end of day 当天回复</strong>
-    </div>
-    <div id="e-qa2"></div>
-  </div>
-</div>
-
-<!-- ===== PANEL F ===== -->
+<!-- ===== PANEL F (Grammar 语法) ===== -->
 <div class="panel" id="panel-f">
   <div class="section-header">
-    <div class="section-icon">🎤</div>
-    <div class="section-info"><h2>Free Talk 自由演讲</h2><p>6 topics + 3 speeches · 6 个话题 + 3 篇演讲</p></div>
+    <div class="section-icon">✍️</div>
+    <div class="section-info"><h2>Grammar 语法练习</h2><p>10 questions · 10 道题 · 选出正确的句子</p></div>
   </div>
   <div class="tip-box">
-    <strong>💡 Structure your answer (PEEL) 组织回答的结构：</strong><br>
-    • <strong>P</strong>oint — state your main idea first 先说观点<br>
-    • <strong>E</strong>vidence — give an example or reason 举例或说明原因<br>
-    • <strong>E</strong>xplain — elaborate briefly 简要展开<br>
-    • <strong>L</strong>ink — conclude and connect back 总结并回扣主题<br>
-    <br>Tap a phrase chip to hear it pronounced 🔊 点击短语卡片可以听发音
+    <strong>💡 Tips 语法要点：</strong><br>
+    • Focus on <strong>subject-verb agreement</strong> 关注<strong>主谓一致</strong><br>
+    • Watch for <strong>uncountable nouns</strong>: milk, information, news 注意<strong>不可数名词</strong><br>
+    • <strong>Passive voice</strong>: has been + past participle <strong>被动语态</strong>：has been + 过去分词<br>
+    • <strong>Preposition collocations</strong>: on the plane, made of wood <strong>介词搭配</strong>：固定搭配要背熟
   </div>
-  <div id="f-topics-list"></div>
-
-  <!-- SPEECH SECTION -->
-  <div class="section-header" style="margin-top:20px">
-    <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Speech Practice 场景演讲</h2><p>3 speeches · 3 篇演讲 · 听 → 读 → 背</p></div>
+  <div id="f-grammar-list"></div>
+  <div class="flashcard-nav" style="margin-top:16px">
+    <button class="btn btn-outline btn-small" onclick="prevGrammar()">← Prev 上一题</button>
+    <div class="card-counter" id="f-counter">1 / 10</div>
+    <button class="btn btn-primary btn-small" onclick="nextGrammar()">Next 下一题 →</button>
   </div>
-  <div class="info-box">
-    <strong>🎯 练习方法：</strong><br>
-    ① 先点播放器<strong>听一遍</strong>整段 → ② 逐句跟读（点每句的 🔊）→ ③ 看中文<strong>回忆英文</strong> → ④ 自己完整背一遍<br>
-    句子都很短，用词简单，节奏感强，适合反复朗读 💪
-  </div>
-  <div id="f-speech-list"></div>
 </div>
 
 <script>
@@ -364,14 +367,9 @@ var B_SENTENCES=[
   {text:"Make sure the warehouse team is informed about the change.",phonetic:"'Warehouse' = WARE-house 仓库。'Informed about' = 被告知。"}
 ];
 
-var C_QA=[
-  {text:"Joe is smiling and laughing. He looks very happy.",q:"Is Joe happy or sad?",ans:"Joe is happy.",extra:"'He is happy' or 'Happy' both work. A full sentence scores better.",vocab:["smiling","laughing"]},
-  {text:"The office temperature is 28 degrees and everyone is sweating.",q:"Is it hot or cold in the office?",ans:"It is hot in the office.",extra:"Add a reason: 'It is hot because everyone is sweating.'",vocab:["temperature","sweating"]},
-  {text:"Sarah called to say the delivery truck broke down on the highway.",q:"Will the delivery arrive on time?",ans:"No, the delivery will be delayed.",extra:"Explain: 'No, because the truck broke down.'",vocab:["broke down","on time","delivery"]},
-  {text:"The manager said: Great job on the presentation! I was really impressed.",q:"How does the manager feel about the presentation?",ans:"The manager is impressed / feels positive.",extra:"You can say: 'The manager thinks the presentation was great.'",vocab:["impressed","presentation","great job"]}
-];
+// C_QA removed — Q&A section deleted (not in real exam)
 
-var D_WORDS=[
+var E_WORDS=[
   {word:"HUGE",syn:"large",wrong:["heavy","tiny","little"],cat:"size",ex:"That was a huge improvement — sales went up 40%."},
   {word:"POSTPONE",syn:"delay",wrong:["cancel","start","finish"],cat:"action",ex:"We had to postpone the launch due to technical issues."},
   {word:"CONFIRM",syn:"verify",wrong:["deny","question","forget"],cat:"action",ex:"Please confirm your attendance by Friday."},
@@ -384,12 +382,12 @@ var D_WORDS=[
   {word:"APPROXIMATELY",syn:"roughly",wrong:["exactly","never","always"],cat:"size",ex:"It will take approximately two hours."}
 ];
 
-var E_P=[
+var D_P=[
   "Good morning everyone. I'd like to start today's meeting by reviewing last week's performance. Our delivery success rate was 94%, which is up 3% from the previous week. However, we had some complaints about customer service response time. Going forward, we need to ensure all customer inquiries are answered within two hours. Additionally, the new pricing structure will be implemented starting next Monday. Please make sure your teams are informed.",
   "Hello, this is David from the operations team. I am calling regarding the order you placed on March 15th. Unfortunately, two of the items you ordered are currently out of stock. We expect them to be available within five to seven business days. We can either send the available items now and ship the rest later, or wait and send everything together. Please let us know your preference by end of day so we can proceed."
 ];
 
-var E_QA=[
+var D_QA=[
   [
     {q:"What was the delivery success rate last week?",opts:["91%","94%","97%","90%"],correct:1},
     {q:"What was the main complaint from customers?",opts:["Delivery speed","Product quality","Response time","Price"],correct:2},
@@ -493,6 +491,20 @@ var F_SPEECHES=[
   }
 ];
 
+// ============ GRAMMAR DATA ============
+var F_GRAMMAR=[
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["Most of the milk have gone bad.","Most of the milk has gone bad.","Most of the milk are going bad.","Most of the milk is going bad."],correct:1,explain:"milk 为不可数名词，谓语用单数 has；has gone bad 强调结果（现在完成时）。",cn:"大部分牛奶已经变质了。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["Some of the cake have eaten up.","Some of the cake has eaten up.","Some of the cake has been eaten up.","Some of the cake have been eaten up."],correct:2,explain:"cake 不可数，谓语用 has；蛋糕是被吃掉的，用被动语态 has been eaten up。",cn:"一些蛋糕已经被吃完了。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["He sleeps in the plane.","He sleeps on the plane.","He sleeps into the plane.","He sleeps onto the plane."],correct:1,explain:"on the plane 是固定搭配，表示在飞机上（乘坐交通工具）；in 仅强调封闭内部；into/onto 表方向，不与 sleep 搭配。",cn:"他在飞机上睡觉。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["She don't like coffee.","She doesn't likes coffee.","She doesn't like coffee.","She not like coffee."],correct:2,explain:"第三人称单数否定用 doesn't + 动词原形 like（不加 s）。",cn:"她不喜欢咖啡。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["The informations are very useful.","The information are very useful.","The information is very useful.","The informations is very useful."],correct:2,explain:"information 是不可数名词，没有复数形式，谓语用 is。",cn:"这些信息非常有用。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["Each of the students have a textbook.","Each of the students has a textbook.","Each of the students are having a textbook.","Each of the student has a textbook."],correct:1,explain:"each of + 复数名词（students），但谓语用单数 has（each 强调个体）。",cn:"每个学生都有一本教科书。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["Neither the manager nor the employees was informed.","Neither the manager nor the employees were informed.","Neither the manager nor the employees is informed.","Neither the manager nor the employees has informed."],correct:1,explain:"neither…nor… 就近一致原则，离谓语最近的是 employees（复数），所以用 were。",cn:"经理和员工都没有被通知。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["The team have decided to postpone the meeting.","The team has decided to postpone the meeting.","The team are decide to postpone the meeting.","The team is decide to postpone the meeting."],correct:1,explain:"team 作为整体看待时用单数 has decided（现在完成时）。",cn:"团队已决定推迟会议。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["There is many reasons for the delay.","There are many reasons for the delay.","There has many reasons for the delay.","There have many reasons for the delay."],correct:1,explain:"many reasons 是复数，there be 句型中 be 与主语一致，用 are。",cn:"延迟有很多原因。"},
+  {q:"Choose the correct sentence: 选出正确的句子：",opts:["The news are very surprising today.","The news is very surprising today.","The news were very surprising today.","The news have been very surprising today."],correct:1,explain:"news 虽以 s 结尾，但它是不可数名词，谓语用 is。",cn:"今天的新闻非常令人惊讶。"}
+];
+
 // ============ UTILS ============
 function tts(text){
   if(!window.speechSynthesis) return alert('TTS not supported in this browser.');
@@ -557,50 +569,103 @@ function initB(){
   document.getElementById('b-list').innerHTML=html;
 }
 
-// ============ INIT C ============
+// ============ INIT C (Talk — topics + speeches) ============
 function initC(){
+  // Topics
   var html='';
-  C_QA.forEach(function(s,i){
-    html+='<div class="card">';
-    html+='<div class="card-title">Scenario 场景 '+(i+1)+'</div>';
-    html+='<div class="passage-box" style="margin-bottom:10px">'+s.text+'</div>';
-    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')">🔊 Play Scenario 播放场景</button>';
-    html+='<div style="font-size:14px;font-weight:600;color:var(--text);margin:12px 0 8px">❓ '+s.q+'</div>';
-    html+='<div class="answer-card"><div class="answer-label">✅ MODEL ANSWER 参考答案</div><div class="answer-text">'+s.ans+'</div></div>';
-    html+='<div class="tip-box" style="margin-bottom:8px">💡 '+s.extra+'</div>';
-    html+='<div style="margin-top:8px"><span style="font-size:11px;color:var(--muted);font-weight:600">KEY VOCABULARY 重点词汇: </span>';
-    s.vocab.forEach(function(v){
-      html+='<span class="phrase-chip" onclick="tts(\''+v+'\')">'+v+'</span> ';
+  F_TOPICS.forEach(function(t,i){
+    html+='<div class="topic-study-card">';
+    html+='<div class="topic-study-num">TOPIC 话题 '+(i+1)+' / '+F_TOPICS.length+'</div>';
+    html+='<div class="topic-study-q">'+t.q+'</div>';
+    html+='<div class="topic-outline">';
+    html+='<div class="topic-outline-title">📋 Suggested Structure 建议结构</div>';
+    t.outline.forEach(function(step,si){
+      html+='<div class="outline-step"><span class="step-dot">'+(si+1)+'</span><span class="step-text">'+step+'</span></div>';
+    });
+    html+='</div>';
+    html+='<div class="topic-outline-title" style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px">💬 Useful Phrases 实用短语 (tap to hear 点击发音)</div>';
+    html+='<div class="phrase-chips">';
+    t.phrases.forEach(function(p){
+      html+='<span class="phrase-chip" onclick="tts(\''+p.replace(/'/g,"\\'")+'\')">'+p+'</span>';
     });
     html+='</div></div>';
   });
-  document.getElementById('c-list').innerHTML=html;
+  document.getElementById('c-topics-list').innerHTML=html;
+  // Speeches
+  initCSpeech();
 }
 
-// ============ INIT D (FLASHCARDS) ============
-var dIdx=0;
-var dFilter='all';
-var dFiltered=[];
+function initCSpeech(){
+  var html='';
+  F_SPEECHES.forEach(function(s,si){
+    html+='<div class="speech-card">';
+    html+='<div class="speech-title">📝 Speech '+(si+1)+' — '+s.title+'</div>';
+    html+='<div class="speech-scene">'+s.scene+'</div>';
+    html+='<div class="audio-bar" onclick="playBarTts(this,F_SPEECHES['+si+'].lines.map(function(l){return l.en}).join(\'. \'))">';
+    html+='<div class="play-icon">▶</div>';
+    html+='<div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>';
+    html+='<div class="bar-label">🔊 Play Full Speech / 播放完整演讲</div>';
+    html+='</div>';
+    html+='<div id="speech-lines-'+si+'">';
+    s.lines.forEach(function(l,li){
+      html+='<div class="speech-line">';
+      html+='<div class="speech-line-btn"><button class="btn btn-tts btn-small" onclick="tts(\''+l.en.replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\')">🔊</button></div>';
+      html+='<div><div class="speech-en">'+(li+1)+'. '+l.en+'</div>';
+      html+='<div class="speech-cn">'+l.cn+'</div></div>';
+      html+='</div>';
+    });
+    html+='</div>';
+    html+='<button class="speech-toggle" onclick="toggleCn(this,'+si+')">🙈 Hide Chinese / 隐藏中文</button>';
+    html+='</div>';
+  });
+  document.getElementById('c-speech-list').innerHTML=html;
+}
+
+// ============ INIT D (Listen 听力) ============
+function initD(){
+  document.getElementById('d-p1').textContent=D_P[0];
+  document.getElementById('d-p2').textContent=D_P[1];
+  var keys=['A','B','C','D'];
+  [0,1].forEach(function(pi){
+    var html='';
+    D_QA[pi].forEach(function(q,qi){
+      html+='<div style="margin-bottom:16px">';
+      html+='<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">Q'+(qi+1)+'. '+q.q+'</div>';
+      html+='<div class="mcq-options" style="display:flex;flex-direction:column;gap:7px">';
+      q.opts.forEach(function(opt,oi){
+        var isCorrect=(oi===q.correct);
+        var cls='mcq-opt'+(isCorrect?' correct':'');
+        html+='<div class="'+cls+'" style="background:var(--bg);border-radius:10px;padding:10px 14px;border:1.5px solid var(--border);display:flex;align-items:center;gap:10px;'+(isCorrect?'border-color:var(--green);background:#eafaf1;':'')+'"><span style="width:24px;height:24px;border-radius:50%;background:'+(isCorrect?'var(--green)':'var(--border)')+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:'+(isCorrect?'#fff':'var(--muted)')+';flex-shrink:0">'+keys[oi]+'</span><span style="font-size:13px'+(isCorrect?';font-weight:700;color:var(--green)':'')+'">'+opt+(isCorrect?' ✅':'')+'</span></div>';
+      });
+      html+='</div></div>';
+    });
+    document.getElementById('d-qa'+(pi+1)).innerHTML=html;
+  });
+}
+
+// ============ INIT E (Vocab 词汇闪卡) ============
+var eIdx=0;
+var eFilter='all';
+var eFiltered=[];
 
 function filterVocab(cat){
-  dFilter=cat;
-  dFiltered=D_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
-  if(dFiltered.length===0) dFiltered=D_WORDS.slice();
-  dIdx=0;
+  eFilter=cat;
+  eFiltered=E_WORDS.filter(function(w){return cat==='all'||w.cat===cat;});
+  if(eFiltered.length===0) eFiltered=E_WORDS.slice();
+  eIdx=0;
   document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
   event.target.classList.add('active');
-  renderD();
+  renderE();
 }
 
-function initD(){
-  dFiltered=D_WORDS.slice();
-  renderD();
+function initE(){
+  eFiltered=E_WORDS.slice();
+  renderE();
 }
 
-function renderD(){
-  var w=dFiltered[dIdx];
+function renderE(){
+  var w=eFiltered[eIdx];
   if(!w) return;
-  var sk='d_'+w.word;
   var html='<div class="flashcard-wrap" onclick="flipCard(this)">';
   html+='<div class="flashcard" id="fc-current" style="min-height:200px;position:relative">';
   html+='<div class="fc-front"><div class="fc-word">'+w.word+'</div>';
@@ -613,8 +678,8 @@ function renderD(){
   html+='<div class="fc-category">'+w.cat.toUpperCase()+'</div>';
   html+='<div style="margin-top:10px"><button class="btn btn-tts" style="background:rgba(255,255,255,0.2);color:#fff;border:none" onclick="event.stopPropagation();tts(\''+w.syn+'\')">🔊 '+w.syn+'</button></div>';
   html+='</div></div></div>';
-  document.getElementById('d-flashcard-area').innerHTML=html;
-  document.getElementById('d-counter').textContent=(dIdx+1)+' / '+dFiltered.length+(dFilter!=='all'?' ('+dFilter+')':'');
+  document.getElementById('e-flashcard-area').innerHTML=html;
+  document.getElementById('e-counter').textContent=(eIdx+1)+' / '+eFiltered.length+(eFilter!=='all'?' ('+eFilter+')':'');
 }
 
 function flipCard(wrap){
@@ -622,30 +687,10 @@ function flipCard(wrap){
   if(fc) fc.classList.toggle('flipped');
 }
 
-function nextD(){if(dIdx<dFiltered.length-1){dIdx++;renderD();}}
-function prevD(){if(dIdx>0){dIdx--;renderD();}}
+function nextE(){if(eIdx<eFiltered.length-1){eIdx++;renderE();}}
+function prevE(){if(eIdx>0){eIdx--;renderE();}}
 
-// ============ INIT E ============
-function initE(){
-  document.getElementById('e-p1').textContent=E_P[0];
-  document.getElementById('e-p2').textContent=E_P[1];
-  var keys=['A','B','C','D'];
-  [0,1].forEach(function(pi){
-    var html='';
-    E_QA[pi].forEach(function(q,qi){
-      html+='<div style="margin-bottom:16px">';
-      html+='<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">Q'+(qi+1)+'. '+q.q+'</div>';
-      html+='<div class="mcq-options" style="display:flex;flex-direction:column;gap:7px">';
-      q.opts.forEach(function(opt,oi){
-        var isCorrect=(oi===q.correct);
-        var cls='mcq-opt'+(isCorrect?' correct':'');
-        html+='<div class="'+cls+'" style="background:var(--bg);border-radius:10px;padding:10px 14px;border:1.5px solid var(--border);display:flex;align-items:center;gap:10px;'+(isCorrect?'border-color:var(--green);background:#eafaf1;':'')+'"><span style="width:24px;height:24px;border-radius:50%;background:'+(isCorrect?'var(--green)':'var(--border)')+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:'+(isCorrect?'#fff':'var(--muted)')+';flex-shrink:0">'+keys[oi]+'</span><span style="font-size:13px'+(isCorrect?';font-weight:700;color:var(--green)':'')+'">'+opt+(isCorrect?' ✅':'')+'</span></div>';
-      });
-      html+='</div></div>';
-    });
-    document.getElementById('e-qa'+(pi+1)).innerHTML=html;
-  });
-}
+// (old initE for Listen → moved to initD above)
 
 // ============ PLAY BAR TTS (SHL TEST style) ============
 function playBarTts(barEl,text){
@@ -664,36 +709,7 @@ function playBarTts(barEl,text){
   window.speechSynthesis.speak(u);
 }
 
-// ============ INIT F SPEECH ============
-function initFSpeech(){
-  var html='';
-  F_SPEECHES.forEach(function(s,si){
-    var fullText=s.lines.map(function(l){return l.en;}).join(' ');
-    html+='<div class="speech-card">';
-    html+='<div class="speech-title">📝 Speech '+(si+1)+' — '+s.title+'</div>';
-    html+='<div class="speech-scene">'+s.scene+'</div>';
-    // Full play bar
-    html+='<div class="audio-bar" onclick="playBarTts(this,F_SPEECHES['+si+'].lines.map(function(l){return l.en}).join(\'. \'))">';
-    html+='<div class="play-icon">▶</div>';
-    html+='<div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>';
-    html+='<div class="bar-label">🔊 Play Full Speech / 播放完整演讲</div>';
-    html+='</div>';
-    // Lines
-    html+='<div id="speech-lines-'+si+'">';
-    s.lines.forEach(function(l,li){
-      html+='<div class="speech-line">';
-      html+='<div class="speech-line-btn"><button class="btn btn-tts btn-small" onclick="tts(\''+l.en.replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\')">🔊</button></div>';
-      html+='<div><div class="speech-en">'+(li+1)+'. '+l.en+'</div>';
-      html+='<div class="speech-cn">'+l.cn+'</div></div>';
-      html+='</div>';
-    });
-    html+='</div>';
-    // Toggle Chinese button
-    html+='<button class="speech-toggle" onclick="toggleCn(this,'+si+')">🙈 Hide Chinese / 隐藏中文</button>';
-    html+='</div>';
-  });
-  document.getElementById('f-speech-list').innerHTML=html;
-}
+// (initFSpeech moved to initCSpeech above)
 
 function toggleCn(btn,si){
   var container=document.getElementById('speech-lines-'+si);
@@ -703,28 +719,62 @@ function toggleCn(btn,si){
   btn.textContent=hidden?'🙈 Hide Chinese / 隐藏中文':'👀 Show Chinese / 显示中文';
 }
 
-// ============ INIT F ============
+// ============ INIT F (Grammar 语法) ============
+var gIdx=0;
+var gAnswered={};
+
 function initF(){
-  var html='';
-  F_TOPICS.forEach(function(t,i){
-    html+='<div class="topic-study-card">';
-    html+='<div class="topic-study-num">TOPIC 话题 '+(i+1)+' / 6</div>';
-    html+='<div class="topic-study-q">'+t.q+'</div>';
-    html+='<div class="topic-outline">';
-    html+='<div class="topic-outline-title">📋 Suggested Structure 建议结构</div>';
-    t.outline.forEach(function(step,si){
-      html+='<div class="outline-step"><span class="step-dot">'+(si+1)+'</span><span class="step-text">'+step+'</span></div>';
-    });
-    html+='</div>';
-    html+='<div class="topic-outline-title" style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px">💬 Useful Phrases 实用短语 (tap to hear 点击发音)</div>';
-    html+='<div class="phrase-chips">';
-    t.phrases.forEach(function(p){
-      html+='<span class="phrase-chip" onclick="tts(\''+p.replace(/'/g,"\\'")+'\')">'+p+'</span>';
-    });
-    html+='</div></div>';
-  });
-  document.getElementById('f-topics-list').innerHTML=html;
+  gIdx=0;
+  gAnswered={};
+  renderGrammar();
 }
+
+function renderGrammar(){
+  var g=F_GRAMMAR[gIdx];
+  if(!g) return;
+  var keys=['A','B','C','D'];
+  var html='<div class="card">';
+  html+='<div class="card-title">Question 第 '+(gIdx+1)+' / '+F_GRAMMAR.length+' 题</div>';
+  html+='<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px">'+g.q+'</div>';
+  if(g.cn) html+='<div style="font-size:12px;color:var(--muted);margin-bottom:12px">💡 '+g.cn+'</div>';
+  html+='<div id="g-opts" style="display:flex;flex-direction:column;gap:8px">';
+  g.opts.forEach(function(opt,oi){
+    var answered=gAnswered[gIdx]!==undefined;
+    var chosen=gAnswered[gIdx]===oi;
+    var isCorrect=oi===g.correct;
+    var style='background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s';
+    if(answered&&isCorrect) style='background:#eafaf1;border:2px solid var(--green);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:default';
+    if(answered&&chosen&&!isCorrect) style='background:#fef2f2;border:2px solid #ef4444;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:default';
+    var onclick=answered?'':'onclick="answerGrammar('+oi+')"';
+    html+='<div class="g-opt" '+onclick+' style="'+style+'">';
+    var circBg=answered&&isCorrect?'var(--green)':(answered&&chosen&&!isCorrect?'#ef4444':'var(--border)');
+    var circColor=answered&&(isCorrect||(chosen&&!isCorrect))?'#fff':'var(--muted)';
+    html+='<span style="width:26px;height:26px;border-radius:50%;background:'+circBg+';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:'+circColor+';flex-shrink:0">'+keys[oi]+'</span>';
+    html+='<span style="font-size:13px;'+(answered&&isCorrect?'font-weight:700;color:var(--green)':'')+(answered&&chosen&&!isCorrect?'text-decoration:line-through;color:#ef4444':'')+'">'+opt+'</span>';
+    if(answered&&isCorrect) html+=' <span style="margin-left:auto">✅</span>';
+    if(answered&&chosen&&!isCorrect) html+=' <span style="margin-left:auto">❌</span>';
+    html+='</div>';
+  });
+  html+='</div>';
+  // Explanation (shown after answer)
+  if(gAnswered[gIdx]!==undefined){
+    html+='<div class="tip-box" style="margin-top:14px;border-left:4px solid var(--green)">';
+    html+='<strong>📖 Explanation 解析：</strong><br>'+g.explain;
+    html+='</div>';
+  }
+  html+='</div>';
+  document.getElementById('f-grammar-list').innerHTML=html;
+  document.getElementById('f-counter').textContent=(gIdx+1)+' / '+F_GRAMMAR.length;
+}
+
+function answerGrammar(oi){
+  if(gAnswered[gIdx]!==undefined) return;
+  gAnswered[gIdx]=oi;
+  renderGrammar();
+}
+
+function nextGrammar(){if(gIdx<F_GRAMMAR.length-1){gIdx++;renderGrammar();}}
+function prevGrammar(){if(gIdx>0){gIdx--;renderGrammar();}}
 
 // Add MCQ opt style
 var mcqStyle=document.createElement('style');
@@ -733,7 +783,7 @@ document.head.appendChild(mcqStyle);
 
 // ============ LOAD ============
 window.addEventListener('load',function(){
-  initA(); initB(); initC(); initD(); initE(); initF(); initFSpeech();
+  initA(); initB(); initC(); initD(); initE(); initF();
   updateStarCount();
   speechSynthesis.getVoices();
 });
