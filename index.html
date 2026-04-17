@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="app-version" content="20260418-0522-wext-ui">
+<meta name="app-version" content="20260418-0556-vocab38">
 <meta name="theme-color" content="#4f46e5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ERIC SHL SVAR">
@@ -343,7 +343,7 @@ body{font-size:15px}
 <div class="panel" id="panel-e">
   <div class="section-header">
     <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>17 words (synonyms + antonyms + usage) · 17 个单词（同义词 + 反义词 + 用法）</p></div>
+    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>38 words (21 synonyms + 15 antonyms + 2 usage) · 38 个单词（21 近义词 + 15 反义词 + 2 用法真题）</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Study Method 学习方法：</strong><br>
@@ -431,6 +431,7 @@ var B_SENTENCES=[
 // C_QA removed — Q&A section deleted (not in real exam)
 
 var E_WORDS=[
+  // ===== 21 SYNONYMS 近义词 =====
   {word:"HUGE",syn:"large",wrong:["heavy","tiny","little"],cat:"size",ex:"That was a huge improvement — sales went up 40%."},
   {word:"POSTPONE",syn:"delay",wrong:["cancel","start","finish"],cat:"action",ex:"We had to postpone the launch due to technical issues."},
   {word:"CONFIRM",syn:"verify",wrong:["deny","question","forget"],cat:"action",ex:"Please confirm your attendance by Friday."},
@@ -440,16 +441,37 @@ var E_WORDS=[
   {word:"SUBMIT",syn:"hand in",wrong:["receive","reject","review"],cat:"action",ex:"Please submit the report by end of day."},
   {word:"NEGOTIATE",syn:"discuss terms",wrong:["agree instantly","refuse","ignore"],cat:"action",ex:"We need to negotiate the contract before signing."},
   {word:"EFFICIENT",syn:"productive",wrong:["lazy","slow","wasteful"],cat:"quality",ex:"She is very efficient — always finishes early."},
-  {word:"APPROXIMATELY",syn:"roughly",wrong:["exactly","never","always"],cat:"size",ex:"It will take approximately two hours."},
-  // Antonym flashcards
+  {word:"ALLOCATE",syn:"assign",wrong:["waste","collect","remove"],cat:"action",ex:"We need to allocate more budget to marketing."},
+  {word:"BENCHMARK",syn:"standard",wrong:["guess","exception","random"],cat:"quality",ex:"This report sets the benchmark for quality."},
+  {word:"DELEGATE",syn:"assign tasks",wrong:["do everything","refuse","ignore"],cat:"action",ex:"A good manager knows how to delegate work."},
+  {word:"FEASIBLE",syn:"possible",wrong:["impossible","unlikely","forbidden"],cat:"quality",ex:"Is it feasible to finish by Friday?"},
+  {word:"COMPREHENSIVE",syn:"thorough",wrong:["brief","partial","shallow"],cat:"quality",ex:"We need a comprehensive review of the data."},
+  {word:"FACILITATE",syn:"make easier",wrong:["complicate","block","prevent"],cat:"action",ex:"This tool will facilitate the process."},
+  {word:"IMPLEMENT",syn:"carry out",wrong:["cancel","delay","ignore"],cat:"action",ex:"We plan to implement the new policy next month."},
+  {word:"MONITOR",syn:"track",wrong:["ignore","forget","skip"],cat:"action",ex:"We need to monitor progress weekly."},
+  {word:"PRIORITIZE",syn:"rank",wrong:["ignore","mix up","skip"],cat:"action",ex:"Please prioritize the urgent tasks first."},
+  {word:"STREAMLINE",syn:"simplify",wrong:["complicate","expand","delay"],cat:"action",ex:"We streamlined the approval process to save time."},
+  {word:"COLLABORATE",syn:"work together",wrong:["compete","fight","avoid"],cat:"action",ex:"The two teams will collaborate on this project."},
+  {word:"EVALUATE",syn:"assess",wrong:["ignore","guess","skip"],cat:"action",ex:"We need to evaluate each candidate carefully."},
+  // ===== 15 ANTONYMS 反义词 =====
   {word:"EXPAND",syn:"shrink",wrong:["grow","maintain","develop"],cat:"action",ex:"The company decided to expand into new markets.",type:"antonym"},
   {word:"ACCEPT",syn:"reject",wrong:["receive","allow","welcome"],cat:"action",ex:"We cannot accept these terms without changes.",type:"antonym"},
   {word:"INCREASE",syn:"decrease",wrong:["grow","multiply","raise"],cat:"action",ex:"We saw an increase in orders last month.",type:"antonym"},
   {word:"TEMPORARY",syn:"permanent",wrong:["short","brief","instant"],cat:"quality",ex:"This is only a temporary arrangement.",type:"antonym"},
-  {word:"COMPLICATED",syn:"simple",wrong:["complex","difficult","intricate"],cat:"quality",ex:"The process is too complicated for new employees.",type:"antonym"},
+  {word:"IMPORT",syn:"export",wrong:["buy","sell","deliver"],cat:"action",ex:"We import materials from overseas.",type:"antonym"},
+  {word:"VOLUNTARY",syn:"compulsory",wrong:["optional","free","willing"],cat:"quality",ex:"Attendance is voluntary, not required.",type:"antonym"},
+  {word:"STRENGTHEN",syn:"weaken",wrong:["build","support","improve"],cat:"action",ex:"Exercise can strengthen your body.",type:"antonym"},
+  {word:"ADVANCE",syn:"retreat",wrong:["move","progress","develop"],cat:"action",ex:"The project continues to advance well.",type:"antonym"},
+  {word:"COMPLICATED",syn:"simple",wrong:["complex","difficult","intricate"],cat:"quality",ex:"The process is too complicated for new staff.",type:"antonym"},
+  {word:"GENEROUS",syn:"stingy",wrong:["kind","giving","friendly"],cat:"quality",ex:"He is very generous with his time.",type:"antonym"},
+  {word:"MAJORITY",syn:"minority",wrong:["most","bulk","many"],cat:"size",ex:"The majority voted in favor.",type:"antonym"},
   {word:"FLEXIBLE",syn:"rigid",wrong:["adaptable","versatile","open"],cat:"quality",ex:"We need a more flexible work schedule.",type:"antonym"},
-  // Usage flashcards (choose correct sentence) ⭐真题
-  {word:"⭐ COMPRISE",syn:"The company comprises 30% women.",wrong:["The company comprise 30% women.","The company is comprised 30% women.","The company comprises of 30% women."],cat:"action",ex:"comprise = 包含/由…构成，不与 of 连用；主语单数用 comprises。",type:"usage"}
+  {word:"PROFIT",syn:"loss",wrong:["income","revenue","gain"],cat:"size",ex:"The company made a healthy profit this year.",type:"antonym"},
+  {word:"HIRE",syn:"dismiss",wrong:["recruit","employ","onboard"],cat:"action",ex:"We plan to hire five new people.",type:"antonym"},
+  {word:"APPROVE",syn:"reject",wrong:["accept","confirm","allow"],cat:"action",ex:"The board will approve the budget tomorrow.",type:"antonym"},
+  // ===== 2 USAGE 真题用法 =====
+  {word:"⭐ COMPRISE",syn:"The company comprises 30% women.",wrong:["The company comprise 30% women.","The company is comprised 30% women.","The company comprises of 30% women."],cat:"action",ex:"comprise = 包含/由…构成，不与 of 连用；主语单数用 comprises。",type:"usage"},
+  {word:"⭐ AUDACIOUS",syn:"≠ cowardly (opposite 反义词)",wrong:["= brave (synonym)","= confident (synonym)","= curious (synonym)"],cat:"quality",ex:"audacious 大胆的、有魄力的 ↔ cowardly 胆小的、怯懦的。真题考反义词。",type:"usage"}
 ];
 
 var D_P=[
