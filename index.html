@@ -673,6 +673,85 @@ var F_GRAMMAR=[
   {q:"⭐ Fill in the blank 填空: Audacious is the opposite of _______.",opts:["brave","cowardly","confident","curious"],correct:1,explain:"audacious 大胆的，有魄力的；cowardly 胆小的，怯懦的。二者互为反义词。",cn:"audacious（大胆的）的反义词是 cowardly（胆小的）。"}
 ];
 
+// ============ STT ENGINE + SCORING ============
+var SRClass=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+var sttRecords=JSON.parse(localStorage.getItem(SKEY+'_stt')||'{}'); // key -> {best, last, attempts}
+var activeSR=null;
+
+function startSTT(onResult,onError){
+  if(!SRClass){alert('⚠️ Speech recognition not supported. Use Chrome/Edge/Safari.');if(onError)onError('not-supported');return null;}
+  if(activeSR){try{activeSR.abort();}catch(e){}}
+  var sr=new SRClass();sr.lang='en-US';sr.continuous=false;sr.interimResults=false;sr.maxAlternatives=3;
+  activeSR=sr;
+  sr.onresult=function(e){activeSR=null;onResult(e.results[0][0].transcript,e.results[0][0].confidence);};
+  sr.onerror=function(e){activeSR=null;if(onError)onError(e.error);};
+  sr.onend=function(){activeSR=null;};
+  sr.start();return sr;
+}
+
+function compareWords(spoken,ref){
+  var s=spoken.toLowerCase().replace(/[^a-z0-9\s']/g,'').trim().split(/\s+/).filter(Boolean);
+  var r=ref.toLowerCase().replace(/[^a-z0-9\s']/g,'').trim().split(/\s+/).filter(Boolean);
+  var origWords=ref.split(/\s+/);
+  var matched=[],missed=[];
+  // For each reference word, check if spoken contains it
+  var sUsed=s.slice();
+  r.forEach(function(w,i){
+    var idx=sUsed.indexOf(w);
+    if(idx>=0){matched.push(i);sUsed.splice(idx,1);}
+    else missed.push({word:origWords[i],idx:i});
+  });
+  return{pct:Math.round(matched.length/r.length*100),matched:matched,missed:missed,total:r.length,origWords:origWords,transcript:spoken};
+}
+
+function buildScoreHTML(result,showRef){
+  var html='<div style="background:rgba(79,70,229,0.04);border-radius:14px;padding:14px;margin-top:10px;border:1.5px solid rgba(79,70,229,0.12)">';
+  // What you said
+  html+='<div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:6px">🎙 YOU SAID 你说的:</div>';
+  html+='<div style="font-size:13px;color:#1e1b4b;margin-bottom:10px;font-style:italic;line-height:1.6">"'+result.transcript+'"</div>';
+  // Word-by-word highlight
+  if(showRef){
+    html+='<div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:4px">📝 WORD CHECK 逐词检查:</div>';
+    html+='<div style="line-height:2.2;margin-bottom:10px">';
+    result.origWords.forEach(function(w,i){
+      if(result.matched.indexOf(i)>=0){
+        html+='<span style="background:rgba(16,185,129,0.15);color:#065f46;border-radius:4px;padding:2px 5px;margin:2px;font-size:13px;font-weight:600">✅ '+w+'</span> ';
+      }else{
+        html+='<span style="background:rgba(239,68,68,0.12);color:#dc2626;border-radius:4px;padding:2px 5px;margin:2px;font-size:13px;font-weight:600;text-decoration:underline wavy #ef4444">❌ '+w+'</span> ';
+      }
+    });
+    html+='</div>';
+  }
+  // Score bar
+  var col=result.pct>=80?'#10b981':result.pct>=50?'#f59e0b':'#ef4444';
+  var label=result.pct>=90?'🌟 Excellent!':result.pct>=80?'👏 Great!':result.pct>=60?'💪 Good, keep going!':result.pct>=40?'📖 Practice more':'🔄 Try again';
+  html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
+  html+='<div style="font-size:28px;font-weight:900;color:'+col+'">'+result.pct+'%</div>';
+  html+='<div style="flex:1"><div style="height:10px;background:#eee;border-radius:5px;overflow:hidden"><div style="height:100%;width:'+result.pct+'%;background:'+col+';border-radius:5px;transition:width 0.6s"></div></div>';
+  html+='<div style="font-size:11px;color:#6b7280;margin-top:3px">'+label+'</div></div></div>';
+  // Missed words
+  if(result.missed.length>0){
+    html+='<div style="font-size:11px;color:#dc2626;margin-top:4px">⚠️ Missed 漏读: <strong>'+result.missed.map(function(m){return m.word}).join(', ')+'</strong></div>';
+  }
+  html+='</div>';
+  return html;
+}
+
+function saveSttRecord(key,pct){
+  if(!sttRecords[key]) sttRecords[key]={best:0,attempts:0};
+  sttRecords[key].attempts++;
+  sttRecords[key].last=pct;
+  if(pct>sttRecords[key].best) sttRecords[key].best=pct;
+  localStorage.setItem(SKEY+'_stt',JSON.stringify(sttRecords));
+}
+
+function getBestBadge(key){
+  var r=sttRecords[key];
+  if(!r||!r.best) return '';
+  var col=r.best>=80?'#10b981':r.best>=50?'#f59e0b':'#ef4444';
+  return '<span style="font-size:10px;background:'+col+';color:#fff;border-radius:10px;padding:2px 8px;font-weight:700;margin-left:6px">Best 最高: '+r.best+'% (×'+r.attempts+')</span>';
+}
+
 // ============ UTILS ============
 function tts(text){
   if(!window.speechSynthesis) return alert('TTS not supported in this browser.');
@@ -710,14 +789,38 @@ function initA(){
   var html='';
   A_SENTENCES.forEach(function(s,i){
     var sk='a_'+i;
-    html+='<div class="sentence-item">';
-    html+='<div class="sentence-num" style="display:flex;justify-content:space-between"><span>Sentence 句子 '+(i+1)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
+    html+='<div class="sentence-item" id="a-card-'+i+'">';
+    html+='<div class="sentence-num" style="display:flex;justify-content:space-between;align-items:center"><span>Sentence 句子 '+(i+1)+getBestBadge('a_'+i)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
     html+='<div class="sentence-text">'+s.text+'</div>';
     html+='<div class="sentence-tip" style="margin-bottom:10px">💡 '+s.tip+'</div>';
-    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="margin-right:8px">🔊 Listen 听一遍</button>';
+    html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
+    html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="flex:1;min-width:120px">🔊 Listen 听一遍</button>';
+    html+='<button class="btn btn-primary" onclick="recordA('+i+')" id="a-rec-'+i+'" style="flex:1;min-width:120px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none">🎤 Record 录音朗读</button>';
+    html+='</div>';
+    html+='<div id="a-result-'+i+'"></div>';
     html+='</div>';
   });
   document.getElementById('a-list').innerHTML=html;
+}
+
+function recordA(i){
+  var btn=document.getElementById('a-rec-'+i);
+  var resEl=document.getElementById('a-result-'+i);
+  btn.textContent='🔴 Recording... 录音中...';btn.style.background='#ef4444';btn.disabled=true;
+  resEl.innerHTML='<div style="text-align:center;padding:12px;color:#6b7280;font-size:13px">🎙 Listening... speak now! 请开始朗读...</div>';
+  startSTT(function(transcript,confidence){
+    btn.textContent='🎤 Record 录音朗读';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    var ref=A_SENTENCES[i].text;
+    var result=compareWords(transcript,ref);
+    saveSttRecord('a_'+i,result.pct);
+    resEl.innerHTML=buildScoreHTML(result,true)+'<div style="text-align:center;margin-top:8px"><button class="btn btn-accent btn-small" onclick="recordA('+i+')" style="font-size:12px">🔄 Try Again 再来一次</button></div>';
+    // Refresh best badge
+    var numEl=document.querySelector('#a-card-'+i+' .sentence-num span:first-child');
+    if(numEl) numEl.innerHTML='Sentence 句子 '+(i+1)+getBestBadge('a_'+i);
+  },function(err){
+    btn.textContent='🎤 Record 录音朗读';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    resEl.innerHTML='<div style="color:#ef4444;font-size:12px;padding:8px">⚠️ Recording failed ('+err+'). Check mic permission. 录音失败，请检查麦克风权限。</div>';
+  });
 }
 
 // ============ INIT B (Blind Listen → Repeat → Reveal) ============
@@ -750,10 +853,12 @@ function initB(){
     html+='<button class="btn btn-outline btn-small" onclick="pauseB()" style="font-size:11px">⏸ Pause 暂停</button>';
     html+='<button class="btn btn-accent btn-small" onclick="playB('+i+')" style="font-size:11px">🔁 Replay 重播</button>';
     html+='</div></div>';
-    // Step 2: Repeat prompt (always visible)
-    html+='<div style="background:#fff8f3;border:1.5px solid #f0d0b0;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:12px;color:#7a4a20">';
-    html+='<strong>🎤 Step 2: Repeat 复述</strong> — 听完后，凭记忆复述这个句子';
+    // Step 2: Record repeat
+    html+='<div style="background:#fff8f3;border:1.5px solid #f0d0b0;border-radius:10px;padding:10px 14px;margin-bottom:10px">';
+    html+='<div style="font-size:12px;color:#7a4a20;margin-bottom:8px"><strong>🎤 Step 2: Repeat 复述</strong> — 听完后，凭记忆复述'+getBestBadge('b_'+i)+'</div>';
+    html+='<button class="btn btn-primary" onclick="recordB('+i+')" id="b-rec-'+i+'" style="width:100%;justify-content:center;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;padding:12px;font-size:13px;border-radius:12px">🎤 Record 录音复述</button>';
     html+='</div>';
+    html+='<div id="b-result-'+i+'"></div>';
     // Step 3: Reveal (hidden text until clicked)
     if(revealed){
       html+='<div class="sentence-text" style="margin-bottom:8px">'+s.text+'</div>';
@@ -797,6 +902,27 @@ function revealB(idx){
   initB();
 }
 
+function recordB(i){
+  var btn=document.getElementById('b-rec-'+i);
+  var resEl=document.getElementById('b-result-'+i);
+  btn.textContent='🔴 Recording... 录音中...';btn.style.background='#ef4444';btn.disabled=true;
+  if(resEl) resEl.innerHTML='<div style="text-align:center;padding:12px;color:#6b7280;font-size:13px">🎙 Listening... repeat the sentence! 请复述...</div>';
+  startSTT(function(transcript,confidence){
+    btn.textContent='🎤 Record 录音复述';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    var ref=B_SENTENCES[i].text;
+    var result=compareWords(transcript,ref);
+    saveSttRecord('b_'+i,result.pct);
+    // For B, show score first; show full word check only after reveal
+    var showRef=!!bRevealed[i];
+    if(resEl) resEl.innerHTML=buildScoreHTML(result,showRef)+'<div style="text-align:center;margin-top:8px"><button class="btn btn-accent btn-small" onclick="recordB('+i+')" style="font-size:12px">🔄 Try Again 再来一次</button></div>';
+    // Refresh best badge in Step 2 header
+    initB();
+  },function(err){
+    btn.textContent='🎤 Record 录音复述';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    if(resEl) resEl.innerHTML='<div style="color:#ef4444;font-size:12px;padding:8px">⚠️ Recording failed ('+err+'). 录音失败。</div>';
+  });
+}
+
 // ============ INIT C (Talk — topics + speeches) ============
 function initC(){
   // Topics
@@ -826,14 +952,19 @@ function initC(){
 function initCSpeech(){
   var html='';
   F_SPEECHES.forEach(function(s,si){
+    var fullText=s.lines.map(function(l){return l.en}).join('. ');
     html+='<div class="speech-card">';
-    html+='<div class="speech-title">📝 Speech '+(si+1)+' — '+s.title+'</div>';
+    html+='<div class="speech-title">📝 Speech '+(si+1)+' — '+s.title+getBestBadge('c_'+si)+'</div>';
     html+='<div class="speech-scene">'+s.scene+'</div>';
-    html+='<div class="audio-bar" onclick="playBarTts(this,F_SPEECHES['+si+'].lines.map(function(l){return l.en}).join(\'. \'))">';
+    html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">';
+    html+='<div class="audio-bar" onclick="playBarTts(this,F_SPEECHES['+si+'].lines.map(function(l){return l.en}).join(\'. \'))" style="flex:1;min-width:0">';
     html+='<div class="play-icon">▶</div>';
     html+='<div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>';
-    html+='<div class="bar-label">🔊 Play Full Speech / 播放完整演讲</div>';
+    html+='<div class="bar-label">🔊 Listen 听</div>';
     html+='</div>';
+    html+='<button class="btn btn-primary" onclick="recordC('+si+')" id="c-rec-'+si+'" style="min-width:130px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;border-radius:14px;padding:12px 16px;font-size:13px;font-weight:700;cursor:pointer">🎤 Record 录音</button>';
+    html+='</div>';
+    html+='<div id="c-result-'+si+'"></div>';
     html+='<div id="speech-lines-'+si+'">';
     s.lines.forEach(function(l,li){
       html+='<div class="speech-line">';
@@ -847,6 +978,26 @@ function initCSpeech(){
     html+='</div>';
   });
   document.getElementById('c-speech-list').innerHTML=html;
+}
+
+function recordC(si){
+  var btn=document.getElementById('c-rec-'+si);
+  var resEl=document.getElementById('c-result-'+si);
+  btn.textContent='🔴 Recording... 录音中...';btn.style.background='#ef4444';btn.disabled=true;
+  if(resEl) resEl.innerHTML='<div style="text-align:center;padding:12px;color:#6b7280;font-size:13px">🎙 Speak now! Read the speech aloud. 请开始朗读演讲...</div>';
+  startSTT(function(transcript,confidence){
+    btn.textContent='🎤 Record 录音';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    var ref=F_SPEECHES[si].lines.map(function(l){return l.en}).join('. ');
+    var result=compareWords(transcript,ref);
+    saveSttRecord('c_'+si,result.pct);
+    if(resEl) resEl.innerHTML=buildScoreHTML(result,true)+'<div style="text-align:center;margin-top:8px"><button class="btn btn-accent btn-small" onclick="recordC('+si+')" style="font-size:12px">🔄 Try Again 再来一次</button></div>';
+    // Refresh best badge
+    var titleEl=document.querySelector('#c-result-'+si).parentElement.querySelector('.speech-title');
+    if(titleEl) titleEl.innerHTML='📝 Speech '+(si+1)+' — '+F_SPEECHES[si].title+getBestBadge('c_'+si);
+  },function(err){
+    btn.textContent='🎤 Record 录音';btn.style.background='linear-gradient(135deg,#4f46e5,#7c3aed)';btn.disabled=false;
+    if(resEl) resEl.innerHTML='<div style="color:#ef4444;font-size:12px;padding:8px">⚠️ Recording failed ('+err+'). 录音失败。</div>';
+  });
 }
 
 // ============ INIT D (Listen 听力) ============
