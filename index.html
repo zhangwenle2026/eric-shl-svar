@@ -190,7 +190,7 @@ body{font-size:15px}
 <div class="panel active" id="panel-a">
   <div class="section-header">
     <div class="section-icon">🗣️</div>
-    <div class="section-info"><h2>Read Aloud 朗读练习</h2><p>16 sentences · 16 个句子</p></div>
+    <div class="section-info"><h2>Read Aloud 朗读练习</h2><p>31 sentences · 31 个句子</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Key Tips 关键技巧：</strong><br>
@@ -236,7 +236,7 @@ body{font-size:15px}
 <div class="panel" id="panel-d">
   <div class="section-header">
     <div class="section-icon">🎧</div>
-    <div class="section-info"><h2>Listening 听力理解</h2><p>4 dialogues × 5 questions · 4 段对话 × 5 道推理题（含⭐真题）</p></div>
+    <div class="section-info"><h2>Listening 听力理解</h2><p>3 dialogues × 5 questions · 3 段⭐真题对话 × 5 道推理题</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Strategy 听力策略（对话版）：</strong><br>
@@ -331,7 +331,7 @@ body{font-size:15px}
 <div class="panel" id="panel-e">
   <div class="section-header">
     <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>38 words (21 synonyms + 15 antonyms + 2 usage) · 38 个单词（21 近义词 + 15 反义词 + 2 用法真题）</p></div>
+    <div class="section-info"><h2>Vocabulary 词汇闪卡</h2><p>9 words · 9 个⭐真题词汇</p></div>
   </div>
   <div class="tip-box">
     <strong>💡 Study Method 学习方法：</strong><br>
@@ -383,22 +383,38 @@ var stars=JSON.parse(localStorage.getItem(SKEY+'_stars')||'{}');
 
 // ============ DATA ============
 var A_SENTENCES=[
-  {text:"The quarterly report will be submitted to the board of directors by the end of this week.",tip:"Stress 重音: QUAR-ter-ly, sub-MIT-ted, di-REC-tors. 'Board of directors' 董事会——作为意群连读。"},
-  {text:"Employees are encouraged to provide feedback on the new company policies.",tip:"'Encouraged to' = 被鼓励。Stress 重音: em-PLOY-ees, en-CUR-aged, POL-i-cies 政策。"},
-  {text:"The marketing department has launched a new campaign to increase brand awareness.",tip:"'Campaign' = kam-PAIN 活动。'Brand awareness' 品牌知名度——连读自然。"},
-  {text:"We need to finalize the budget before the next board meeting.",tip:"'Finalize' = FI-na-lize 最终确定。Stress 重音: FI-na-lize, BUD-get, BOARD meeting."},
-  {text:"The new software system will improve efficiency across all departments.",tip:"'Efficiency' = e-FISH-en-see 效率。'Across all departments' 所有部门——不要吞 across。"},
-  {text:"Customer satisfaction has increased by fifteen percent this quarter.",tip:"'Satisfaction' = sa-tis-FAC-tion 满意度。'Fifteen percent' 慢读数字。"},
-  {text:"Please ensure all safety protocols are followed during the inspection.",tip:"'Protocols' = PRO-to-cols 协议/规程。'Inspection' = in-SPEC-tion 检查。"},
-  {text:"The conference will feature keynote speakers from leading technology companies.",tip:"'Keynote' = KEY-note 主旨/主题。'Feature' = 以…为特色。连读 'leading technology'。"},
-  {text:"Our team successfully completed the project ahead of schedule and under budget.",tip:"'Ahead of schedule' 提前完成，'under budget' 低于预算——两个短语都要读清楚。"},
-  {text:"The training program is designed to enhance leadership skills among mid-level managers.",tip:"'Enhance' = en-HANCE 提升。'Mid-level managers' 中层管理者——作为一个意群。"},
-  {text:"All participants must register online before the deadline.",tip:"'Participants' = par-TIS-i-pants 参与者。Stress 重音: REG-is-ter, DEAD-line."},
-  {text:"The company plans to expand its operations to three new markets next year.",tip:"'Expand operations' = 扩展业务。Stress 重音: ex-PAND, op-er-A-tions."},
-  {text:"Effective communication is essential for maintaining strong client relationships.",tip:"'Essential' = e-SEN-tial 必要的。'Client relationships' 客户关系——自然连读。"},
-  {text:"The annual performance review process begins in the first week of January.",tip:"'Annual' = AN-nual 年度的。'Performance review' 绩效评估——作为意群读。"},
-  {text:"We are committed to reducing our carbon footprint by twenty percent over the next five years.",tip:"'Committed to' = 致力于。'Carbon footprint' 碳足迹——稍做停顿再读数字。"},
-  {text:"Management has approved the proposal to restructure the customer service department.",tip:"'Restructure' = re-STRUC-ture 重组。Stress 重音: ap-PROVED, pro-PO-sal."}
+  {text:"The quarterly report will be submitted to the board of directors by the end of this week.",cn:"季度报告将在本周末之前提交给董事会。",tip:"Stress 重音: QUAR-ter-ly, sub-MIT-ted, di-REC-tors. 'Board of directors' 董事会——作为意群连读。"},
+  {text:"Employees are encouraged to provide feedback on the new company policies.",cn:"员工被鼓励对新的公司政策提供反馈。",tip:"'Encouraged to' = 被鼓励。Stress 重音: em-PLOY-ees, en-CUR-aged, POL-i-cies 政策。"},
+  {text:"The marketing department has launched a new campaign to increase brand awareness.",cn:"市场部已经发起了一项新活动来提高品牌知名度。",tip:"'Campaign' = kam-PAIN 活动。'Brand awareness' 品牌知名度——连读自然。"},
+  {text:"We need to finalize the budget before the next board meeting.",cn:"我们需要在下次董事会之前敲定预算。",tip:"'Finalize' = FI-na-lize 最终确定。Stress 重音: FI-na-lize, BUD-get, BOARD meeting."},
+  {text:"The new software system will improve efficiency across all departments.",cn:"新软件系统将提高所有部门的效率。",tip:"'Efficiency' = e-FISH-en-see 效率。'Across all departments' 所有部门——不要吞 across。"},
+  {text:"Customer satisfaction has increased by fifteen percent this quarter.",cn:"本季度客户满意度提高了15%。",tip:"'Satisfaction' = sa-tis-FAC-tion 满意度。'Fifteen percent' 慢读数字。"},
+  {text:"Please ensure all safety protocols are followed during the inspection.",cn:"请确保在检查期间遵守所有安全规程。",tip:"'Protocols' = PRO-to-cols 协议/规程。'Inspection' = in-SPEC-tion 检查。"},
+  {text:"The conference will feature keynote speakers from leading technology companies.",cn:"大会将邀请来自领先科技公司的主旨演讲者。",tip:"'Keynote' = KEY-note 主旨/主题。'Feature' = 以…为特色。连读 'leading technology'。"},
+  {text:"Our team successfully completed the project ahead of schedule and under budget.",cn:"我们的团队提前并低于预算地完成了项目。",tip:"'Ahead of schedule' 提前完成，'under budget' 低于预算——两个短语都要读清楚。"},
+  {text:"The training program is designed to enhance leadership skills among mid-level managers.",cn:"该培训项目旨在提升中层管理者的领导力。",tip:"'Enhance' = en-HANCE 提升。'Mid-level managers' 中层管理者——作为一个意群。"},
+  {text:"All participants must register online before the deadline.",cn:"所有参与者必须在截止日期前在线注册。",tip:"'Participants' = par-TIS-i-pants 参与者。Stress 重音: REG-is-ter, DEAD-line."},
+  {text:"The company plans to expand its operations to three new markets next year.",cn:"公司计划明年将业务扩展到三个新市场。",tip:"'Expand operations' = 扩展业务。Stress 重音: ex-PAND, op-er-A-tions."},
+  {text:"Effective communication is essential for maintaining strong client relationships.",cn:"有效沟通对维护良好的客户关系至关重要。",tip:"'Essential' = e-SEN-tial 必要的。'Client relationships' 客户关系——自然连读。"},
+  {text:"The annual performance review process begins in the first week of January.",cn:"年度绩效评估流程在一月第一周开始。",tip:"'Annual' = AN-nual 年度的。'Performance review' 绩效评估——作为意群读。"},
+  {text:"We are committed to reducing our carbon footprint by twenty percent over the next five years.",cn:"我们致力于在未来五年内减少20%的碳足迹。",tip:"'Committed to' = 致力于。'Carbon footprint' 碳足迹——稍做停顿再读数字。"},
+  {text:"Management has approved the proposal to restructure the customer service department.",cn:"管理层已批准了重组客服部门的提案。",tip:"'Restructure' = re-STRUC-ture 重组。Stress 重音: ap-PROVED, pro-PO-sal."},
+  // ===== 真题新增 =====
+  {text:"They have come to buy my car, but I don't want to sell it.",cn:"他们来买我的车，但我不想卖。",tip:"注意 'don't want to' 连读自然，不要吞 't'。"},
+  {text:"Let me issue a refund for the items you returned yesterday.",cn:"让我为你昨天退回的商品办理退款。",tip:"'Issue a refund' = 办理退款。Stress 重音: IS-sue, RE-fund, re-TURNED."},
+  {text:"He is a talented actor, but he becomes nervous on stage.",cn:"他是一位有才华的演员，但一上台就紧张。",tip:"'Talented' = TAL-en-ted 有天赋的。'Nervous' = NER-vous。注意 but 前后的语气转折。"},
+  {text:"A small browser window will open when you click on the print tickets tab.",cn:"当你点击"打印票"标签时，会弹出一个小浏览器窗口。",tip:"'Browser' = BROW-ser 浏览器。'Tab' = 标签。注意 'click on' 连读。"},
+  {text:"Let's watch one episode of the latest show.",cn:"我们看一集最新的节目吧。",tip:"'Episode' = EP-i-sode 一集。'Latest' = LAY-test 最新的。"},
+  {text:"I last saw her at five in the evening.",cn:"我最后一次见她是在下午五点。",tip:"'Last saw' 连读。注意 'five in the' 意群节奏。"},
+  {text:"Can I request an early check-in or late check-out?",cn:"我可以申请提前入住或延迟退房吗？",tip:"'Check-in / check-out' 酒店常用词，注意连字符词的重音。"},
+  {text:"Meet me at the client's office and we can discuss the issues there.",cn:"在客户办公室跟我碰面，我们可以在那讨论这些问题。",tip:"'Client's office' 注意所有格 's 发音。'Discuss the issues' 作为意群。"},
+  {text:"The IT manager ensures that all the systems are updated.",cn:"IT 经理确保所有系统都已更新。",tip:"'Ensures' = en-SURES 确保。'Updated' = up-DAY-ted。"},
+  {text:"Select your departure from the following list.",cn:"从以下列表中选择你的出发地。",tip:"'Departure' = de-PAR-ture 出发。'Following' = FOL-low-ing。"},
+  {text:"There was a shocking turn of events in the landmark case.",cn:"在这起标志性案件中出现了令人震惊的转折。",tip:"'Landmark case' = 标志性案件。'Turn of events' 事态转折——意群连读。"},
+  {text:"How sad to have wasted her talent.",cn:"浪费了她的才华，真令人惋惜。",tip:"'Wasted' = WASTE-ed。注意 'How sad' 的感叹语气。"},
+  {text:"Let me take your trench coat and dry it before you wear it again.",cn:"让我拿走你的风衣，烘干后再给你穿。",tip:"'Trench coat' = 风衣。Stress 重音: TRENCH coat, DRY it."},
+  {text:"Repaying debt on time improves your credit score.",cn:"按时还债能提高你的信用评分。",tip:"'Repaying' = re-PAY-ing 偿还。'Credit score' 信用评分——连读。"},
+  {text:"We give automatic boarding priority to list A customers.",cn:"我们为A类客户提供自动优先登机。",tip:"'Automatic' = au-to-MA-tic 自动的。'Boarding priority' 登机优先权。"}
 ];
 
 var B_SENTENCES=[
@@ -419,72 +435,26 @@ var B_SENTENCES=[
 // C_QA removed — Q&A section deleted (not in real exam)
 
 var E_WORDS=[
-  // ===== 21 SYNONYMS 近义词 =====
-  {word:"HUGE",syn:"large",wrong:["heavy","tiny","little"],cat:"size",ex:"That was a huge improvement — sales went up 40%."},
-  {word:"POSTPONE",syn:"delay",wrong:["cancel","start","finish"],cat:"action",ex:"We had to postpone the launch due to technical issues."},
-  {word:"CONFIRM",syn:"verify",wrong:["deny","question","forget"],cat:"action",ex:"Please confirm your attendance by Friday."},
-  {word:"URGENT",syn:"immediate",wrong:["slow","optional","relaxed"],cat:"quality",ex:"This is urgent — we need a response today."},
-  {word:"CLARIFY",syn:"explain",wrong:["confuse","hide","rush"],cat:"action",ex:"Could you clarify what you mean by that?"},
-  {word:"EXCEED",syn:"surpass",wrong:["fail","reach","miss"],cat:"action",ex:"Our team exceeded the target by 15%."},
-  {word:"SUBMIT",syn:"hand in",wrong:["receive","reject","review"],cat:"action",ex:"Please submit the report by end of day."},
-  {word:"NEGOTIATE",syn:"discuss terms",wrong:["agree instantly","refuse","ignore"],cat:"action",ex:"We need to negotiate the contract before signing."},
-  {word:"EFFICIENT",syn:"productive",wrong:["lazy","slow","wasteful"],cat:"quality",ex:"She is very efficient — always finishes early."},
-  {word:"ALLOCATE",syn:"assign",wrong:["waste","collect","remove"],cat:"action",ex:"We need to allocate more budget to marketing."},
-  {word:"BENCHMARK",syn:"standard",wrong:["guess","exception","random"],cat:"quality",ex:"This report sets the benchmark for quality."},
-  {word:"DELEGATE",syn:"assign tasks",wrong:["do everything","refuse","ignore"],cat:"action",ex:"A good manager knows how to delegate work."},
-  {word:"FEASIBLE",syn:"possible",wrong:["impossible","unlikely","forbidden"],cat:"quality",ex:"Is it feasible to finish by Friday?"},
-  {word:"COMPREHENSIVE",syn:"thorough",wrong:["brief","partial","shallow"],cat:"quality",ex:"We need a comprehensive review of the data."},
-  {word:"FACILITATE",syn:"make easier",wrong:["complicate","block","prevent"],cat:"action",ex:"This tool will facilitate the process."},
-  {word:"IMPLEMENT",syn:"carry out",wrong:["cancel","delay","ignore"],cat:"action",ex:"We plan to implement the new policy next month."},
-  {word:"MONITOR",syn:"track",wrong:["ignore","forget","skip"],cat:"action",ex:"We need to monitor progress weekly."},
-  {word:"PRIORITIZE",syn:"rank",wrong:["ignore","mix up","skip"],cat:"action",ex:"Please prioritize the urgent tasks first."},
-  {word:"STREAMLINE",syn:"simplify",wrong:["complicate","expand","delay"],cat:"action",ex:"We streamlined the approval process to save time."},
-  {word:"COLLABORATE",syn:"work together",wrong:["compete","fight","avoid"],cat:"action",ex:"The two teams will collaborate on this project."},
-  {word:"EVALUATE",syn:"assess",wrong:["ignore","guess","skip"],cat:"action",ex:"We need to evaluate each candidate carefully."},
-  // ===== 15 ANTONYMS 反义词 =====
-  {word:"EXPAND",syn:"shrink",wrong:["grow","maintain","develop"],cat:"action",ex:"The company decided to expand into new markets.",type:"antonym"},
-  {word:"ACCEPT",syn:"reject",wrong:["receive","allow","welcome"],cat:"action",ex:"We cannot accept these terms without changes.",type:"antonym"},
-  {word:"INCREASE",syn:"decrease",wrong:["grow","multiply","raise"],cat:"action",ex:"We saw an increase in orders last month.",type:"antonym"},
-  {word:"TEMPORARY",syn:"permanent",wrong:["short","brief","instant"],cat:"quality",ex:"This is only a temporary arrangement.",type:"antonym"},
-  {word:"IMPORT",syn:"export",wrong:["buy","sell","deliver"],cat:"action",ex:"We import materials from overseas.",type:"antonym"},
-  {word:"VOLUNTARY",syn:"compulsory",wrong:["optional","free","willing"],cat:"quality",ex:"Attendance is voluntary, not required.",type:"antonym"},
-  {word:"STRENGTHEN",syn:"weaken",wrong:["build","support","improve"],cat:"action",ex:"Exercise can strengthen your body.",type:"antonym"},
-  {word:"ADVANCE",syn:"retreat",wrong:["move","progress","develop"],cat:"action",ex:"The project continues to advance well.",type:"antonym"},
-  {word:"COMPLICATED",syn:"simple",wrong:["complex","difficult","intricate"],cat:"quality",ex:"The process is too complicated for new staff.",type:"antonym"},
-  {word:"GENEROUS",syn:"stingy",wrong:["kind","giving","friendly"],cat:"quality",ex:"He is very generous with his time.",type:"antonym"},
-  {word:"MAJORITY",syn:"minority",wrong:["most","bulk","many"],cat:"size",ex:"The majority voted in favor.",type:"antonym"},
-  {word:"FLEXIBLE",syn:"rigid",wrong:["adaptable","versatile","open"],cat:"quality",ex:"We need a more flexible work schedule.",type:"antonym"},
-  {word:"PROFIT",syn:"loss",wrong:["income","revenue","gain"],cat:"size",ex:"The company made a healthy profit this year.",type:"antonym"},
-  {word:"HIRE",syn:"dismiss",wrong:["recruit","employ","onboard"],cat:"action",ex:"We plan to hire five new people.",type:"antonym"},
-  {word:"APPROVE",syn:"reject",wrong:["accept","confirm","allow"],cat:"action",ex:"The board will approve the budget tomorrow.",type:"antonym"},
-  // ===== 2 USAGE 真题用法 =====
+  // ===== ⭐ 真题用法 =====
   {word:"⭐ COMPRISE",syn:"The company comprises 30% women.",wrong:["The company comprise 30% women.","The company is comprised 30% women.","The company comprises of 30% women."],cat:"action",ex:"comprise = 包含/由…构成，不与 of 连用；主语单数用 comprises。",type:"usage"},
-  {word:"⭐ AUDACIOUS",syn:"≠ cowardly (opposite 反义词)",wrong:["= brave (synonym)","= confident (synonym)","= curious (synonym)"],cat:"quality",ex:"audacious 大胆的、有魄力的 ↔ cowardly 胆小的、怯懦的。真题考反义词。",type:"usage"}
+  {word:"⭐ AUDACIOUS",syn:"≠ cowardly (opposite 反义词)",wrong:["= brave (synonym)","= confident (synonym)","= curious (synonym)"],cat:"quality",ex:"audacious 大胆的、有魄力的 ↔ cowardly 胆小的、怯懦的。真题考反义词。",type:"usage"},
+  // ===== ⭐ 真题新增 =====
+  {word:"⭐ CONSEQUENCES",syn:"results / outcomes 结果",wrong:["causes 原因","reasons 理由","origins 起源"],cat:"quality",ex:"consequences 结果、后果。Every action has consequences. 每个行为都有后果。",type:"usage"},
+  {word:"⭐ REBUKING",syn:"scolding / criticizing 责备",wrong:["praising 表扬","encouraging 鼓励","supporting 支持"],cat:"action",ex:"rebuking 责备、训斥。The manager was rebuking the team for missing the deadline. 经理正因错过截止日期而训斥团队。",type:"usage"},
+  {word:"⭐ OBSCURE",syn:"unclear / vague 朦胧、模糊",wrong:["obvious 明显的","clear 清晰的","bright 明亮的"],cat:"quality",ex:"obscure 朦胧的、模糊的、晦涩的。The meaning of the poem is quite obscure. 这首诗的含义相当晦涩。",type:"usage"},
+  {word:"⭐ HINT",syn:"clue / suggestion 暗示",wrong:["order 命令","announcement 公告","proof 证明"],cat:"quality",ex:"hint 暗示、提示。She dropped a hint about the surprise party. 她暗示了惊喜派对的事。",type:"usage"},
+  {word:"⭐ SETTLED",syn:"established / moved in 定居",wrong:["wandered 漫游","departed 出发","fled 逃跑"],cat:"action",ex:"settled 定居、安顿。They settled in São Paulo after years abroad. 在海外多年后他们定居在圣保罗。",type:"usage"},
+  {word:"⭐ RESERVE",syn:"book / set aside 预定",wrong:["cancel 取消","release 释放","abandon 放弃"],cat:"action",ex:"reserve 预定、保留。I'd like to reserve a table for two tonight. 我想预定今晚两人的桌位。",type:"usage"},
+  {word:"⭐ REMOVE",syn:"V: take away 移走; N: distance 距离",wrong:["add 添加","attach 附上","insert 插入"],cat:"action",ex:"remove (v.) 移走、去除、开除；(n.) 距离、差距。Please remove your belongings. 请移走你的物品。/ at one remove from reality 与现实有一步之遥。",type:"usage"}
 ];
 
 var D_P=[
-  "Woman: Have you heard? The company is planning to move to a new office next month. Man: Yes, I read the email. It says the new building is closer to the train station, which would make my commute shorter. But I'm a bit worried about the open-plan layout. Woman: Me too. I find it hard to concentrate when there's a lot of noise. I wonder if they'll have quiet rooms. Man: The email mentioned some meeting pods and focus rooms, but I'm not sure how many. If there aren't enough, people might end up booking them all day. Woman: That's a good point. I think we should bring this up at the next team meeting. Maybe management hasn't considered how many people actually need quiet space. Man: Agreed. Also, I noticed the new office doesn't have a cafeteria — just a small kitchen. Woman: Really? That could be a problem for people who don't bring lunch. There are probably restaurants nearby though. Man: I hope so. Overall I think the move could be positive, but there are definitely some things they need to sort out first.",
-  "Manager: I need to talk to you about the Henderson project. The client wants to move the deadline forward by two weeks. Developer: Two weeks? That's going to be very tight. We're already behind on the testing phase because of the bugs we found last week. Manager: I understand. But the client is under pressure from their board to show progress. Is there any way we can deliver a basic version first and add the remaining features later? Developer: We could do a phased delivery. The core functionality is about eighty percent done. If we skip some of the nice-to-have features, we could probably have something ready. Manager: What about quality? I don't want us to deliver something buggy. Developer: If we focus on the core features only, I'm fairly confident we can maintain quality. But we'd need an extra developer for the next two weeks. Manager: I'll see what I can do. Let me talk to the resource team. In the meantime, can you prepare a revised timeline showing what we can deliver and when? Developer: Sure, I'll have that ready by tomorrow morning.",
   "⭐ Tina: Hi, Justin, how are you? Justin: Hi, Tina. I'm fine, thank you. I was planning to meet you this evening. We haven't discussed the plans for the Christmas party yet. Tina: Oh yes, Christmas is just two weeks away. There are so many arrangements to be made. Justin: I think we should schedule the party three days before December twenty-fifth. There are so many employees who have to travel back to their own towns and many of them are probably leaving early in the week. Tina: I agree the party should be on Wednesday, as you say, but not before that. Justin: I have the contact details of a few caterers. I presume you may need these. Tina: Oh yes, that would be helpful. Thanks — being an HR can really get tiresome. Justin: True, you have so many arrangements to make. Do you want me to take care of the catering? You can concentrate on the decorations and also the invitations that need to go out to our clients. Tina: Oh, that would be great. Thanks so much, but please be sure to pick a good caterer — we don't want to disappoint the employees and clients. Justin: Don't worry. I'll find the perfect food and drinks. Tina, if you want, I can send Shiny from my department to help you out with the other arrangements. Tina: Oh no, we absolutely do not need more people on the organizing committee. By the way, I saw a fun game on a TV show. Maybe we can play that game at the party. Justin: It doesn't involve dancing around if you lose a turn, does it? Tina: Ha ha, don't worry, you can be the mediator — the mediator doesn't have to dance. Justin: Thank you so much for your generosity. So I'll work with James and Rita to settle on a caterer. John can help me decide the menu. Tina: Yes, let's meet the day after tomorrow to see where things stand.",
   "⭐ Man: I was about to come to your office. Good, I found you on the way. Woman: Good morning, sir. Has something happened? I was just going to the cafeteria. Man: I am afraid I won't be able to make it to the meeting with the vending machine supplier today. Woman: Oh, should I cancel the meeting for the day? Man: No, no. Why cancel it? You can attend and take notes of their presentation. Woman: Yes, sir. Anything else that you want me to do? Man: Yes, I want you to negotiate a better price on the machine. We want to find a less expensive machine to replace the existing one. Woman: Do you want a less expensive machine even if it has fewer beverage options? Man: No, we want to keep at least five options, but we don't want to spend more than ten thousand dollars. Woman: Okay, I'll make a note of it. I will leave the office in a while. Man: Great. And please remember that we do not want to compromise on quality. Woman: I understand that, sir. I will try to get the best deal for cost and quality. Is there anything else you want to ask me? Man: Do I have the liberty to close the deal if I find the right machine? Woman: No, because I would still like to consider other suppliers in the market, even if our present supplier offers us a good price. Man: Sounds good. I'll have my lunch and then leave for the meeting. Woman: All the best, Sarah. Call me when you reach the meeting venue.",
   "⭐ Ria: My name is Ria. Thank you for calling GTBfly Airways. How may I help you? Peter: Hi, my name is Peter. My father is traveling to New York on your eleven AM flight tomorrow. He is seventy years old and has some difficulty walking. He's traveling alone. I would like to get him some assistance both on and off the flight. Ria: I will be glad to help you with that, sir. I can reserve an accessible seat and also assign an attendant to him. Can you please give me his details? Peter: His name is John Matthew, and he is traveling on flight number two twenty-three tomorrow, July twelfth. Ria: Thank you, sir. I have reserved an accessible seat for him. His seat number is A3. Does he suffer from any specific health conditions? Peter: Yes, he is diabetic. He has recently undergone knee surgery too. Ria: I see. Regarding his medications, please ensure that he carries the doctor's prescription for approval from the airport authority. If he doesn't bring the prescription, he will be asked to store his medications in his checked baggage. Peter: Oh yes, I am aware of the procedure. I have the prescription with me. Ria: OK, sir. Is there anything else I can help you with? Peter: Can you send me an email confirmation that the requested arrangements have been made for my father's flight? Ria: Yes, sir. I will do that. However, the confirmation won't include the seat details. That will be done when your father checks in. Peter: That shouldn't be a problem, since you say you have already reserved the seat for him. Thank you for your time. Ria: You're welcome, sir. It was a pleasure to assist you today. Thanks again for flying GTBfly Airways."
 ];
 
 var D_QA=[
-  [
-    {q:"What does the man like about the new office?",opts:["It has a cafeteria","It's closer to the train station","It has an open-plan layout","It's in a quieter neighborhood"],correct:1},
-    {q:"Why is the woman concerned?",opts:["The office is too far away","She doesn't like her manager","She finds it hard to concentrate in noisy environments","She doesn't want to change desk"],correct:2},
-    {q:"What can you infer about the meeting pods?",opts:["There are more than enough","They might not be sufficient for all staff","They are only for managers","They haven't been built yet"],correct:1},
-    {q:"What will the man probably do next?",opts:["Look for a new job","Book a meeting pod","Raise concerns at the team meeting","Send an email to HR"],correct:2},
-    {q:"What is the overall tone of the conversation?",opts:["Angry and frustrated","Cautiously positive with concerns","Completely negative","Excited without reservation"],correct:1}
-  ],
-  [
-    {q:"Why does the client want to move the deadline forward?",opts:["To save money","They are under pressure from their board","The project is too simple","They found a cheaper provider"],correct:1},
-    {q:"What is the developer's main concern?",opts:["He wants a pay raise","He doesn't like the client","They are behind on testing due to bugs","He wants to quit"],correct:2},
-    {q:"What solution does the manager propose?",opts:["Cancel the project","Hire a new team","Deliver a basic version first","Ask the client to wait a month"],correct:2},
-    {q:"What does the developer need to meet the deadline?",opts:["A bigger office","An extra developer for two weeks","Permission to skip all testing","A meeting with the client"],correct:1},
-    {q:"What will the developer do by tomorrow morning?",opts:["Finish the project","Prepare a revised timeline","Meet with the client","Request a transfer"],correct:1}
-  ],
   [
     {q:"What can be said about the organizing committee? 关于组织委员会可以说什么？",opts:["They need more members","Tina wants to add Shiny","They do not need more people on the committee","Justin is not on the committee"],correct:2},
     {q:"What can be inferred from the conversation? 从对话中可以推断什么？",opts:["Tina and Justin are in different departments","They don't get along","The party will be on Dec 25th","Justin doesn't want to help"],correct:0},
@@ -736,6 +706,7 @@ function initA(){
     html+='<div class="sentence-item" id="a-card-'+i+'">';
     html+='<div class="sentence-num" style="display:flex;justify-content:space-between;align-items:center"><span>Sentence 句子 '+(i+1)+getBestBadge('a_'+i)+'</span><span class="star-toggle'+(stars[sk]?' on':'')+'" onclick="var on=toggleStar(\''+sk+'\');this.className=\'star-toggle\'+(on?\' on\':\'\')">'+(stars[sk]?'⭐':'☆')+'</span></div>';
     html+='<div class="sentence-text">'+s.text+'</div>';
+    if(s.cn) html+='<div style="font-size:12px;color:#6b7280;margin:-4px 0 6px 0;line-height:1.5">'+s.cn+'</div>';
     html+='<div class="sentence-tip" style="margin-bottom:10px">💡 '+s.tip+'</div>';
     html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
     html+='<button class="btn btn-tts" onclick="tts(\''+s.text.replace(/'/g,"\\'")+'\')" style="flex:1;min-width:120px">🔊 Listen 听一遍</button>';
