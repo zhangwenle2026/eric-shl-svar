@@ -145,20 +145,7 @@ body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);m
 .cat-btn.active{background:linear-gradient(135deg,#4f46e5,#7c3aed);border-color:transparent;color:#fff;box-shadow:0 4px 12px rgba(79,70,229,0.25)}
 .cat-btn:hover:not(.active){border-color:var(--primary-light);color:var(--primary)}
 
-/* FREE TALK topic card */
-.topic-study-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--glass-border);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.25s}
-.topic-study-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,70,229,0.12)}
-.topic-study-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.5px;margin-bottom:6px}
-.topic-study-q{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:12px;line-height:1.5}
-.topic-outline{margin-bottom:12px}
-.topic-outline-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
-.outline-step{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
-.step-dot{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 8px rgba(79,70,229,0.25)}
-.step-text{font-size:12px;color:var(--text);line-height:1.6}
-.phrase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.phrase-chip{background:rgba(79,70,229,0.06);color:var(--primary);padding:5px 14px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(79,70,229,0.15);transition:all 0.25s}
-.phrase-chip:hover{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-color:transparent;transform:translateY(-1px)}
+
 
 /* STAR TOGGLE */
 .star-toggle{cursor:pointer;font-size:18px;color:#ddd;transition:color 0.2s;margin-left:auto}
@@ -234,23 +221,8 @@ body{font-size:15px}
 <!-- ===== PANEL C (Talk 演讲) ===== -->
 <div class="panel" id="panel-c">
   <div class="section-header">
-    <div class="section-icon">🎤</div>
-    <div class="section-info"><h2>Free Talk 自由演讲</h2><p>4 real exam topics + 4 speeches ⭐ 4 个真题话题 + 4 篇演讲</p></div>
-  </div>
-  <div class="tip-box">
-    <strong>💡 Structure your answer (PEEL) 组织回答的结构：</strong><br>
-    • <strong>P</strong>oint — state your main idea first 先说观点<br>
-    • <strong>E</strong>vidence — give an example or reason 举例或说明原因<br>
-    • <strong>E</strong>xplain — elaborate briefly 简要展开<br>
-    • <strong>L</strong>ink — conclude and connect back 总结并回扣主题<br>
-    <br>Tap a phrase chip to hear it pronounced 🔊 点击短语卡片可以听发音
-  </div>
-  <div id="c-topics-list"></div>
-
-  <!-- SPEECH SECTION -->
-  <div class="section-header" style="margin-top:20px">
     <div class="section-icon">📝</div>
-    <div class="section-info"><h2>Speech Practice 场景演讲</h2><p>3 speeches · 3 篇演讲 · 听 → 读 → 背</p></div>
+    <div class="section-info"><h2>Speech Practice 场景演讲</h2><p>5 speeches · 5 篇演讲 · 听 → 读 → 背</p></div>
   </div>
   <div class="info-box">
     <strong>🎯 练习方法：</strong><br>
@@ -534,34 +506,6 @@ var D_QA=[
     {q:"What arrangements does Ria make for John? Ria为John做了哪些安排？",opts:["A wheelchair and priority boarding","An accessible seat and an assigned attendant","A first-class upgrade and special meal","A window seat and extra legroom"],correct:1},
     {q:"Why does Peter say the missing seat info is not a problem? 为什么Peter说缺少座位信息不成问题？",opts:["He doesn't care about the seat location","Because Ria has already reserved the seat for his father","Because he will call back to confirm later","Because his father prefers any available seat"],correct:1}
   ]
-];
-
-var F_TOPICS=[
-  {
-    q:"Describe the scene of an airport. ⭐真题 描述机场的场景。",
-    outline:["Define what an airport is 定义机场是什么","Describe the process: check-in → security → gate 描述流程：值机→安检→登机口","Mention what you see inside (shops, screens, people) 提到里面看到的（商店、屏幕、人们）","End with how airports connect people 以机场连接人们收尾"],
-    phrases:["An airport is a very busy and important place.","When you arrive, you first go to the check-in counter.","Then you go through security.","Inside there are many shops and restaurants.","Airports connect people to different cities and countries."]
-  },
-  {
-    q:"Describe the scene of a shopping mall. ⭐真题 描述商场的场景。",
-    outline:["Define what a mall is 定义商场是什么","Describe what stores you can find 描述能找到什么商店","Mention the atmosphere (crowded, music, comfortable) 提到氛围（热闹、音乐、舒适）","End with why people enjoy going there 以人们为什么喜欢去那里收尾"],
-    phrases:["A shopping mall is a large building with many stores.","You can find clothing shops, food courts, and a cinema.","On weekends, the mall is very crowded.","Many people go there not only to shop but also to meet friends.","It is convenient because you can find everything in one building."]
-  },
-  {
-    q:"Describe the scene of a playground. ⭐真题 描述操场的场景。",
-    outline:["Define what a playground is 定义操场是什么","Describe the facilities (track, basketball court, field) 描述设施（跑道、篮球场、球场）","Mention activities people do there 提到人们在那里做的活动","End with the feeling/atmosphere 以感受/氛围收尾"],
-    phrases:["A playground is an open area where people exercise.","Students run, play basketball, and do morning exercises.","It usually has a running track and a football field.","It is a place full of energy and laughter.","Playing there helps people stay healthy and happy."]
-  },
-  {
-    q:"Describe the scene of a flood. ⭐真题 描述洪水的场景。",
-    outline:["Explain when/how floods happen 解释洪水何时/如何发生","Describe the damage (water, streets, cars, houses) 描述损害（水、街道、车、房子）","Mention how people react and get rescued 提到人们如何反应和被救援","End with resilience — people helping each other 以坚韧收尾——人们互相帮助"],
-    phrases:["A flood can happen after many days of heavy rain.","The water rises very fast and covers the streets.","Cars and houses are under water.","Rescue teams come by boats to help.","The flood causes damage, but people help each other and stay strong."]
-  },
-  {
-    q:"Describe the scene of staying at a resort. ⭐真题 描述在度假村的场景。",
-    outline:["Set the scene — pool, sunshine, surroundings 设定场景——泳池、阳光、周围环境","Describe what people are doing (swimming, relaxing, drinking) 描述人们在做什么（游泳、放松、喝饮品）","Use senses: sounds, smells, sights 运用感官：声音、气味、视觉","End with the feeling of peace and happiness 以平和幸福的感受收尾"],
-    phrases:["I am sitting by the swimming pool under the warm sun.","Children are splashing in the clear blue water.","A waiter brings tropical drinks with little umbrellas.","In the distance, I can see the beach and gentle waves.","The resort is a perfect place to relax and forget your worries."]
-  }
 ];
 
 // ============ SPEECH DATA ============
@@ -925,27 +869,6 @@ function recordB(i){
 
 // ============ INIT C (Talk — topics + speeches) ============
 function initC(){
-  // Topics
-  var html='';
-  F_TOPICS.forEach(function(t,i){
-    html+='<div class="topic-study-card">';
-    html+='<div class="topic-study-num">TOPIC 话题 '+(i+1)+' / '+F_TOPICS.length+'</div>';
-    html+='<div class="topic-study-q">'+t.q+'</div>';
-    html+='<div class="topic-outline">';
-    html+='<div class="topic-outline-title">📋 Suggested Structure 建议结构</div>';
-    t.outline.forEach(function(step,si){
-      html+='<div class="outline-step"><span class="step-dot">'+(si+1)+'</span><span class="step-text">'+step+'</span></div>';
-    });
-    html+='</div>';
-    html+='<div class="topic-outline-title" style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px">💬 Useful Phrases 实用短语 (tap to hear 点击发音)</div>';
-    html+='<div class="phrase-chips">';
-    t.phrases.forEach(function(p){
-      html+='<span class="phrase-chip" onclick="tts(\''+p.replace(/'/g,"\\'")+'\')">'+p+'</span>';
-    });
-    html+='</div></div>';
-  });
-  document.getElementById('c-topics-list').innerHTML=html;
-  // Speeches
   initCSpeech();
 }
 
